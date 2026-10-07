@@ -1,0 +1,16 @@
+# dependențe și build
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# variabile de mediu (cheile WhatsApp / Telegram / Resend nu se urcă pe GitHub)
+.env
+.env*.local
+
+# sistem
+.DS_Store
+Thumbs.db
+.vercel
+.docs-tmp/
