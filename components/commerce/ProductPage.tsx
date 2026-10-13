@@ -71,9 +71,9 @@ export function ProductPage({ slug }: { slug: string }) {
         {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="text-[0.7rem] uppercase tracking-wide2 text-stone-500">
           <ol className="flex flex-wrap items-center gap-x-3 gap-y-1">
-            <li><Link href="/" className="transition-colors hover:text-gold-300">Acasă</Link></li>
+            <li><Link href="/" className="inline-flex min-h-10 items-center transition-colors hover:text-gold-300">Acasă</Link></li>
             <li aria-hidden>/</li>
-            <li><Link href={categoryHref(p.categoryKey)} className="transition-colors hover:text-gold-300">{getCategory(p.categoryKey)?.title ?? p.category}</Link></li>
+            <li><Link href={categoryHref(p.categoryKey)} className="inline-flex min-h-10 items-center transition-colors hover:text-gold-300">{getCategory(p.categoryKey)?.title ?? p.category}</Link></li>
             <li aria-hidden>/</li>
             <li aria-current="page" className="text-silk/80">{p.name}</li>
           </ol>
@@ -119,12 +119,12 @@ export function ProductPage({ slug }: { slug: string }) {
           <div className="lg:col-span-5">
             <div className="lg:sticky lg:top-28">
               <p className="eyebrow flex items-center gap-4">
-                <span aria-hidden className="h-px w-10 bg-gold-500" />
+                <span aria-hidden className="h-px w-10 bg-gold-400" />
                 {p.category}
               </p>
               <h1 className="mt-6 text-balance font-display text-[clamp(2.25rem,1.6rem+2vw,3.5rem)] font-normal leading-[1.05] text-ivory">{p.name}</h1>
               <p className="mt-5 font-display text-3xl tabular-nums text-gold-400">{formatRON(price)}</p>
-              <p className="mt-5 max-w-prose font-serif text-lg leading-relaxed text-silk/85">{p.lead}</p>
+              <p className="lead mt-5 max-w-prose">{p.lead}</p>
 
               {/* Croiala (doar costume și cămăși) */}
               {mtm && (

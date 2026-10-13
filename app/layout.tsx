@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from 'next';
 /* Fonturi self-hosted (Fontsource): zero request-uri către terți, fără FOUT, conform GDPR.
-   Bodoni Moda cu axa „opsz”: contrastul fin de revistă crește automat la dimensiuni mari. */
-import '@fontsource-variable/bodoni-moda/opsz.css';
-import '@fontsource-variable/bodoni-moda/opsz-italic.css';
+   EB Garamond (13 oct 2026): aceeași familie garalde ca literele din logoul oficial, doar drept (fără italic),
+   ca titlurile și logoul să vorbească aceeași limbă. */
+import '@fontsource-variable/eb-garamond/wght.css';
 import '@fontsource-variable/manrope/wght.css';
 import './globals.css';
 import { SITE_URL, verified } from '@/lib/brand';
@@ -26,9 +26,9 @@ export const metadata: Metadata = {
     url: SITE_URL,
     title: 'Cesarini — Eleganța nu se poartă. Se croiește.',
     description: verified.entitySentence,
-    images: [{ url: '/og/cesarini-home.jpg', width: 1200, height: 630, alt: 'Cesarini — Maison de Croitorie, Cluj-Napoca' }],
+    // Imaginea de distribuire: app/opengraph-image.jpg + app/twitter-image.jpg (logoul pe catifea), moștenite de toate paginile
   },
-  twitter: { card: 'summary_large_image' },
+  twitter: { card: 'summary_large_image', title: 'Cesarini — Eleganța nu se poartă. Se croiește.', description: verified.entitySentence },
   // Indexarea e oprită până la lansare (previzualizări Vercel, demo). Pe domeniul final: ALLOW_INDEXING=true.
   robots: (process.env.ALLOW_INDEXING === 'true'
     ? { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 }

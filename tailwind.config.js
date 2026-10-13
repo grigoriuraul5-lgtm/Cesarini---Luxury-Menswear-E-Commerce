@@ -1,7 +1,7 @@
 /**
  * CESARINI — Design System "Dark & Gold"
  * Surfaces obsidian → graphite · aur periat (champagne → bronze) · ivory/silk
- * Tipografie: Bodoni Moda (display, registru Vogue) · Cormorant Garamond (editorial italic) · Manrope (UI)
+ * Tipografie: EB Garamond (display + italic editorial, aceeași familie ca logoul) · Manrope (UI)
  * @type {import('tailwindcss').Config}
  */
 module.exports = {
@@ -33,16 +33,17 @@ module.exports = {
       },
       fontFamily: {
         // Numele de familie care conțin cifre TREBUIE puse între ghilimele, altfel CSS invalidează toată declarația
-        display: ['var(--font-bodoni)', 'Didot', '"Bodoni 72"', 'serif'],
-        // Registrul editorial folosește tot Bodoni Moda: axa opsz o face lizibilă la dimensiuni de text
-        serif: ['var(--font-bodoni)', 'Didot', 'serif'],
+        // EB Garamond: literele logoului (garalde, contrast moderat, serife înclinate). Fallback-uri din aceeași familie.
+        display: ['var(--font-garamond)', '"EB Garamond"', 'Garamond', '"Times New Roman"', 'serif'],
+        serif: ['var(--font-garamond)', '"EB Garamond"', 'Garamond', '"Times New Roman"', 'serif'],
         sans: ['var(--font-manrope)', '"Helvetica Neue"', 'Arial', 'sans-serif'],
       },
       fontSize: {
         eyebrow: ['0.6875rem', { lineHeight: '1', letterSpacing: '0.32em' }],
-        'display-sm': ['clamp(2.5rem, 1.6rem + 3.6vw, 4.5rem)', { lineHeight: '1.02', letterSpacing: '-0.02em' }],
-        'display-md': ['clamp(3rem, 1.6rem + 5.6vw, 6.5rem)', { lineHeight: '0.98', letterSpacing: '-0.025em' }],
-        'display-lg': ['clamp(3.2rem, 1rem + 6.6vw, 8.25rem)', { lineHeight: '0.92', letterSpacing: '-0.03em' }],
+        // Garamond are ochiul literei mai mic decât Bodoni: tracking negativ mai blând, ca literele să respire ca în logo
+        'display-sm': ['clamp(2.5rem, 1.6rem + 3.6vw, 4.5rem)', { lineHeight: '1.04', letterSpacing: '-0.01em' }],
+        'display-md': ['clamp(3rem, 1.6rem + 5.6vw, 6.5rem)', { lineHeight: '1', letterSpacing: '-0.015em' }],
+        'display-lg': ['clamp(3.2rem, 1rem + 6.6vw, 8.25rem)', { lineHeight: '0.95', letterSpacing: '-0.018em' }],
       },
       letterSpacing: { luxe: '0.32em', wide2: '0.18em' },
       maxWidth: { site: '1440px', prose: '64ch' },

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { CrestMark, Wordmark } from '../brand/Logo';
 import { useId, useState, type FormEvent, type ReactNode } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { formatRON, verified } from '@/lib/brand';
@@ -63,7 +64,7 @@ export function Checkout() {
         <div className="container-site py-section">
           <p className="eyebrow">Finalizare comandă</p>
           <h1 className="mt-6 font-display text-display-sm font-normal text-ivory">Coșul e gol.</h1>
-          <p className="mt-6 max-w-prose font-serif text-lg text-silk/85">Alege o piesă din colecție și revino aici ca să finalizezi comanda.</p>
+          <p className="lead mt-6 max-w-prose">Alege o piesă din colecție și revino aici ca să finalizezi comanda.</p>
           <Link href="/produs/costum-ceremonie" className={goldButtonClass('solid', 'mt-10')}>
             <span className="relative">Vezi costumul de ceremonie</span>
           </Link>
@@ -340,8 +341,9 @@ function Shell({ children }: { children: ReactNode }) {
     <>
       <header className="border-b border-gold-400/20 bg-obsidian/60 pt-[env(safe-area-inset-top,0px)] backdrop-blur-md">
         <div className="container-site flex h-20 items-center justify-between gap-6">
-          <Link href="/" aria-label="Cesarini — acasă" className="font-display text-[1.25rem] uppercase tracking-[0.42em] text-ivory transition-colors hover:text-gold-300">
-            Cesarini
+          <Link href="/" aria-label="Cesarini — acasă" className="group flex shrink-0 items-center gap-3">
+            <CrestMark className="h-[42px] w-auto transition-[filter] duration-700 ease-expo group-hover:drop-shadow-[0_0_14px_rgba(212,175,55,0.35)] sm:h-[48px]" />
+            <Wordmark className="h-[12px] w-auto max-[359px]:hidden sm:h-[15px]" />
           </Link>
           <p className="hidden text-[0.68rem] font-semibold uppercase tracking-wide2 text-stone-400 sm:block">Finalizare comandă</p>
           <p className="flex items-center gap-2 text-[0.68rem] font-semibold uppercase tracking-wide2 text-gold-300">
@@ -395,7 +397,7 @@ function Confirmation({ payload, firstName, delivered }: { payload: OrderPayload
           <h1 className="mt-5 font-display text-display-sm font-normal text-ivory">
             Mulțumim, <em className="text-gold-400">{firstName}.</em>
           </h1>
-          <p className="mt-6 max-w-prose font-serif text-xl leading-relaxed text-silk/85">
+          <p className="lead mt-6 max-w-prose">
             Atelierul a primit comanda{custom ? ' și măsurile tale' : ''}. Păstrează numărul comenzii: <span className="whitespace-nowrap">{payload.orderId}</span>.
           </p>
           <ol className="mt-12 border-t border-gold-400/20">

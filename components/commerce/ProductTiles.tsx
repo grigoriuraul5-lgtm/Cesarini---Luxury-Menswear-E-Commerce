@@ -81,13 +81,13 @@ export function ProductSpread({ p, flip, onCustomize }: { p: CommerceProduct; fl
       </Link>
       <div className="md:col-span-5">
         <p className="eyebrow flex items-center gap-4">
-          <span aria-hidden className="h-px w-10 bg-gold-500" />
+          <span aria-hidden className="h-px w-10 bg-gold-400" />
           {p.category}
         </p>
         <h3 className="mt-6 text-balance font-display text-display-sm font-normal text-ivory">
           <Link href={productHref(p.slug)} className="transition-colors hover:text-gold-100">{p.name}</Link>
         </h3>
-        <p className="mt-6 max-w-prose font-serif text-lg leading-relaxed text-silk/85">{p.lead}</p>
+        <p className="lead mt-6 max-w-prose">{p.lead}</p>
         <ul className="mt-6 space-y-1.5 text-sm text-stone-400">
           {p.details.map((d) => (
             <li key={d} className="flex gap-3"><span aria-hidden className="text-gold-500">—</span>{d}</li>

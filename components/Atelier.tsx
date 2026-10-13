@@ -44,7 +44,7 @@ export function Atelier() {
           <div className="lg:sticky lg:top-32">
             <Reveal>
               <p className="eyebrow flex items-center gap-4">
-                <span aria-hidden className="h-px w-10 bg-gold-500" />
+                <span aria-hidden className="h-px w-10 bg-gold-400" />
                 The Craftsmanship &amp; Atelier
               </p>
             </Reveal>
@@ -57,8 +57,8 @@ export function Atelier() {
             </Reveal>
             <Reveal delay={0.16}>
               {/* Paragraful-entitate: fraza pe care o citează AI-urile */}
-              <p className="mt-10 max-w-prose font-serif text-xl leading-relaxed text-silk/85">
-                Din {verified.foundingYear}, în showroom-ul de pe Ștefan Octavian Iosif, fiecare costum Cesarini trece prin mâinile
+              <p className="lead mt-10 max-w-prose">
+                În showroom-ul de pe Ștefan Octavian Iosif, fiecare costum Cesarini trece prin mâinile
                 croitorilor casei înainte să plece. Ajustările sunt gratuite pentru întreaga ținută: costum, cămașă și pantaloni.
               </p>
             </Reveal>
@@ -101,7 +101,7 @@ export function Atelier() {
                       <h3 className="font-display text-3xl font-normal text-ivory transition-colors duration-500 group-hover:text-gold-100 sm:text-4xl">
                         {s.title}
                       </h3>
-                      <p className="mt-3 font-serif text-lg italic text-gold-200/90">{s.lead}</p>
+                      <p className="mt-3 text-base font-medium text-gold-200/90">{s.lead}</p>
                       <p className="mt-4 max-w-prose text-[0.95rem] leading-relaxed text-stone-400">{s.body}</p>
                     </div>
                     <span
@@ -183,7 +183,7 @@ export function Atelier() {
               </p>
               <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
                 <BookingButton variant="solid" />
-                <a href={`tel:${verified.phoneE164}`} className="text-sm text-silk/80 transition-colors hover:text-gold-300">
+                <a href={`tel:${verified.phoneE164}`} className="inline-flex min-h-11 items-center text-sm text-silk/80 transition-colors hover:text-gold-300">
                   sau sună: <span className="text-ivory">{verified.phoneDisplay}</span>
                 </a>
               </div>
@@ -226,7 +226,7 @@ export function Atelier() {
               <h3 className="font-display text-3xl font-normal text-ivory">Pricing Transparency</h3>
               <span className="hidden text-[0.65rem] uppercase tracking-wide2 text-stone-500 sm:inline">Prețuri în lei</span>
             </div>
-            <p className="mt-3 font-serif italic text-stone-400">Prețuri fixe, afișate. Croiala e inclusă.</p>
+            <p className="mt-3 text-sm text-stone-400">Prețuri fixe, afișate. Ajustările din showroom sunt incluse.</p>
 
             <ul className="mt-10 space-y-6">
               {PRICE_LIST.map((row, i) => (

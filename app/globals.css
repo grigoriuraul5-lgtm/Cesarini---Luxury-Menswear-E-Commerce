@@ -5,7 +5,7 @@
 @layer base {
   :root {
     color-scheme: dark;
-    --font-bodoni: 'Bodoni Moda Variable';
+    --font-garamond: 'EB Garamond Variable';
     --font-manrope: 'Manrope Variable';
   }
   /* Negrul stă pe <html>; <body> rămâne transparent, altfel acoperă fundalul fix cu z-index: -1 */
@@ -17,6 +17,15 @@
     text-rendering: optimizeLegibility;
   }
   ::selection { @apply bg-gold-500 text-obsidian; }
+
+  /* Ierarhie tipografică (13 oct 2026):
+     1. Display: EB Garamond drept (aceeași familie ca logoul), kerning + ligaturi, rânduri echilibrate.
+     2. Etichete: Manrope uppercase, spațiat, aur #D4AF37 (.eyebrow).
+     3. Text: Manrope (.lead pentru paragrafele de deschidere).
+     Fără italic: accentul din titluri vine din culoare, nu din înclinare. */
+  .font-display, .font-serif { font-kerning: normal; font-feature-settings: "kern" 1, "liga" 1, "lnum" 1; }
+  h1, h2, h3 { text-wrap: balance; }
+  em { font-style: normal; }
   :focus-visible { outline: 1px solid theme('colors.gold.400'); outline-offset: 4px; }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -26,7 +35,9 @@
 
 @layer components {
   .container-site { @apply mx-auto w-full max-w-site px-gutter; }
-  .eyebrow { @apply font-sans text-eyebrow font-semibold uppercase text-gold-500; }
+  .eyebrow { @apply font-sans text-eyebrow font-semibold uppercase text-gold-400; }
+  /* Paragraful de deschidere: sans curat, puțin mai mare, cu aer în plus pe fundal închis */
+  .lead { @apply font-sans text-silk/85; font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem); line-height: 1.8; font-weight: 400; text-wrap: pretty; }
 
   .hairline { @apply h-px w-full bg-gold-hairline; }
 

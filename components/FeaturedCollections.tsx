@@ -52,13 +52,13 @@ export function FeaturedCollections() {
         <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
           <Reveal>
             <p className="eyebrow flex items-center gap-4">
-              <span aria-hidden className="h-px w-10 bg-gold-500" />
+              <span aria-hidden className="h-px w-10 bg-gold-400" />
               Featured Collections
             </p>
             <h2 id="collections-title" className="mt-8 font-display text-display-sm font-normal text-ivory">
               Garderoba unei <em className="text-gold-400">seri importante</em>
             </h2>
-            <p className="mt-6 max-w-[38rem] font-serif text-lg leading-relaxed text-silk/80">
+            <p className="lead mt-6 max-w-[38rem]">
               Costume de ceremonie și business, cămăși, pantofi și accesorii. Toate ajustate gratuit în atelierul din Cluj-Napoca.
             </p>
           </Reveal>

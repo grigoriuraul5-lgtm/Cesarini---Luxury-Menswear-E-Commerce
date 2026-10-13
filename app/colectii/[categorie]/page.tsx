@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { social } from '@/lib/seo';
 import { notFound } from 'next/navigation';
 import { formatRON } from '@/lib/brand';
 import { CATEGORIES, commerceProducts, getCategory } from '@/lib/commerce/catalog';
@@ -19,10 +20,13 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const c = getCategory((await params).categorie);
   if (!c) return {};
   const from = Math.min(...productsOf(c.key).map((p) => p.price));
+  const title = `${c.title} · de la ${formatRON(from)}`;
+  const description = `${c.intro} De la ${formatRON(from)}. Cesarini, Cluj-Napoca.`;
   return {
-    title: `${c.title} · de la ${formatRON(from)}`,
-    description: `${c.intro} De la ${formatRON(from)}. Cesarini, Cluj-Napoca.`,
+    title,
+    description,
     alternates: { canonical: `/colectii/${c.key}` },
+    ...social({ title: `${title} | Cesarini`, description, path: `/colectii/${c.key}` }),
   };
 }
 

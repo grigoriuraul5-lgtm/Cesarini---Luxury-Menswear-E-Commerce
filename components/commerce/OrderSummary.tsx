@@ -66,7 +66,7 @@ export function OrderSummary({ idPrefix, locked = false }: { idPrefix: string; l
                     <div className="mt-3 grid grid-cols-[auto_1fr] items-center gap-4">
                       {/* căptușeala cu broderia */}
                       <div aria-hidden className="fabric-silk relative grid h-20 w-20 place-items-center border border-gold-400/20">
-                        <span className="font-display text-2xl italic tracking-wide" style={{ color: thread.color }}>
+                        <span className="font-display text-2xl tracking-[0.12em]" style={{ color: thread.color }}>
                           {mono.text || 'A.P.'}
                         </span>
                         <span className="absolute inset-1.5 border border-dashed border-gold-400/15" />

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { social } from '@/lib/seo';
 import { notFound } from 'next/navigation';
 import { articles, getArticle } from '@/lib/journal';
 import { articleGraph } from '@/lib/schema';
@@ -19,7 +20,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     title: a.title,
     description: a.shortAnswer.slice(0, 300),
     alternates: { canonical: `/journal/${a.slug}` },
-    openGraph: { type: 'article', title: a.title, description: a.dek, publishedTime: a.published, modifiedTime: a.updated },
+    ...social({ title: a.title, description: a.dek, path: `/journal/${a.slug}`, type: 'article', published: a.published, modified: a.updated }),
   };
 }
 

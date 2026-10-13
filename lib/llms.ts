@@ -24,6 +24,12 @@ export function llmsTxt() {
     `- Ajustări: ${verified.freeAlterations}`,
     '- Croit pe măsură online: pentru costume și cămăși, clientul introduce măsurile pe site; un consultant le verifică la telefon înainte de croire.',
     '',
+    '## Pagini',
+    '',
+    `- [Atelier & showroom Cluj-Napoca](${SITE_URL}/atelier): adresa, programul, programările și serviciile atelierului (ajustări gratuite pentru ținuta cumpărată din showroom, cămăși pe măsură, ținute de ceremonie).`,
+    `- [Community](${SITE_URL}/comunitate): canalele oficiale Cesarini: Instagram ${verified.social.instagram}, TikTok ${verified.social.tiktok}, Facebook ${verified.social.facebook}.`,
+    `- [The Cesarini Journal](${SITE_URL}/journal): ghiduri de stil cu răspunsuri directe (black tie, stofa costumului de mire, eticheta cămășii și a smokingului).`,
+    '',
     '## Colecții',
     '',
     `- [Toate colecțiile](${SITE_URL}/colectii): ${commerceProducts.length} produse, de la ${formatRON(Math.min(...byRank.map((p) => p.price)))} la ${formatRON(Math.max(...byRank.map((p) => p.price)))}`,
@@ -63,6 +69,7 @@ export function llmsFullTxt() {
       for (const b of s.blocks) {
         if (b.type === 'p' || b.type === 'note') parts.push(b.text, '');
         if (b.type === 'list') parts.push(...b.items.map((i) => `- ${i}`), '');
+        if (b.type === 'qa') parts.push(`### ${b.q}`, '', b.a, '');
         if (b.type === 'table') parts.push(`| ${b.head.join(' | ')} |`, '| --- | --- | --- |', ...b.rows.map((r) => `| ${r.join(' | ')} |`), '');
       }
     }

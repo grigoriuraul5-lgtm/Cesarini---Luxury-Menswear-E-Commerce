@@ -8,7 +8,7 @@ Lucrat cu Raul (grigoriuraul5@gmail.com), care face site-ul pentru client.
 
 ## Stack și rulare
 - **Next.js 15 (App Router) + React 19 + Tailwind CSS 3.4 + Framer Motion 12**, TypeScript.
-- Fonturi self-hosted (Fontsource): **Bodoni Moda** (opsz) pentru titluri și accente editoriale, **Manrope** pentru UI.
+- Fonturi self-hosted (Fontsource): **EB Garamond** pentru titluri și accente editoriale (aceeași familie ca logoul), **Manrope** pentru UI.
 - Rulare: `npm install` → `npm run dev` → http://localhost:3000. Pe Windows: dublu-click pe `porneste-windows.bat`, pe Mac: `porneste-mac.command`.
 - Arhiva completă (cod + imagini): `cesarini-next-final.zip`. Raul o atașează în chatul nou. Imaginile din `public/brand/` sunt doar în arhivă.
 

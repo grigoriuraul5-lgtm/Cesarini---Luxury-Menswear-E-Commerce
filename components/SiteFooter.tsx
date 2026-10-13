@@ -4,9 +4,10 @@ import Link from 'next/link';
 import { useId, useState, type FormEvent } from 'react';
 import { verified } from '@/lib/brand';
 import { useBooking } from './booking/BookingProvider';
+import { LogoLockup, Wordmark } from './brand/Logo';
 
 const linkCls = 'inline-flex min-h-10 items-center text-[0.95rem] text-silk/80 transition-colors duration-300 hover:text-gold-300';
-const headCls = 'text-[0.65rem] font-semibold uppercase tracking-wide2 text-gold-500';
+const headCls = 'text-[0.65rem] font-semibold uppercase tracking-wide2 text-gold-400';
 
 /**
  * Footer-ul casei: patru coloane pe obsidian semi-transparent (catifeaua trece pe sub el),
@@ -21,8 +22,9 @@ export function SiteFooter() {
       <div className="container-site grid gap-14 pb-16 pt-20 sm:grid-cols-2 lg:grid-cols-12 lg:gap-10">
         {/* 1 · Manifest */}
         <div className="lg:col-span-4">
-          <Link href="/" aria-label="Cesarini — acasă" className="font-display text-2xl uppercase tracking-[0.42em] text-ivory transition-colors hover:text-gold-300">
-            Cesarini
+          {/* Logoul complet, vertical, exact ca în fișierul oficial */}
+          <Link href="/" aria-label="Cesarini — acasă" className="group inline-block">
+            <LogoLockup title="Cesarini — For Him" className="h-auto w-[232px] transition-[filter] duration-700 ease-expo group-hover:drop-shadow-[0_0_20px_rgba(212,175,55,0.15)]" />
           </Link>
           <p className="mt-8 max-w-[18ch] font-display text-[clamp(1.75rem,1.4rem+1vw,2.4rem)] leading-tight text-ivory">
             Eleganța nu se poartă. <em className="text-gold-400">Se croiește.</em>
@@ -51,7 +53,9 @@ export function SiteFooter() {
           <ul className="mt-5 space-y-1">
             <li><Link href="/colectii" className={linkCls}>Colecții</Link></li>
             <li><Link href="/colectii?croiala=mtm" className={linkCls}>Croit pe măsură</Link></li>
+            <li><Link href="/comunitate" className={linkCls}>Community</Link></li>
             <li><Link href="/journal" className={linkCls}>Journal</Link></li>
+            <li><Link href="/atelier" className={linkCls}>Atelier &amp; contact</Link></li>
             <li>
               <button type="button" onClick={() => booking.open()} aria-haspopup="dialog" className={`${linkCls} cursor-pointer`}>
                 Private Fitting
@@ -70,9 +74,9 @@ export function SiteFooter() {
               {verified.postalCode} {verified.city}
             </a>
             <p>
-              <a href={`tel:${verified.phoneE164}`} className="font-display text-xl text-ivory transition-colors hover:text-gold-300">{verified.phoneDisplay}</a>
+              <a href={`tel:${verified.phoneE164}`} className="inline-flex min-h-11 items-center font-display text-xl text-ivory transition-colors hover:text-gold-300">{verified.phoneDisplay}</a>
               <br />
-              <a href={`mailto:${verified.email}`} className="transition-colors hover:text-gold-300">{verified.email}</a>
+              <a href={`mailto:${verified.email}`} className="inline-flex min-h-11 items-center transition-colors hover:text-gold-300">{verified.email}</a>
             </p>
             <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-sm">
               {verified.hours.map((h) => (
@@ -97,19 +101,18 @@ export function SiteFooter() {
 
       {/* Semnătura: numele casei, pe toată lățimea */}
       <div aria-hidden className="container-site select-none overflow-hidden">
-        <p className="whitespace-nowrap text-center font-display text-[clamp(3.5rem,15.5vw,15rem)] uppercase leading-[0.8] tracking-[0.12em] text-gold-400/[0.09]">
-          Cesarini
-        </p>
+        {/* Literele din logo, nu text tipărit: semnătura e identică cu emblema */}
+        <Wordmark tone="current" className="mx-auto block h-auto w-full max-w-[1320px] translate-y-[18%] text-gold-400/[0.09]" />
       </div>
 
       <div className="border-t border-gold-400/15">
         <div className="container-site flex flex-col gap-4 py-6 text-xs text-stone-500 md:flex-row md:items-center md:justify-between">
           <p>© {year} {verified.legalHint}. Toate drepturile rezervate.</p>
           <ul className="flex flex-wrap gap-x-6 gap-y-2">
-            <li><Link href="/termeni" className="inline-flex min-h-8 items-center transition-colors hover:text-gold-300">Termeni și condiții</Link></li>
-            <li><Link href="/confidentialitate" className="inline-flex min-h-8 items-center transition-colors hover:text-gold-300">Politica de confidențialitate (GDPR)</Link></li>
-            <li><a href="https://anpc.ro" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-8 items-center transition-colors hover:text-gold-300">ANPC</a></li>
-            <li><a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-8 items-center transition-colors hover:text-gold-300">Soluționarea alternativă a litigiilor (SAL)</a></li>
+            <li><Link href="/termeni" className="inline-flex min-h-11 items-center transition-colors hover:text-gold-300 md:min-h-8">Termeni și condiții</Link></li>
+            <li><Link href="/confidentialitate" className="inline-flex min-h-11 items-center transition-colors hover:text-gold-300 md:min-h-8">Politica de confidențialitate (GDPR)</Link></li>
+            <li><a href="https://anpc.ro" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center transition-colors hover:text-gold-300 md:min-h-8">ANPC</a></li>
+            <li><a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center transition-colors hover:text-gold-300 md:min-h-8">Soluționarea alternativă a litigiilor (SAL)</a></li>
           </ul>
         </div>
       </div>

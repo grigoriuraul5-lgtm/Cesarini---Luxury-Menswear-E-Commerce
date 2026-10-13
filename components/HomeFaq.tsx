@@ -23,7 +23,7 @@ export function HomeFaq() {
           <div className="lg:sticky lg:top-32">
             <Reveal>
               <p className="eyebrow flex items-center gap-4">
-                <span aria-hidden className="h-px w-10 bg-gold-500" />
+                <span aria-hidden className="h-px w-10 bg-gold-400" />
                 Răspunsuri de la croitori
               </p>
             </Reveal>
@@ -33,7 +33,7 @@ export function HomeFaq() {
               </h2>
             </Reveal>
             <Reveal delay={0.16}>
-              <p className="mt-8 max-w-[30rem] font-serif text-lg leading-relaxed text-silk/85">
+              <p className="lead mt-8 max-w-[30rem]">
                 Ce costă, cât durează și cum te măsori de acasă. Pentru restul, sună-ne:{' '}
                 <a href={`tel:${verified.phoneE164}`} className="whitespace-nowrap text-gold-300 underline-offset-4 hover:underline">{verified.phoneDisplay}</a>.
               </p>

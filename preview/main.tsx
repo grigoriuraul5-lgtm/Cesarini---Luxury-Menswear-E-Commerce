@@ -15,10 +15,14 @@ import { Catalog } from '@/components/commerce/Catalog';
 import { JournalIndex } from '@/components/journal/JournalIndex';
 import { ArticlePage } from '@/components/journal/ArticlePage';
 import { getArticle } from '@/lib/journal';
+import { AtelierPage } from '@/components/atelier/AtelierPage';
+import { CommunityPage } from '@/components/community/CommunityPage';
+import { LegalPage } from '@/components/LegalPage';
 
 /** Mini-router pentru previzualizare: aceleași componente ca pe site, fără Next.js. */
 const known = (href: string) =>
   href === '/' || href === '/checkout' || href === '/colectii' || href === '/journal' ||
+  href === '/atelier' || href === '/comunitate' || href === '/termeni' || href === '/confidentialitate' ||
   (href.startsWith('/produs/') && !!getProduct(href.slice(8))) ||
   (href.startsWith('/colectii/') && !!getCategory(href.slice(10))) ||
   (href.startsWith('/journal/') && !!getArticle(href.slice(9)));
@@ -34,8 +38,11 @@ function App() {
         window.history.replaceState(window.history.state, '', `${window.location.pathname}${query}`);
       } catch { /* istoric indisponibil */ }
       if (!known(href)) return;
+      const hash = full.includes('#') ? full.slice(full.indexOf('#') + 1) : '';
       setRoute(href);
       window.scrollTo({ top: 0 });
+      // ancore (/atelier#ajustari, /#intrebari): după randare, coboară la secțiune
+      if (hash) setTimeout(() => document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' }), 120);
     };
     window.addEventListener('preview:navigate', go);
     return () => window.removeEventListener('preview:navigate', go);
@@ -60,6 +67,21 @@ function App() {
         <>
           <SiteNav />
           <main id="continut"><ArticlePage key={route} a={getArticle(route.slice(9))!} /></main>
+        </>
+      ) : route === '/atelier' ? (
+        <>
+          <SiteNav />
+          <main id="continut"><AtelierPage /></main>
+        </>
+      ) : route === '/comunitate' ? (
+        <>
+          <SiteNav />
+          <main id="continut"><CommunityPage /></main>
+        </>
+      ) : route === '/termeni' || route === '/confidentialitate' ? (
+        <>
+          <SiteNav />
+          <main id="continut"><LegalPage key={route} kind={route === '/termeni' ? 'termeni' : 'confidentialitate'} /></main>
         </>
       ) : route.startsWith('/produs/') ? (
         <>

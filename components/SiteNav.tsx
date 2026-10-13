@@ -8,6 +8,7 @@ import { EXPO } from './ui/Reveal';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { useBooking } from './booking/BookingProvider';
 import { useCart } from './commerce/CartProvider';
+import { CrestMark, Wordmark } from './brand/Logo';
 
 /**
  * Bară transparentă peste hero → frosted glass cu hairline aurie după scroll.
@@ -40,12 +41,13 @@ export function SiteNav() {
         scrolled ? 'bg-obsidian/60 backdrop-blur-md backdrop-saturate-150' : 'bg-gradient-to-b from-obsidian/70 to-transparent'
       }`}
     >
-      <div className="container-site flex h-20 items-center justify-between gap-6">
-        <Link href="/" aria-label="Cesarini — acasă" className="group flex items-baseline gap-3">
-          <span className="font-display text-[1.35rem] uppercase tracking-[0.42em] text-ivory transition-colors duration-500 group-hover:text-gold-300">
-            Cesarini
-          </span>
-          <span className="hidden font-serif text-sm italic text-gold-500/80 xl:inline">Cluj · 2015</span>
+      <div className="container-site flex h-20 items-center justify-between gap-3 sm:gap-6">
+        {/* Logoul oficial, în varianta orizontală pentru bară: blazonul + CESARINI (aceleași contururi ca în fișierul clientului) */}
+        <Link href="/" aria-label="Cesarini — acasă" className="group flex shrink-0 items-center gap-3 sm:gap-3.5">
+          <CrestMark
+            className={`h-[44px] w-auto origin-left transition-transform duration-700 ease-expo min-[400px]:h-[48px] sm:h-[60px] ${scrolled ? 'scale-[0.88]' : ''} group-hover:drop-shadow-[0_0_14px_rgba(212,175,55,0.35)]`}
+          />
+          <Wordmark className="h-[12px] w-auto transition-opacity duration-500 group-hover:opacity-90 max-[339px]:hidden min-[400px]:h-[14px] sm:h-[19px]" />
         </Link>
 
         {/* Selector VIP */}
@@ -93,7 +95,7 @@ export function SiteNav() {
             onClick={cart.open}
             aria-haspopup="dialog"
             aria-label={`Coșul tău${cart.totals.count ? `, ${cart.totals.count} ${cart.totals.count === 1 ? 'piesă' : 'piese'}` : ', gol'}`}
-            className="relative grid h-12 w-12 cursor-pointer place-items-center text-silk transition-colors duration-300 hover:text-gold-300"
+            className="relative grid h-12 w-11 cursor-pointer place-items-center text-silk sm:w-12 transition-colors duration-300 hover:text-gold-300"
           >
             <svg aria-hidden viewBox="0 0 20 22" className="h-5 w-5">
               <path d="M3.5 7h13l-1 13.5h-11z" fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinejoin="round" />
@@ -111,7 +113,7 @@ export function SiteNav() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? 'Închide meniul' : 'Deschide meniul'}
-            className="relative grid h-12 w-12 cursor-pointer place-items-center lg:hidden"
+            className="relative grid h-12 w-11 cursor-pointer place-items-center sm:w-12 lg:hidden"
           >
             <span className={`absolute h-px w-6 bg-ivory transition-all duration-500 ease-expo ${open ? 'rotate-45' : '-translate-y-1'}`} />
             <span className={`absolute h-px w-6 bg-gold-400 transition-all duration-500 ease-expo ${open ? '-rotate-45' : 'translate-y-1'}`} />
@@ -147,8 +149,8 @@ export function SiteNav() {
                 ))}
               </ul>
               <div className="space-y-6 border-t border-gold-400/20 pt-6">
-                <address className="font-serif text-lg not-italic leading-relaxed text-stone-400">
-                  <span className="italic">{verified.street}, {verified.city}</span>
+                <address className="text-base not-italic leading-relaxed text-stone-400">
+                  <span className="text-silk">{verified.street}, {verified.city}</span>
                   <br />
                   <span className="text-base">{verified.hours.map((h) => `${h.label} ${h.opens}–${h.closes}`).join(' · ')}</span>
                   <br />

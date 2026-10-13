@@ -56,7 +56,9 @@ export function organizationGraph() {
       '@id': id('showroom'),
       name: `${verified.name} — Showroom ${verified.city}`,
       url: SITE_URL,
-      image: `${SITE_URL}/brand/showroom.jpg`,
+      // Fără fotografie reală a showroom-ului încă: logoul oficial ține locul imaginii. Coordonatele GEO: de confirmat din profilul Google Business.
+      image: `${SITE_URL}/brand/cesarini-logo-512.png`,
+      logo: `${SITE_URL}/brand/cesarini-logo-512.png`,
       address,
       hasMap: verified.mapsUrl,
       telephone: verified.phoneE164,
@@ -111,7 +113,6 @@ export function productGraph() {
     category: c.title,
     brand: { '@id': id('brand') },
     url: SITE_URL + c.href,
-    image: `${SITE_URL}/collections/${c.slug}.jpg`,
     ...(c.slug === 'costume-ceremonie' && {
       material: verified.ceremonySuitSpec.fabric,
       size: verified.ceremonySuitSpec.sizes,
@@ -271,7 +272,7 @@ export function catalogGraph(opts: {
 /** Articol din Journal: Article + FAQPage (text identic cu cel afișat) + BreadcrumbList. */
 export function articleGraph(a: {
   slug: string; title: string; dek: string; shortAnswer: string; published: string; updated: string;
-  keywords: string[]; faqs: { q: string; a: string }[]; relatedProducts: string[];
+  keywords: string[]; faqs: { q: string; a: string }[]; relatedProducts: string[]; about: string;
 }) {
   const url = `${SITE_URL}/journal/${a.slug}`;
   return {
@@ -292,7 +293,8 @@ export function articleGraph(a: {
         author: { '@id': id('organization') },
         publisher: { '@id': id('organization') },
         isPartOf: { '@id': id('website') },
-        about: { '@type': 'Thing', name: 'Black tie (cod vestimentar)' },
+        about: { '@type': 'Thing', name: a.about },
+        image: `${SITE_URL}/opengraph-image.jpg`,
         mentions: [{ '@id': id('showroom') }, ...a.relatedProducts.map((s) => ({ '@id': `${SITE_URL}/produs/${s}#product` }))],
       },
       {
@@ -307,6 +309,37 @@ export function articleGraph(a: {
           { '@type': 'ListItem', position: 2, name: 'Journal', item: `${SITE_URL}/journal` },
           { '@type': 'ListItem', position: 3, name: a.title, item: url },
         ],
+      },
+    ],
+  };
+}
+
+/** Pagină de conținut (Atelier, Community, pagini legale): WebPage legat de showroom + BreadcrumbList. */
+export function webPageGraph(opts: {
+  path: string;
+  name: string;
+  description: string;
+  type?: 'WebPage' | 'ContactPage' | 'AboutPage';
+  breadcrumb: { name: string; path: string }[];
+}) {
+  const url = SITE_URL + opts.path;
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': opts.type ?? 'WebPage',
+        '@id': `${url}#page`,
+        url,
+        name: opts.name,
+        description: opts.description,
+        inLanguage: 'ro-RO',
+        isPartOf: { '@id': id('website') },
+        about: { '@id': id('showroom') },
+        publisher: { '@id': id('organization') },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: opts.breadcrumb.map((b, i) => ({ '@type': 'ListItem', position: i + 1, name: b.name, item: SITE_URL + b.path })),
       },
     ],
   };

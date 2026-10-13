@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { social } from '@/lib/seo';
 import { formatRON } from '@/lib/brand';
 import { commerceProducts } from '@/lib/commerce/catalog';
 import { catalogGraph } from '@/lib/schema';
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
   title: 'Colecții: costume, cămăși, pantofi și accesorii',
   description,
   alternates: { canonical: '/colectii' },
+  ...social({ title: 'Colecțiile Cesarini: costume, cămăși, pantofi și accesorii', description, path: '/colectii' }),
 };
 
 export default function CollectionsPage() {

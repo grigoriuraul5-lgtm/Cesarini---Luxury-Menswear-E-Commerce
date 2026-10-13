@@ -44,7 +44,7 @@ export function CartDrawer() {
     >
       {empty ? (
         <div className="px-6 py-12 sm:px-10">
-          <p className="max-w-prose font-serif text-lg leading-relaxed text-silk/85">
+          <p className="lead max-w-prose">
             Alege o piesă, apoi decide: mărime standard, cu livrare în 1 – 2 zile, sau croită pe măsurile tale.
           </p>
           <ul className="mt-10 space-y-px border border-gold-400/20 bg-gold-400/20">

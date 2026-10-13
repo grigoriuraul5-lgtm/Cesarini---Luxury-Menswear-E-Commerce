@@ -12,12 +12,12 @@ import { EXPO } from './ui/Reveal';
 const LINES = [
   { text: 'Eleganța', className: 'text-ivory' },
   { text: 'nu se poartă.', className: 'text-ivory' },
-  { text: 'Se croiește.', className: 'font-normal italic text-gold-400' },
+  { text: 'Se croiește.', className: 'text-gold-400' },
 ];
 
 /* Faptele-cheie (GEO): propoziții scurte, vizibile, identice cu datele structurate. */
 const FACTS = [
-  `Din ${verified.foundingYear}, în centrul Clujului`,
+  'Showroom în centrul Clujului',
   `${verified.googleRating.value} din 5 · ${verified.googleRating.count} recenzii Google`,
   'Ajustări gratuite pentru toată ținuta',
   `Costum de ceremonie · ${formatRON(verified.prices.ceremonySuit)}`,
@@ -57,7 +57,7 @@ export function Hero() {
         {/* ——— Coloana editorială ——— */}
         <motion.div style={reduce ? undefined : { y: textY, opacity: fade }} className="lg:col-span-6 xl:col-span-7">
           <motion.p {...fadeUp(0.1)} className="eyebrow flex items-center gap-4">
-            <span aria-hidden className="h-px w-10 bg-gold-500" />
+            <span aria-hidden className="h-px w-10 bg-gold-400" />
             <span><span className="hidden sm:inline">Maison de Croitorie · </span>Cluj-Napoca · Est. {verified.foundingYear}</span>
           </motion.p>
 
@@ -71,9 +71,9 @@ export function Hero() {
             ))}
           </h1>
 
-          <motion.p {...fadeUp(0.75)} className="mt-10 max-w-[34rem] font-serif text-[1.35rem] leading-relaxed text-silk/85 sm:text-2xl">
+          <motion.p {...fadeUp(0.75)} className="lead mt-10 max-w-[33rem]">
             Costume de ceremonie din lână, cămăși pe măsură și accesorii,{' '}
-            <em className="text-silk">ajustate gratuit</em> de croitorii casei în showroom-ul din centrul Clujului.
+            <strong className="font-medium text-ivory">ajustate gratuit</strong> de croitorii casei în showroom-ul din centrul Clujului.
           </motion.p>
 
           <motion.div {...fadeUp(0.9)} className="mt-12 flex flex-col gap-4 sm:flex-row sm:items-center">
@@ -131,10 +131,6 @@ export function Hero() {
             </motion.div>
           </div>
 
-          <figcaption className="mt-5 flex items-baseline justify-between gap-4 text-sm">
-            <span className="font-serif text-lg italic text-silk">{verified.tagline}</span>
-            <span className="eyebrow text-stone-500">Est. {verified.foundingYear}</span>
-          </figcaption>
         </motion.figure>
       </div>
 

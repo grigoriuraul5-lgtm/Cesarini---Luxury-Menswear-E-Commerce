@@ -65,9 +65,15 @@ export const verified = {
 };
 
 export const editorial = {
+  /**
+   * WhatsApp: același număr ca telefonul verificat. DE CONFIRMAT CU CLIENTUL că numărul are WhatsApp.
+   * Stă în `editorial`, nu în `verified`: nu intră în JSON-LD (sameAs / contactPoint) până la confirmare.
+   */
+  whatsapp: { href: 'https://wa.me/40723424929', display: '0723 424 929', confirmed: false },
+  instagramHandle: '@cesarini.romania',
   showroomLabel: 'Showroom Cesarini — Str. Ștefan Octavian Iosif 1, Cluj-Napoca',
   appointmentShort: 'Private Fitting, pe bază de programare',
-  seasonLabel: 'Collection Automne · MMXXVI',
+  seasonLabel: 'Collections · Garderoba completă',
 };
 
 export const formatRON = (v: number) => new Intl.NumberFormat('ro-RO').format(v) + ' lei';
@@ -203,21 +209,21 @@ export const atelierServices = [
     title: 'Made-to-Measure Fit',
     lead: 'Costumul, ajustat pe măsurile tale de croitorii casei. Gratuit.',
     body: 'Talie, mâneci, tiv, lungimea sacoului: fiecare piesă cumpărată din showroom este croită pe tine, fără cost suplimentar.',
-    href: '/atelier/ajustari',
+    href: '/atelier#ajustari',
   },
   {
     numeral: 'II',
     title: 'Cămăși pe Măsură',
     lead: 'Guler, manșetă și lungime, după măsurile tale.',
     body: 'Pentru bărbatul la care o cămașă din raft nu vine niciodată perfect la guler și la manșetă.',
-    href: '/atelier/camasi-pe-masura',
+    href: '/atelier#camasi-pe-masura',
   },
   {
     numeral: 'III',
     title: 'Ceremonie & Mire',
     lead: 'Ținuta completă, într-o singură vizită.',
     body: 'Costum, cămașă, pantofi și accesorii, alese împreună cu un consultant și ajustate înaintea marelui moment.',
-    href: '/atelier/ceremonie',
+    href: '/atelier#ceremonie',
   },
 ] as const;
 
@@ -255,16 +261,10 @@ export const faqs = [
   },
 ] as const;
 
+/** Navigația principală (13 oct 2026): Collections → Community → Journal → Atelier (showroom & contact). */
 export const nav = [
-  { label: 'Bespoke', href: '/atelier' },
   { label: 'Collections', href: '/colectii' },
+  { label: 'Community', href: '/comunitate' },
   { label: 'Journal', href: '/journal' },
-  { label: 'Atelier', href: '/atelier/ajustari' },
-] as const;
-
-export const styleGuides = [
-  { label: 'Ghidul Definitiv Black Tie', href: '/journal/ghid-black-tie' },
-  { label: 'Costumul de mire: calendarul probelor', href: '/journal/costum-de-mire' },
-  { label: 'Lungimea corectă a manșetei', href: '/journal/lungimea-corecta-a-mansetei' },
-  { label: 'Cum asortezi cravata cu costumul', href: '/journal/cravata-si-costumul' },
+  { label: 'Atelier', href: '/atelier' },
 ] as const;

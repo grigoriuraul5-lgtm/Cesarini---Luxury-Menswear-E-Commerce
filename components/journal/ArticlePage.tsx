@@ -18,17 +18,17 @@ export function ArticlePage({ a }: { a: Article }) {
       <header className="container-site">
         <nav aria-label="Breadcrumb" className="text-[0.7rem] uppercase tracking-wide2 text-stone-500">
           <ol className="flex flex-wrap items-center gap-x-3 gap-y-1">
-            <li><Link href="/" className="transition-colors hover:text-gold-300">Acasă</Link></li>
+            <li><Link href="/" className="inline-flex min-h-10 items-center transition-colors hover:text-gold-300">Acasă</Link></li>
             <li aria-hidden>/</li>
-            <li><Link href="/journal" className="transition-colors hover:text-gold-300">Journal</Link></li>
+            <li><Link href="/journal" className="inline-flex min-h-10 items-center transition-colors hover:text-gold-300">Journal</Link></li>
           </ol>
         </nav>
         <p className="eyebrow mt-10 flex items-center gap-4">
-          <span aria-hidden className="h-px w-10 bg-gold-500" />
+          <span aria-hidden className="h-px w-10 bg-gold-400" />
           <span><span className="hidden sm:inline">The Cesarini Journal · </span>{a.kicker}</span>
         </p>
         <h1 className="mt-8 max-w-[20ch] text-balance font-display text-display-md font-normal text-ivory">{a.title}</h1>
-        <p className="mt-8 max-w-[42rem] font-serif text-xl italic leading-relaxed text-silk/85">{a.dek}</p>
+        <p className="lead mt-8 max-w-[40rem]">{a.dek}</p>
         <p className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-1 text-[0.72rem] uppercase tracking-wide2 text-stone-500">
           <span>Atelierul Cesarini</span>
           <span aria-hidden className="h-1 w-1 rotate-45 bg-gold-500/60" />
@@ -46,7 +46,7 @@ export function ArticlePage({ a }: { a: Article }) {
             <ol className="mt-5 space-y-1 border-l border-gold-400/20">
               {a.sections.map((s) => (
                 <li key={s.id}>
-                  <a href={`#${s.id}`} className="-ml-px block border-l border-transparent py-2 pl-4 text-sm leading-snug text-stone-400 transition-colors hover:border-gold-400 hover:text-ivory">
+                  <a href={`#${s.id}`} className="-ml-px block border-l border-transparent py-2.5 pl-4 text-sm leading-snug text-stone-400 transition-colors hover:border-gold-400 hover:text-ivory">
                     {s.question}
                   </a>
                 </li>
@@ -64,7 +64,7 @@ export function ArticlePage({ a }: { a: Article }) {
             <span aria-hidden className="absolute left-3 top-3 h-4 w-4 border-l border-t border-gold-400/70" />
             <span aria-hidden className="absolute bottom-3 right-3 h-4 w-4 border-b border-r border-gold-400/70" />
             <h2 id="raspuns" className="eyebrow">Răspunsul scurt</h2>
-            <p className="mt-5 font-serif text-[1.35rem] leading-relaxed text-ivory">{a.shortAnswer}</p>
+            <p className="mt-5 font-display text-[clamp(1.25rem,1.1rem+0.5vw,1.5rem)] leading-[1.55] text-ivory">{a.shortAnswer}</p>
           </section>
 
           {a.sections.map((s) => (
@@ -84,7 +84,7 @@ export function ArticlePage({ a }: { a: Article }) {
                 if (!p) return null;
                 return (
                   <li key={slug}>
-                    <Link href={productHref(slug)} className="group flex items-center gap-5 bg-obsidian p-4 transition-colors hover:bg-graphite">
+                    <Link href={productHref(slug)} className="group flex h-full items-center gap-5 bg-obsidian/80 p-4 transition-colors duration-500 hover:bg-graphite">
                       <LuxImage media={p.gallery[0]} sizes="80px" zoom={false} className="h-24 w-20 shrink-0 border border-gold-400/20" />
                       <span className="min-w-0">
                         <span className="block font-display text-lg leading-snug text-ivory group-hover:text-gold-100">{p.name}</span>
@@ -122,7 +122,7 @@ export function ArticlePage({ a }: { a: Article }) {
             </p>
             <p className="mt-5 max-w-prose text-stone-400">{verified.street}, {verified.city} · {verified.phoneDisplay}</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <BookingButton variant="solid" occasion="Gală / Black tie" />
+              <BookingButton variant="solid" occasion={a.occasion} />
               <GoldButton href="/colectii" variant="ghost">Vezi colecția</GoldButton>
             </div>
           </Reveal>
@@ -136,6 +136,13 @@ function BlockView({ b }: { b: Block }) {
   switch (b.type) {
     case 'p':
       return <p className="max-w-prose leading-relaxed text-silk/85">{b.text}</p>;
+    case 'qa':
+      return (
+        <div className="max-w-prose border-t border-gold-400/15 pt-5">
+          <h3 className="font-display text-[1.4rem] font-normal leading-snug text-ivory">{b.q}</h3>
+          <p className="mt-2 leading-relaxed text-silk/85">{b.a}</p>
+        </div>
+      );
     case 'note':
       return <p className="max-w-prose border border-gold-400/25 bg-gold-400/[0.04] px-5 py-4 text-[0.95rem] leading-relaxed text-gold-100">{b.text}</p>;
     case 'list':
@@ -156,7 +163,7 @@ function BlockView({ b }: { b: Block }) {
             <caption className="sr-only">{b.caption}</caption>
             <thead>
               <tr className="border-b border-gold-400/40">
-                {b.head.map((h) => <th key={h} scope="col" className="py-3 pr-6 text-[0.65rem] font-semibold uppercase tracking-wide2 text-gold-500">{h}</th>)}
+                {b.head.map((h) => <th key={h} scope="col" className="py-3 pr-6 text-[0.65rem] font-semibold uppercase tracking-wide2 text-gold-400">{h}</th>)}
               </tr>
             </thead>
             <tbody>

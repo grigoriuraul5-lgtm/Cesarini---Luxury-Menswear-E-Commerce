@@ -77,7 +77,7 @@ export function LanguageSwitcher({ initial = 'ro' as Code }) {
                       selected ? 'text-gold-300' : 'text-silk hover:bg-gold-500/10 hover:text-ivory'
                     }`}
                   >
-                    <span className="font-serif text-base">{l.label}</span>
+                    <span className="text-sm">{l.label}</span>
                     <span className="text-[0.62rem] tracking-wide2 text-stone-500">{l.short}</span>
                   </button>
                 </li>

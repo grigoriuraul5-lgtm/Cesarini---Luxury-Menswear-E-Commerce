@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
+import { social } from '@/lib/seo';
 import { notFound } from 'next/navigation';
 import { formatRON } from '@/lib/brand';
-import { commerceProducts, getProduct } from '@/lib/commerce/catalog';
+import { commerceProducts, getProduct, isMtm } from '@/lib/commerce/catalog';
 import { productPageGraph } from '@/lib/schema';
 import { SiteNav } from '@/components/SiteNav';
 import { SiteFooter } from '@/components/SiteFooter';
@@ -16,10 +17,13 @@ export const generateStaticParams = () => commerceProducts.map((p) => ({ slug: p
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const p = getProduct((await params).slug);
   if (!p) return {};
+  const title = `${p.name} · ${formatRON(p.price)}`;
+  const description = `${p.lead} ${formatRON(p.price)}.${isMtm(p.garment) ? ' Mărime standard sau croit pe măsură.' : ''} Cesarini, Cluj-Napoca.`;
   return {
-    title: `${p.name} · ${formatRON(p.price)}`,
-    description: `${p.lead} ${formatRON(p.price)}. Mărime standard sau croit pe măsură, de la Cesarini, Cluj-Napoca.`,
+    title,
+    description,
     alternates: { canonical: `/produs/${p.slug}` },
+    ...social({ title: `${title} | Cesarini`, description, path: `/produs/${p.slug}` }),
   };
 }
 

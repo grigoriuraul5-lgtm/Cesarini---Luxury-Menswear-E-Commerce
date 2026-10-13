@@ -103,7 +103,7 @@ export function Catalog({ category }: { category?: CategoryKey }) {
       {/* ——— Antet editorial ——— */}
       <header className="container-site">
         <p className="eyebrow flex items-center gap-4">
-          <span aria-hidden className="h-px w-10 bg-gold-500" />
+          <span aria-hidden className="h-px w-10 bg-gold-400" />
           {cat ? `Collections · ${cat.label}` : editorial.seasonLabel}
         </p>
         <h1 className="mt-8 max-w-[14ch] text-balance font-display text-display-md font-normal text-ivory">
@@ -115,7 +115,7 @@ export function Catalog({ category }: { category?: CategoryKey }) {
             </>
           )}
         </h1>
-        <p className="mt-8 max-w-[38rem] font-serif text-xl leading-relaxed text-silk/85">
+        <p className="lead mt-8 max-w-[38rem]">
           {cat
             ? cat.intro
             : `Costume, cămăși, pantofi și accesorii, de la ${formatRON(Math.min(...prices))} la ${formatRON(Math.max(...prices))}. Costumele și cămășile se pot croi pe măsurile tale.`}
@@ -135,7 +135,7 @@ export function Catalog({ category }: { category?: CategoryKey }) {
                   aria-pressed={on}
                   disabled={disabled}
                   onClick={() => toggle('ocazie', o.key)}
-                  className={`relative min-h-11 cursor-pointer font-display text-[clamp(1.6rem,1.2rem+1.6vw,2.6rem)] italic leading-none transition-colors duration-500 ease-expo disabled:cursor-not-allowed disabled:opacity-30 ${
+                  className={`relative min-h-11 cursor-pointer font-display text-[clamp(1.6rem,1.2rem+1.6vw,2.6rem)] leading-none transition-colors duration-500 ease-expo disabled:cursor-not-allowed disabled:opacity-30 ${
                     on ? 'text-gold-300' : 'text-silk/60 hover:text-ivory'
                   }`}
                 >
