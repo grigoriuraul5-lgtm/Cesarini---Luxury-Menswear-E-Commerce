@@ -35,11 +35,17 @@ export const metadata: Metadata = {
     : { index: false, follow: false }) as Metadata['robots'],
 };
 
+const INTRO_SCRIPT = "try{if(sessionStorage.getItem('cesarini-intro'))document.documentElement.classList.add('intro-seen')}catch(e){}";
+
 export const viewport: Viewport = { themeColor: '#0A0A0A', colorScheme: 'dark' };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ro">
+    <html lang="ro" suppressHydrationWarning>
+      <head>
+        {/* Intro-ul cu logoul rulează o singură dată pe sesiune: marcăm vizitele următoare înainte de primul pixel */}
+        <script dangerouslySetInnerHTML={{ __html: INTRO_SCRIPT }} />
+      </head>
       <body className="grain">
         <BrandBackdrop />
         <a href="#continut" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:bg-gold-400 focus:px-4 focus:py-2 focus:text-obsidian">

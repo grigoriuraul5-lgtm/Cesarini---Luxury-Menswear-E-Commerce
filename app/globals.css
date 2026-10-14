@@ -111,3 +111,20 @@
   .no-scrollbar { scrollbar-width: none; }
   .no-scrollbar::-webkit-scrollbar { display: none; }
 }
+
+/* ——— Intrarea pe site: logoul, apoi cortina se ridică (components/IntroCurtain.tsx) ——— */
+.intro-curtain {
+  position: fixed; inset: 0; z-index: 90; display: grid; place-items: center; align-content: center; gap: 1.75rem;
+  background: #0A0A0A; pointer-events: none;
+  animation: intro-lift 1s cubic-bezier(0.76, 0, 0.24, 1) 1.55s forwards;
+}
+.intro-curtain__glow { position: absolute; inset: 0; background: radial-gradient(45% 40% at 50% 48%, rgba(212,175,55,.14), transparent 70%); opacity: 0; animation: intro-fade 1.2s ease-out .1s forwards; }
+.intro-curtain__logo { position: relative; opacity: 0; transform: translateY(10px) scale(.96); filter: blur(6px); animation: intro-logo 1.1s cubic-bezier(0.16, 1, 0.3, 1) .15s forwards; }
+.intro-curtain__line { position: relative; display: block; height: 1px; width: clamp(8rem, 30vw, 14rem); background: linear-gradient(90deg, transparent, rgba(230,202,101,.85), transparent); transform: scaleX(0); animation: intro-line .9s cubic-bezier(0.16, 1, 0.3, 1) .6s forwards; }
+@keyframes intro-logo { to { opacity: 1; transform: none; filter: blur(0); } }
+@keyframes intro-fade { to { opacity: 1; } }
+@keyframes intro-line { to { transform: scaleX(1); } }
+@keyframes intro-lift { to { clip-path: inset(0 0 100% 0); visibility: hidden; } }
+.intro-curtain { clip-path: inset(0 0 0 0); }
+html.intro-seen .intro-curtain { display: none; }
+@media (prefers-reduced-motion: reduce) { .intro-curtain { display: none; } }

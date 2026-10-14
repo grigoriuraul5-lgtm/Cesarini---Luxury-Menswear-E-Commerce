@@ -8,6 +8,7 @@ import { GoldButton } from './ui/GoldButton';
 import { useBooking } from './booking/BookingProvider';
 import { LuxImage } from './ui/LuxImage';
 import { EXPO } from './ui/Reveal';
+import { introDelay } from './IntroCurtain';
 
 /* Titlul editorial, rând cu rând: fiecare rând urcă dintr-o mască (tehnică de revistă). */
 const LINES = [
@@ -36,15 +37,17 @@ export function Hero() {
   const textY = useTransform(scrollYProgress, [0, 1], ['0%', '-8%']);
   const fade = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
+  // Dacă rulează intro-ul cu logoul (prima vizită în sesiune), coregrafia hero-ului pornește după el
+  const D = introDelay();
   const line = (i: number) => ({
     initial: reduce ? false : { y: '110%' },
     animate: { y: '0%' },
-    transition: { duration: 1.3, ease: EXPO, delay: 0.25 + i * 0.12 },
+    transition: { duration: 1.3, ease: EXPO, delay: D + 0.25 + i * 0.12 },
   });
   const fadeUp = (delay: number) => ({
     initial: reduce ? false : { opacity: 0, y: 18 },
     animate: { opacity: 1, y: 0 },
-    transition: { duration: 1.1, ease: EXPO, delay },
+    transition: { duration: 1.1, ease: EXPO, delay: D + delay },
   });
 
   return (
@@ -57,13 +60,13 @@ export function Hero() {
 
       <div className="container-site grid flex-1 items-center gap-14 py-[clamp(1.25rem,4svh,3rem)] lg:grid-cols-12 lg:gap-8 lg:py-16">
         {/* ——— Coloana editorială ——— */}
-        <motion.div style={reduce ? undefined : { y: textY, opacity: fade }} className="lg:col-span-6 xl:col-span-7">
+        <motion.div style={reduce ? undefined : { y: textY, opacity: fade }} className="min-w-0 lg:col-span-6 xl:col-span-7">
           <motion.p {...fadeUp(0.1)} className="eyebrow flex items-center gap-4">
             <span aria-hidden className="h-px w-10 bg-gold-400" />
             <span><span className="hidden sm:inline">Maison de Croitorie · </span>Cluj-Napoca · Est. {verified.foundingYear}</span>
           </motion.p>
 
-          <h1 id="hero-title" className="mt-[clamp(1rem,3.5svh,2rem)] font-display text-display-lg font-normal lg:mt-8">
+          <h1 id="hero-title" className="mt-[clamp(1rem,3.5svh,2rem)] font-display text-display-lg font-normal max-lg:text-[clamp(2.5rem,11vw,3.25rem)] lg:mt-8">
             {LINES.map((l, i) => (
               <span key={l.text} className="-mx-[0.08em] -mb-[0.12em] block overflow-hidden px-[0.08em] pb-[0.2em]">
                 <motion.span {...line(i)} className={`block ${l.className}`}>
@@ -73,10 +76,21 @@ export function Hero() {
             ))}
           </h1>
 
-          <motion.p {...fadeUp(0.75)} className="lead mt-[clamp(0.75rem,3svh,2.5rem)] max-w-[33rem] max-lg:leading-[1.65] lg:mt-10">
+          <motion.p {...fadeUp(0.75)} className="lead mt-[clamp(0.75rem,3svh,2.5rem)] max-w-[33rem] max-lg:text-[1rem] max-lg:leading-[1.6] lg:mt-10">
             Costume de ceremonie din lână, cămăși pe măsură și accesorii,{' '}
             <strong className="font-medium text-ivory">ajustate gratuit</strong> de croitorii casei în showroom-ul din centrul Clujului.
           </motion.p>
+
+          {/* ——— Doar pe telefon: card foto editorial compact, între text și buton ——— */}
+          <motion.figure {...fadeUp(0.85)} className="relative mt-[clamp(1rem,3svh,1.75rem)] overflow-hidden rounded-md border border-gold-400/20 shadow-noir lg:hidden">
+            <LuxImage media={media.editorial.heroFitting} priority grade="soft" zoom={false} sizes="92vw" className="aspect-[2/1] w-full" />
+            <span aria-hidden className="pointer-events-none absolute inset-2 rounded-[4px] border border-gold-400/15" />
+            <figcaption className="absolute bottom-3 right-3 inline-flex items-center gap-2 rounded-full border border-gold-400/25 bg-obsidian/45 px-3 py-1.5 text-[0.62rem] font-semibold uppercase tracking-wide2 text-silk backdrop-blur-md">
+              Showroom Cluj
+              <span aria-hidden className="h-3 w-px bg-gold-400/30" />
+              <span className="tabular-nums text-gold-300">{verified.googleRating.value} ★</span>
+            </figcaption>
+          </motion.figure>
 
           {/* Un singur buton; programarea e un link text cu săgeată, nu un al doilea bloc */}
           <motion.div {...fadeUp(0.9)} className="mt-[clamp(1.25rem,4svh,3rem)] flex flex-wrap items-center gap-x-8 gap-y-2 lg:mt-12 lg:gap-10">
@@ -93,6 +107,7 @@ export function Hero() {
               </svg>
             </button>
           </motion.div>
+
         </motion.div>
 
         {/* ——— Cardul media: fotografie editorială (smoking) ——— */}
@@ -100,7 +115,7 @@ export function Hero() {
           style={reduce ? undefined : { y: artY }}
           initial={reduce ? false : { opacity: 0, clipPath: 'inset(10% 10% 10% 10%)' }}
           animate={{ opacity: 1, clipPath: 'inset(0% 0% 0% 0%)' }}
-          transition={{ duration: 1.8, ease: EXPO, delay: 0.2 }}
+          transition={{ duration: 1.8, ease: EXPO, delay: D + 0.2 }}
           className="relative mx-auto hidden w-full max-w-[30rem] lg:col-span-6 lg:block lg:max-w-none xl:col-span-5"
         >
           <div className="group relative aspect-[4/5] overflow-hidden border border-gold-400/20 shadow-noir transition-shadow duration-700 ease-expo hover:shadow-[0_0_20px_rgba(212,175,55,0.15)]">
@@ -109,7 +124,7 @@ export function Hero() {
               className="absolute inset-0"
               initial={reduce ? false : { scale: 1.14 }}
               animate={{ scale: 1 }}
-              transition={{ duration: 6, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 6, ease: [0.22, 1, 0.36, 1], delay: D }}
             >
               <LuxImage
                 media={portrait}

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { SiteNav } from '@/components/SiteNav';
 import { Hero } from '@/components/Hero';
+import { IntroCurtain } from '@/components/IntroCurtain';
 import { Atelier } from '@/components/Atelier';
 import { FeaturedCollections } from '@/components/FeaturedCollections';
 import { BrandBackdrop } from '@/components/BrandBackdrop';
@@ -91,10 +92,11 @@ function App() {
       ) : (
         <>
           <SiteNav />
+          <IntroCurtain />
           <main id="continut">
             <Hero />
-            <Atelier />
             <FeaturedCollections />
+            <Atelier />
             <HomeFaq />
           </main>
         </>

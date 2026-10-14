@@ -1,5 +1,6 @@
 import { SiteNav } from '@/components/SiteNav';
 import { Hero } from '@/components/Hero';
+import { IntroCurtain } from '@/components/IntroCurtain';
 import { Atelier } from '@/components/Atelier';
 import { FeaturedCollections } from '@/components/FeaturedCollections';
 import { HomeFaq } from '@/components/HomeFaq';
@@ -11,10 +12,11 @@ export default function HomePage() {
   return (
     <>
       <SiteNav />
+      <IntroCurtain />
       <main id="continut">
         <Hero />
-        <Atelier />
         <FeaturedCollections />
+        <Atelier />
         <HomeFaq />
       </main>
       <SiteFooter />

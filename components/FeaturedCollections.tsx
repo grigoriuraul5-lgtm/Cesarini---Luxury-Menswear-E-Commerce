@@ -47,7 +47,7 @@ export function FeaturedCollections() {
   };
 
   return (
-    <section aria-labelledby="collections-title" aria-roledescription="carusel" className="relative border-t border-gold-400/20 py-section">
+    <section aria-labelledby="collections-title" aria-roledescription="carusel" className="relative border-t border-gold-400/20 pb-[clamp(2.5rem,6vw,5rem)] pt-section">
       <div className="container-site">
         <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
           <Reveal>
@@ -59,7 +59,7 @@ export function FeaturedCollections() {
               Garderoba unei <em className="text-gold-400">seri importante</em>
             </h2>
             <p className="lead mt-6 max-w-[38rem]">
-              Costume de ceremonie și business, cămăși, pantofi și accesorii. Toate ajustate gratuit în atelierul din Cluj-Napoca.
+              De la cămașa Oxford de {formatRON(verified.prices.businessShirt)} la costumul de ceremonie în trei piese de {formatRON(verified.prices.ceremonySuit)}. Piesele cele mai căutate, cu prețul la vedere.
             </p>
           </Reveal>
 
@@ -144,7 +144,7 @@ function ProductCard({ p }: { p: FeaturedProduct }) {
         <p className="mt-2 text-[0.8rem] text-stone-400">{p.detail}</p>
 
         <div className="mt-auto flex items-center justify-between gap-4 pt-6">
-          <p className="font-display text-2xl tabular-nums text-gold-400">{formatRON(p.price)}</p>
+          <p className="whitespace-nowrap font-display text-2xl tabular-nums text-gold-400">{formatRON(p.price)}</p>
           <span
             aria-hidden
             className="inline-flex min-h-10 items-center gap-2 border border-gold-400/30 px-4 text-[0.62rem] font-semibold uppercase tracking-wide2 text-silk transition-all duration-500 ease-expo group-hover:border-gold-400 group-hover:bg-gold-400 group-hover:text-obsidian"

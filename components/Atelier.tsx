@@ -26,18 +26,10 @@ const PRICE_LIST = [
   { item: 'Ajustări de croitorie', note: 'pentru întreaga ținută din showroom', price: 'Gratuit', highlight: true },
 ];
 
-const DETAILS = [
-  { label: 'Showroom', value: `${verified.street}`, sub: `${verified.postalCode} ${verified.city}` },
-  { label: 'Program', value: `${verified.hours[0].opens} – ${verified.hours[0].closes}`, sub: `${verified.hours[0].label} · ${verified.hours[1].label} ${verified.hours[1].opens} – ${verified.hours[1].closes}` },
-  { label: 'Programări', value: verified.phoneDisplay, sub: verified.email, href: `tel:${verified.phoneE164}` },
-  { label: 'Livrare', value: '1 – 2 zile lucrătoare', sub: 'confirmarea mărimii prin telefon' },
-];
 
 export function Atelier() {
-  const reduce = useReducedMotion();
-
   return (
-    <section id="atelier" aria-labelledby="atelier-title" className="relative py-section">
+    <section id="atelier" aria-labelledby="atelier-title" className="relative pb-[clamp(3rem,7vw,6rem)] pt-section">
       <div className="container-site grid gap-16 lg:grid-cols-12 lg:gap-10">
         {/* ——— Coloana de titlu, lipită la scroll ——— */}
         <header className="lg:col-span-5">
@@ -63,15 +55,12 @@ export function Atelier() {
               </p>
             </Reveal>
             <Reveal delay={0.24}>
-              <p className="mt-8 flex items-center gap-3 text-sm text-stone-400">
-                <span className="font-display text-2xl text-gold-300">{verified.googleRating.value}</span>
-                <span aria-hidden className="h-6 w-px bg-gold-400/20" />
-                <span>
-                  din 5 pe Google
-                  <br />
-                  {verified.googleRating.count} de recenzii
-                </span>
-              </p>
+              <Link href="/atelier" className="group mt-8 inline-flex min-h-11 items-center gap-3 text-[0.72rem] font-semibold uppercase tracking-wide2 text-gold-200 transition-colors duration-500 hover:text-gold-100">
+                <span className="border-b border-gold-400/40 pb-1 transition-colors duration-500 group-hover:border-gold-200">Despre atelier, prețuri și program</span>
+                <svg aria-hidden viewBox="0 0 24 8" className="h-2 w-6 transition-transform duration-500 ease-expo group-hover:translate-x-1">
+                  <path d="M0 4h22M18 1l4 3-4 3" fill="none" stroke="currentColor" strokeWidth="1" />
+                </svg>
+              </Link>
             </Reveal>
           </div>
         </header>
@@ -121,8 +110,42 @@ export function Atelier() {
         </div>
       </div>
 
-      {/* ——— Mozaic „Made-to-Measure”: procesul, în imagini ——— */}
+      {/* ——— Showroom Experience: banda cinematică cu programare ——— */}
       <div className="container-site mt-section">
+        <Reveal>
+          <div className="group relative overflow-hidden border border-gold-400/20">
+            <LuxImage media={media.atelier.suitOnMannequin} grade="none" sizes="100vw" className="aspect-[2/3] sm:aspect-[16/9] lg:aspect-[21/9]" />
+            <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,10,10,.3)_0%,rgba(10,10,10,.82)_38%,rgba(10,10,10,.95)_100%)] lg:bg-[linear-gradient(90deg,rgba(10,10,10,.94)_0%,rgba(10,10,10,.75)_45%,rgba(10,10,10,.25)_100%)]" />
+            <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-12 lg:justify-center lg:p-16">
+              <p className="eyebrow">Showroom<span className="hidden sm:inline"> Experience</span> · Cluj-Napoca</p>
+              <h3 className="mt-6 max-w-[16ch] font-display text-display-sm font-normal text-ivory">
+                O probă privată, <em className="text-gold-400">fără grabă.</em>
+              </h3>
+              <p className="mt-6 max-w-[36rem] text-[0.95rem] leading-relaxed text-silk/85">
+                {verified.appointmentNote} {verified.street}, {verified.city}.
+              </p>
+              <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+                <BookingButton variant="solid" />
+                <a href={`tel:${verified.phoneE164}`} className="inline-flex min-h-11 items-center gap-1.5 text-sm text-silk/80 transition-colors hover:text-gold-300">
+                  sau sună: <span className="text-ivory">{verified.phoneDisplay}</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+
+    </section>
+  );
+}
+
+
+/** Procesul Made-to-Measure, în imagini (pe pagina /atelier). */
+export function AtelierProcess() {
+  return (
+    <section aria-label="Procesul Made-to-Measure" className="relative">
+      {/* ——— Mozaic „Made-to-Measure”: procesul, în imagini ——— */}
+      <div className="container-site">
         <Reveal className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="eyebrow">Made-to-Measure</p>
@@ -167,56 +190,15 @@ export function Atelier() {
         </ul>
       </div>
 
-      {/* ——— Showroom Experience: banda cinematică cu programare ——— */}
-      <div className="container-site mt-section">
+    </section>
+  );
+}
+
+/** Lista de prețuri, toate din `verified` (pe pagina /atelier). */
+export function AtelierPriceList() {
+  const reduce = useReducedMotion();
+  return (
         <Reveal>
-          <div className="group relative overflow-hidden border border-gold-400/20">
-            <LuxImage media={media.atelier.suitOnMannequin} grade="none" sizes="100vw" className="aspect-[4/5] sm:aspect-[16/9] lg:aspect-[21/9]" />
-            <div aria-hidden className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,10,10,.94)_0%,rgba(10,10,10,.75)_45%,rgba(10,10,10,.25)_100%)]" />
-            <div className="absolute inset-0 flex flex-col justify-end p-8 sm:p-12 lg:justify-center lg:p-16">
-              <p className="eyebrow">Showroom Experience · Cluj-Napoca</p>
-              <h3 className="mt-6 max-w-[16ch] font-display text-display-sm font-normal text-ivory">
-                O probă privată, <em className="text-gold-400">fără grabă.</em>
-              </h3>
-              <p className="mt-6 max-w-[36rem] text-[0.95rem] leading-relaxed text-silk/85">
-                {verified.appointmentNote} {verified.street}, {verified.city}.
-              </p>
-              <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-                <BookingButton variant="solid" />
-                <a href={`tel:${verified.phoneE164}`} className="inline-flex min-h-11 items-center text-sm text-silk/80 transition-colors hover:text-gold-300">
-                  sau sună: <span className="text-ivory">{verified.phoneDisplay}</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </Reveal>
-      </div>
-
-      {/* ——— Atelier Details + Pricing Transparency ——— */}
-      <div className="container-site mt-section grid gap-16 lg:grid-cols-12 lg:gap-10">
-        <Reveal className="lg:col-span-5">
-          <h3 className="eyebrow">Atelier Details</h3>
-          <dl className="mt-8 grid grid-cols-1 gap-px border border-gold-400/20 bg-gold-400/20 sm:grid-cols-2">
-            {DETAILS.map((d) => (
-              <div key={d.label} className="bg-obsidian/70 p-6 backdrop-blur-md transition-colors duration-500 hover:bg-graphite/80">
-                <dt className="text-[0.65rem] font-semibold uppercase tracking-wide2 text-stone-500">{d.label}</dt>
-                <dd className="mt-3">
-                  {d.href ? (
-                    <a href={d.href} className="font-display text-xl text-ivory transition-colors hover:text-gold-300">
-                      {d.value}
-                    </a>
-                  ) : (
-                    <span className="font-display text-xl text-ivory">{d.value}</span>
-                  )}
-                  <span className="mt-1 block text-sm text-stone-400">{d.sub}</span>
-                </dd>
-              </div>
-            ))}
-          </dl>
-          <p className="mt-6 max-w-prose text-sm leading-relaxed text-stone-400">{verified.appointmentNote}</p>
-        </Reveal>
-
-        <Reveal delay={0.1} className="lg:col-span-6 lg:col-start-7">
           <div className="relative border border-gold-400/20 bg-charcoal/60 p-8 shadow-gold-inset backdrop-blur-md transition-shadow duration-700 hover:shadow-[0_0_20px_rgba(212,175,55,0.15)] sm:p-12">
             {/* colțuri de passe-partout */}
             <span aria-hidden className="absolute left-3 top-3 h-4 w-4 border-l border-t border-gold-500/60" />
@@ -250,7 +232,5 @@ export function Atelier() {
             </ul>
           </div>
         </Reveal>
-      </div>
-    </section>
   );
 }

@@ -6,6 +6,7 @@ import { media } from '@/lib/media';
 import { LuxImage } from '../ui/LuxImage';
 import { Reveal } from '../ui/Reveal';
 import { BookingButton, goldButtonClass } from '../ui/GoldButton';
+import { AtelierPriceList, AtelierProcess } from '../Atelier';
 
 const p = verified.prices;
 
@@ -167,6 +168,18 @@ export function AtelierPage() {
           })}
         </ol>
       </section>
+
+      {/* ——— Lista de prețuri (mutată de pe prima pagină) ——— */}
+      <section aria-label="Lista de prețuri" className="container-site mt-section">
+        <div className="mx-auto max-w-2xl">
+          <AtelierPriceList />
+        </div>
+      </section>
+
+      {/* ——— Procesul Made-to-Measure, în imagini (mutat de pe prima pagină) ——— */}
+      <div className="mt-section">
+        <AtelierProcess />
+      </div>
 
       {/* ——— Vizita, pas cu pas ——— */}
       <section aria-labelledby="vizita" className="container-site mt-section">

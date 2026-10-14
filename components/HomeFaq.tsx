@@ -17,7 +17,7 @@ export function HomeFaq() {
   const uid = useId();
 
   return (
-    <section id="intrebari" aria-labelledby="faq-title" className="relative border-t border-gold-400/20 py-section">
+    <section id="intrebari" aria-labelledby="faq-title" className="relative border-t border-gold-400/20 pb-[clamp(3rem,7vw,6rem)] pt-section">
       <div className="container-site grid gap-14 lg:grid-cols-12 lg:gap-10">
         <header className="lg:col-span-5">
           <div className="lg:sticky lg:top-32">

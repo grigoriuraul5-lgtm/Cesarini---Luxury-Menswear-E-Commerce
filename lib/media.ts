@@ -23,6 +23,13 @@ export const media = {
     },
   },
   editorial: {
+    /** Cardul editorial din hero-ul de pe telefon: detaliu de ajustare (mâinile pe nasture, batistă în buzunar).
+     *  Imagine aleasă de Raul (14.10.2026), decupată 2:1. Sursă/licență: de confirmat (pare Unsplash). */
+    heroFitting: {
+      src: '/editorial/hero-fitting.webp',
+      alt: 'Bărbat își încheie nasturele sacoului gri, cu batistă roșie în buzunarul de la piept',
+      focal: '50% 50%',
+    },
     /** Cardul din dreapta al hero-ului. Alternative verificate (există pe Unsplash):
      *  photo-1539025828301-b314ca222fa9 (bărbat în smoking negru, Viespire)
      *  photo-1742319690297-eaa312e20d77 (croitori care iau măsura taliei, Alireza heidarpour) */
