@@ -4,7 +4,8 @@ import { useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { verified, formatRON } from '@/lib/brand';
 import { media } from '@/lib/media';
-import { GoldButton, BookingButton } from './ui/GoldButton';
+import { GoldButton } from './ui/GoldButton';
+import { useBooking } from './booking/BookingProvider';
 import { LuxImage } from './ui/LuxImage';
 import { EXPO } from './ui/Reveal';
 
@@ -27,6 +28,7 @@ const portrait = media.editorial.heroTuxedo;
 
 export function Hero() {
   const reduce = useReducedMotion();
+  const booking = useBooking();
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
   // Parallax: imaginea urcă mai lent decât textul; textul se estompează la ieșire
@@ -53,7 +55,7 @@ export function Hero() {
         <div className="absolute inset-x-0 bottom-0 h-1/3 bg-[linear-gradient(180deg,transparent,rgba(10,10,10,.6))]" />
       </div>
 
-      <div className="container-site grid flex-1 items-center gap-14 py-12 lg:grid-cols-12 lg:gap-8 lg:py-16">
+      <div className="container-site grid flex-1 items-center gap-14 py-[clamp(1.25rem,4svh,3rem)] lg:grid-cols-12 lg:gap-8 lg:py-16">
         {/* ——— Coloana editorială ——— */}
         <motion.div style={reduce ? undefined : { y: textY, opacity: fade }} className="lg:col-span-6 xl:col-span-7">
           <motion.p {...fadeUp(0.1)} className="eyebrow flex items-center gap-4">
@@ -61,7 +63,7 @@ export function Hero() {
             <span><span className="hidden sm:inline">Maison de Croitorie · </span>Cluj-Napoca · Est. {verified.foundingYear}</span>
           </motion.p>
 
-          <h1 id="hero-title" className="mt-8 font-display text-display-lg font-normal">
+          <h1 id="hero-title" className="mt-[clamp(1rem,3.5svh,2rem)] font-display text-display-lg font-normal lg:mt-8">
             {LINES.map((l, i) => (
               <span key={l.text} className="-mx-[0.08em] -mb-[0.12em] block overflow-hidden px-[0.08em] pb-[0.2em]">
                 <motion.span {...line(i)} className={`block ${l.className}`}>
@@ -71,14 +73,25 @@ export function Hero() {
             ))}
           </h1>
 
-          <motion.p {...fadeUp(0.75)} className="lead mt-10 max-w-[33rem]">
+          <motion.p {...fadeUp(0.75)} className="lead mt-[clamp(0.75rem,3svh,2.5rem)] max-w-[33rem] max-lg:leading-[1.65] lg:mt-10">
             Costume de ceremonie din lână, cămăși pe măsură și accesorii,{' '}
             <strong className="font-medium text-ivory">ajustate gratuit</strong> de croitorii casei în showroom-ul din centrul Clujului.
           </motion.p>
 
-          <motion.div {...fadeUp(0.9)} className="mt-12 flex flex-col gap-4 sm:flex-row sm:items-center">
+          {/* Un singur buton; programarea e un link text cu săgeată, nu un al doilea bloc */}
+          <motion.div {...fadeUp(0.9)} className="mt-[clamp(1.25rem,4svh,3rem)] flex flex-wrap items-center gap-x-8 gap-y-2 lg:mt-12 lg:gap-10">
             <GoldButton href="/colectii">Explore Collection</GoldButton>
-            <BookingButton variant="ghost" />
+            <button
+              type="button"
+              onClick={() => booking.open()}
+              aria-haspopup="dialog"
+              className="group inline-flex min-h-11 cursor-pointer items-center gap-3 text-[0.72rem] font-semibold uppercase tracking-wide2 text-gold-200 transition-colors duration-500 hover:text-gold-100"
+            >
+              <span className="border-b border-gold-400/40 pb-1 transition-colors duration-500 group-hover:border-gold-200">Book Private Fitting</span>
+              <svg aria-hidden viewBox="0 0 24 8" className="h-2 w-6 transition-transform duration-500 ease-expo group-hover:translate-x-1">
+                <path d="M0 4h22M18 1l4 3-4 3" fill="none" stroke="currentColor" strokeWidth="1" />
+              </svg>
+            </button>
           </motion.div>
         </motion.div>
 
@@ -88,7 +101,7 @@ export function Hero() {
           initial={reduce ? false : { opacity: 0, clipPath: 'inset(10% 10% 10% 10%)' }}
           animate={{ opacity: 1, clipPath: 'inset(0% 0% 0% 0%)' }}
           transition={{ duration: 1.8, ease: EXPO, delay: 0.2 }}
-          className="relative mx-auto w-full max-w-[30rem] lg:col-span-6 lg:max-w-none xl:col-span-5"
+          className="relative mx-auto hidden w-full max-w-[30rem] lg:col-span-6 lg:block lg:max-w-none xl:col-span-5"
         >
           <div className="group relative aspect-[4/5] overflow-hidden border border-gold-400/20 shadow-noir transition-shadow duration-700 ease-expo hover:shadow-[0_0_20px_rgba(212,175,55,0.15)]">
             {/* Ken Burns lent: fotografia se așază în cadru la încărcare */}
