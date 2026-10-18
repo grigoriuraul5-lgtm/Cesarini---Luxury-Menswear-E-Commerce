@@ -12,8 +12,9 @@ const tagBase = 'border px-2.5 py-1 text-[0.58rem] font-semibold uppercase track
 function Tags({ p }: { p: CommerceProduct }) {
   return (
     <span className="pointer-events-none absolute left-3 top-3 flex flex-col items-start gap-1.5">
-      {isMtm(p.garment) && <span className={`${tagBase} border-gold-400/60 bg-obsidian/55 text-gold-200`}>Croit pe măsură</span>}
-      <span className={`${tagBase} border-gold-400/20 bg-obsidian/40 text-silk/90`}>Showroom Cluj</span>
+      {p.badge && <span className={`${tagBase} border-gold-300 bg-gold-400 text-obsidian`}>{p.badge}</span>}
+      {isMtm(p.garment) && <span className={`${tagBase} hidden border-gold-400/60 bg-obsidian/55 text-gold-200 sm:inline-block`}>Croit pe măsură</span>}
+      <span className={`${tagBase} hidden border-gold-400/20 bg-obsidian/40 text-silk/90 sm:inline-block`}>Showroom Cluj</span>
     </span>
   );
 }
@@ -35,22 +36,26 @@ function DualImage({ p, sizes, className }: { p: CommerceProduct; sizes: string;
 const occasionLine = (p: CommerceProduct) =>
   OCCASIONS.filter((o) => p.occasions.includes(o.key)).map((o) => o.short).join(' · ');
 
+/** Fișa pe scurt: „3 piese · 100% lână · Model C03” (doar ce e confirmat în fișa clientului). */
+export const specLine = (p: CommerceProduct) =>
+  [p.pieces && `${p.pieces} piese`, p.garment === 'suit' ? p.composition : null, p.code && `Model ${p.code}`].filter(Boolean).join(' · ');
+
 /** Card de catalog (vizualizarea grilă). */
 export function ProductTile({ p, onCustomize }: { p: CommerceProduct; onCustomize: (p: CommerceProduct) => void }) {
   return (
     <article className="group flex h-full flex-col">
       <Link href={productHref(p.slug)} tabIndex={-1} aria-hidden className="relative block overflow-hidden border border-gold-400/20 transition-shadow duration-700 ease-expo hover:shadow-gold-soft">
-        <DualImage p={p} sizes="(min-width: 1280px) 24vw, (min-width: 640px) 40vw, 92vw" className="aspect-[3/4]" />
+        <DualImage p={p} sizes="(min-width: 1280px) 24vw, (min-width: 640px) 40vw, 48vw" className="aspect-[3/4]" />
         <Tags p={p} />
       </Link>
-      <div className="flex flex-1 flex-col pt-5">
-        <p className="text-[0.62rem] font-semibold uppercase tracking-wide2 text-stone-500">{p.category}</p>
-        <h3 className="mt-2 font-display text-[1.4rem] font-normal leading-snug text-ivory transition-colors duration-500 group-hover:text-gold-100">
+      <div className="flex flex-1 flex-col pt-3 sm:pt-5">
+        <p className="hidden text-[0.62rem] font-semibold uppercase tracking-wide2 text-stone-500 sm:block">{p.category}</p>
+        <h3 className="font-display text-[1.05rem] font-normal sm:mt-2 sm:text-[1.4rem] leading-snug text-ivory transition-colors duration-500 group-hover:text-gold-100">
           <Link href={productHref(p.slug)} className="focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold-300">{p.name}</Link>
         </h3>
-        <p className="mt-1 text-[0.8rem] text-stone-400">Pentru {occasionLine(p).toLowerCase()}</p>
-        <p className="mt-3 font-display text-2xl tabular-nums text-gold-400">{formatRON(p.price)}</p>
-        <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-3 pt-5">
+        <p className="mt-1 text-[0.72rem] leading-snug text-stone-400 sm:text-[0.8rem]">{specLine(p) || `Pentru ${occasionLine(p).toLowerCase()}`}</p>
+        <p className="mt-2 whitespace-nowrap font-display text-xl tabular-nums text-gold-400 sm:mt-3 sm:text-2xl">{formatRON(p.price)}</p>
+        <div className="mt-auto hidden flex-wrap items-center gap-x-5 gap-y-3 pt-5 sm:flex">
           {isMtm(p.garment) && (
             <button
               type="button"

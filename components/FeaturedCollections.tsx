@@ -2,17 +2,31 @@
 
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { featuredProducts, formatRON, verified, type FeaturedProduct } from '@/lib/brand';
+import { formatRON, verified } from '@/lib/brand';
+import { getProduct, productHref, type CommerceProduct } from '@/lib/commerce/catalog';
+import { specLine } from './commerce/ProductTiles';
 import { media } from '@/lib/media';
 import { LuxImage } from './ui/LuxImage';
 import { Reveal } from './ui/Reveal';
 import { useBooking } from './booking/BookingProvider';
 
 /**
- * „Garderoba unei seri importante”: carusel de produse reale (nume + preț de pe cesarini.ro).
+ * „Garderoba unei seri importante”: carusel cu produse reale din catalog (pozele și fișele Cesarini).
+ * Selecția amestecă ceremonie, business și pantofi; ordinea de mai jos e cea afișată.
  * Scroll-snap nativ (swipe pe mobil, trackpad pe desktop) + butoane prev/next + indicator de progres.
  * Pe desktop încap 3 carduri și jumătate: al patrulea „iese” din cadru ca invitație la scroll.
  */
+const FEATURED = [
+  'costum-ceremonie-negru-c03',
+  'costum-business-bej-b02',
+  'costum-ceremonie-alb-crem-c10',
+  'costum-business-caramiziu-b15',
+  'costum-ceremonie-verde-inchis-c07',
+  'pantofi-oxford-negru-semilucios',
+  'costum-ceremonie-bordo-c16',
+];
+const featured = FEATURED.map((s) => getProduct(s)).filter(Boolean) as CommerceProduct[];
+
 export function FeaturedCollections() {
   const trackRef = useRef<HTMLUListElement>(null);
   const [progress, setProgress] = useState(0);
@@ -59,7 +73,7 @@ export function FeaturedCollections() {
               Garderoba unei <em className="text-gold-400">seri importante</em>
             </h2>
             <p className="lead mt-6 max-w-[38rem]">
-              De la cămașa Oxford de {formatRON(verified.prices.businessShirt)} la costumul de ceremonie în trei piese de {formatRON(verified.prices.ceremonySuit)}. Piesele cele mai căutate, cu prețul la vedere.
+              De la cămașa Oxford de {formatRON(verified.prices.businessShirt)} la costumul de ceremonie de {formatRON(verified.prices.ceremonySuit)}. Piesele cele mai căutate, cu prețul la vedere.
             </p>
           </Reveal>
 
@@ -79,7 +93,7 @@ export function FeaturedCollections() {
         ref={trackRef}
         className="no-scrollbar mt-16 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-6 pl-gutter pr-gutter [scroll-padding-left:clamp(1.25rem,4vw,3.5rem)] xl:pl-[max(clamp(1.25rem,4vw,3.5rem),calc((100vw-1440px)/2+3.5rem))]"
       >
-        {featuredProducts.map((p, i) => (
+        {featured.map((p, i) => (
           <li key={p.slug} className="w-[80%] shrink-0 snap-start sm:w-[46%] lg:w-[30%] xl:w-[27%]">
             <Reveal delay={Math.min(i, 3) * 0.08} className="h-full">
               <ProductCard p={p} />
@@ -120,15 +134,18 @@ export function FeaturedCollections() {
 }
 
 /** Card de produs e-commerce: foto cu zoom la hover, categorie, titlu, preț în aur, „Vezi Detalii”. */
-function ProductCard({ p }: { p: FeaturedProduct }) {
+function ProductCard({ p }: { p: CommerceProduct }) {
   return (
     <article className="group relative flex h-full flex-col border border-gold-400/20 bg-charcoal/40 backdrop-blur-md transition-all duration-700 ease-expo hover:-translate-y-1 hover:border-gold-400/40 hover:shadow-[0_0_20px_rgba(212,175,55,0.15)]">
       <div className="relative">
-        <LuxImage media={media.products[p.media]} sizes="(min-width: 1280px) 27vw, (min-width: 1024px) 30vw, (min-width: 640px) 46vw, 80vw" className="aspect-[3/4]" />
+        <LuxImage media={p.gallery[0]} sizes="(min-width: 1280px) 27vw, (min-width: 1024px) 30vw, (min-width: 640px) 46vw, 80vw" className="aspect-[3/4]" />
         {/* eticheta de categorie, pe sticlă */}
         <span className="absolute left-4 top-4 border border-gold-400/20 bg-obsidian/40 px-3 py-1.5 text-[0.6rem] font-semibold uppercase tracking-wide2 text-silk backdrop-blur-md">
           {p.category}
         </span>
+        {p.badge && (
+          <span className="absolute right-4 top-4 bg-gold-400 px-3 py-1.5 text-[0.6rem] font-semibold uppercase tracking-wide2 text-obsidian">{p.badge}</span>
+        )}
         {/* „ajustări gratuite” apare la hover — argumentul real al casei */}
         <span className="absolute inset-x-4 bottom-4 translate-y-2 border border-gold-400/20 bg-obsidian/55 px-4 py-2.5 text-center text-[0.65rem] uppercase tracking-wide2 text-gold-200 opacity-0 backdrop-blur-md transition-all duration-500 ease-expo group-hover:translate-y-0 group-hover:opacity-100">
           Ajustări gratuite în atelier
@@ -137,11 +154,11 @@ function ProductCard({ p }: { p: FeaturedProduct }) {
 
       <div className="flex flex-1 flex-col p-6">
         <h3 className="font-display text-[1.45rem] font-normal leading-snug text-ivory transition-colors duration-500 group-hover:text-gold-100">
-          <Link href={p.href} className="after:absolute after:inset-0 focus-visible:outline-none">
+          <Link href={productHref(p.slug)} className="after:absolute after:inset-0 focus-visible:outline-none">
             {p.name}
           </Link>
         </h3>
-        <p className="mt-2 text-[0.8rem] text-stone-400">{p.detail}</p>
+        <p className="mt-2 text-[0.8rem] text-stone-400">{specLine(p)}</p>
 
         <div className="mt-auto flex items-center justify-between gap-4 pt-6">
           <p className="whitespace-nowrap font-display text-2xl tabular-nums text-gold-400">{formatRON(p.price)}</p>

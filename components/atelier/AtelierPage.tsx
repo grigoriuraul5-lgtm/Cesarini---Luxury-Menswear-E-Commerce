@@ -31,7 +31,7 @@ const SERVICE_FACTS: Record<string, { id: string; facts: string[] }> = {
   III: {
     id: 'ceremonie',
     facts: [
-      `Costum de ceremonie în trei piese (${verified.ceremonySuitSpec.pieces}), ${verified.ceremonySuitSpec.fabric}, mărimi ${verified.ceremonySuitSpec.sizes}: ${formatRON(p.ceremonySuit)}.`,
+      `Costum de ceremonie în ${verified.ceremonySuitSpec.piecesRange}, ${verified.ceremonySuitSpec.fabric}, mărimi ${verified.ceremonySuitSpec.sizes}: ${formatRON(p.ceremonySuit)}.`,
       `Cămașă de ceremonie ${formatRON(p.ceremonyShirt)} · pantofi Oxford ${formatRON(p.oxfordShoes)} · curea din piele naturală ${formatRON(p.leatherBelt)}.`,
       'Cravate, papioane și butoni, aleși în showroom împreună cu ținuta.',
     ],

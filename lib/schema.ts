@@ -177,7 +177,12 @@ export function homeGraph() {
 }
 
 /** Pagina de produs: Product + Offer (preț verificat) + BreadcrumbList. „Croit pe măsură” nu intră până nu e confirmat. */
-export function productPageGraph(p: { slug: string; name: string; category: string; categoryKey: string; lead: string; price: number }) {
+export function productPageGraph(p: {
+  slug: string; name: string; category: string; categoryKey: string; lead: string; price: number;
+  code?: string; color?: string; composition?: string; sizes?: string[]; badge?: string; gallery?: { src: string }[];
+}) {
+  // Pozele reale Cesarini (din /produse/…) pot intra în schema; placeholder-ele de stoc NU
+  const images = (p.gallery ?? []).filter((g) => g.src.startsWith('/produse/')).slice(0, 4).map((g) => `${SITE_URL}${g.src}`);
   const url = `${SITE_URL}/produs/${p.slug}`;
   return {
     '@context': 'https://schema.org',
@@ -190,13 +195,17 @@ export function productPageGraph(p: { slug: string; name: string; category: stri
         category: p.category,
         brand: { '@id': id('brand') },
         url,
-        ...(p.slug === 'costum-ceremonie' && { material: verified.ceremonySuitSpec.fabric, size: verified.ceremonySuitSpec.sizes }),
+        ...(p.code && { sku: p.code }),
+        ...(p.color && { color: p.color }),
+        ...(p.composition && { material: p.composition }),
+        ...(p.sizes?.length && { size: `${p.sizes[0]} – ${p.sizes[p.sizes.length - 1]}` }),
+        ...(images.length && { image: images }),
         offers: {
           '@type': 'Offer',
           url,
           price: String(p.price),
           priceCurrency: 'RON',
-          availability: 'https://schema.org/InStock',
+          availability: p.badge === 'Stoc limitat' ? 'https://schema.org/LimitedAvailability' : 'https://schema.org/InStock',
           seller: { '@id': id('showroom') },
         },
       },

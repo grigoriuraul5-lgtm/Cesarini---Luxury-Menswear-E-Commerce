@@ -81,7 +81,7 @@ export const articles: Article[] = [
               ['Talia', 'Brâu (cummerbund) sau vestă joasă, ca talia cămășii să nu se vadă.', '—'],
               ['Cămașa', 'Albă, de ceremonie, cu plastron sau cu nasturi ascunși.', `Cămașă de ceremonie cu nasturi ascunși · ${formatRON(p.ceremonyShirt)}`],
               ['Papionul', 'Negru, cu aceeași textură ca reverele. Ideal, cu nod legat de mână.', 'Papioane în showroom.'],
-              ['Pantofii', 'Oxford negru lucios sau pantofi de seară din lac.', `Pantofi Oxford negru lucios · ${formatRON(p.oxfordShoes)}`],
+              ['Pantofii', 'Oxford negru lucios sau pantofi de seară din lac.', `Pantofi Oxford negru semilucios · ${formatRON(p.oxfordShoes)}`],
               ['Accesoriile', 'Butoni discreți, șosete negre subțiri, batistă albă la buzunarul de la piept.', 'Butoni în showroom.'],
             ],
           },
@@ -92,7 +92,7 @@ export const articles: Article[] = [
         question: 'Pot purta un costum negru în loc de smoking?',
         answer: 'La „black tie optional”, da. La „black tie” strict, gazdele se așteaptă la smoking.',
         blocks: [
-          { type: 'p', text: `Un costum negru sau bleumarin închis, cu cămașă albă și papion negru, e alegerea corectă când invitația lasă loc. Costumul de ceremonie Cesarini are trei piese (${verified.ceremonySuitSpec.pieces}), e din ${verified.ceremonySuitSpec.fabric}, vine în mărimile ${verified.ceremonySuitSpec.sizes} și costă ${formatRON(p.ceremonySuit)}.` },
+          { type: 'p', text: `Un costum negru sau bleumarin închis, cu cămașă albă și papion negru, e alegerea corectă când invitația lasă loc. Costumul de ceremonie Cesarini vine în ${verified.ceremonySuitSpec.piecesRange}, e din ${verified.ceremonySuitSpec.fabric}, vine în mărimile ${verified.ceremonySuitSpec.sizes} și costă ${formatRON(p.ceremonySuit)}.` },
           { type: 'note', text: 'Cu un costum în loc de smoking, păstrează restul regulilor: papion, nu cravată; pantofi negri lucioși; fără curea vizibilă sub vestă.' },
         ],
       },
@@ -145,9 +145,9 @@ export const articles: Article[] = [
         a: `La Cesarini, ${verified.street}, ${verified.postalCode} ${verified.city}: cămăși de ceremonie de la ${formatRON(p.ceremonyShirt)}, pantofi Oxford negri lucioși la ${formatRON(p.oxfordShoes)}, costume de ceremonie la ${formatRON(p.ceremonySuit)}, papioane și butoni. Program: ${hours}. Programări la ${verified.phoneDisplay}.`,
       },
       { q: 'Pot comanda online un costum croit pe măsură de la Cesarini?', a: 'Da. Pe pagina costumului sau a cămășii alegi „Croit pe măsură”, introduci măsurile cu ajutorul ghidului ilustrat, iar un consultant Cesarini te sună să le verifice înainte de croire.' },
-      { q: 'Cât costă un costum de ceremonie Cesarini?', a: `Costumul de ceremonie Cesarini costă ${formatRON(p.ceremonySuit)}. Are trei piese (${verified.ceremonySuitSpec.pieces}), este din ${verified.ceremonySuitSpec.fabric} și vine în mărimile ${verified.ceremonySuitSpec.sizes}.` },
+      { q: 'Cât costă un costum de ceremonie Cesarini?', a: `Costumul de ceremonie Cesarini costă ${formatRON(p.ceremonySuit)}. Vine în ${verified.ceremonySuitSpec.piecesRange}, este din ${verified.ceremonySuitSpec.fabric} și vine în mărimile ${verified.ceremonySuitSpec.sizes}.` },
     ],
-    relatedProducts: ['camasa-ceremonie-nasturi-ascunsi', 'pantofi-oxford-negru-lucios', 'costum-ceremonie', 'camasa-ceremonie-nasturi-negri'],
+    relatedProducts: ['camasa-ceremonie-nasturi-ascunsi', 'pantofi-oxford-negru-semilucios', 'costum-ceremonie-negru-c03', 'camasa-ceremonie-nasturi-negri'],
   },
   {
     slug: 'stofa-costum-de-mire',
@@ -156,7 +156,7 @@ export const articles: Article[] = [
     about: 'Stofe pentru costumul de mire',
     occasion: 'Nuntă — mire',
     dek: 'Ce înseamnă numerele „Super” de pe etichetă, când are sens mătasea și ce greutate de stofă alegi pentru o nuntă de vară sau de iarnă.',
-    shortAnswer: `Pentru un costum de mire, lâna merino fină (în jur de Super 110s – 130s) este alegerea cea mai sigură: drapează frumos, respiră o zi întreagă și își revine după șifonare. Mătasea pură se folosește rar la un costum întreg; o găsești în amestec cu lâna, pentru luciu, sau la reverele smokingului, la papion și la batistă. La Cesarini (${addr}), costumul de ceremonie este din ${verified.ceremonySuitSpec.fabric}, în trei piese, la ${formatRON(p.ceremonySuit)}.`,
+    shortAnswer: `Pentru un costum de mire, lâna merino fină (în jur de Super 110s – 130s) este alegerea cea mai sigură: drapează frumos, respiră o zi întreagă și își revine după șifonare. Mătasea pură se folosește rar la un costum întreg; o găsești în amestec cu lâna, pentru luciu, sau la reverele smokingului, la papion și la batistă. La Cesarini (${addr}), costumul de ceremonie este din ${verified.ceremonySuitSpec.fabric}, în două sau trei piese, la ${formatRON(p.ceremonySuit)}.`,
     published: '2026-10-13',
     updated: '2026-10-13',
     readingMinutes: 8,
@@ -239,12 +239,12 @@ export const articles: Article[] = [
       {
         id: 'la-cesarini',
         question: 'Cum îți alegi costumul de mire la Cesarini, în Cluj-Napoca?',
-        answer: `Costumul de ceremonie Cesarini este din ${verified.ceremonySuitSpec.fabric}, în trei piese, și costă ${formatRON(p.ceremonySuit)}; restul detaliilor despre stofă le discuți cu un consultant în showroom.`,
+        answer: `Costumul de ceremonie Cesarini este din ${verified.ceremonySuitSpec.fabric}, în două sau trei piese, și costă ${formatRON(p.ceremonySuit)}; restul detaliilor despre stofă le discuți cu un consultant în showroom.`,
         blocks: [
           {
             type: 'list',
             items: [
-              `Trei piese (${verified.ceremonySuitSpec.pieces}), mărimile ${verified.ceremonySuitSpec.sizes}.`,
+              `Două sau trei piese (vesta apare la modelele în trei piese), mărimile ${verified.ceremonySuitSpec.sizes}.`,
               `În showroom (${addr}): ${verified.freeAlterations}`,
               'Online: alegi „Croit pe măsură” pe pagina costumului și introduci măsurile; un consultant te sună să le verifice înainte de croire.',
               `Program: ${hours}. ${verified.appointmentNote}`,
@@ -257,10 +257,10 @@ export const articles: Article[] = [
       { q: 'Ce înseamnă Super 130s la un costum?', a: 'Super 130s arată finețea lânii: fibre de cel mult 17,25 microni. Stofa e fină, cu cădere moale, dar destul de rezistentă pentru o zi întreagă, motiv pentru care e o alegere bună pentru costumul de mire.' },
       { q: 'Este mătasea potrivită pentru un costum de mire?', a: 'Ca accent, da: în amestec cu lâna, la reverele smokingului, la papion sau la batistă. Un costum întreg din mătase pură se șifonează ușor și arată urmele de transpirație, așa că pentru o zi lungă lâna merino e mai sigură.' },
       { q: 'Ce stofă alegi pentru o nuntă vara?', a: 'O lână ușoară, în jur de 230 – 260 de grame pe metru, cu țesătură aerisită și căptușeală parțială, într-o culoare ca bleumarinul sau griul mediu.' },
-      { q: 'Din ce stofă e costumul de ceremonie Cesarini?', a: `Costumul de ceremonie Cesarini este din ${verified.ceremonySuitSpec.fabric} și are trei piese (${verified.ceremonySuitSpec.pieces}), în mărimile ${verified.ceremonySuitSpec.sizes}. Costă ${formatRON(p.ceremonySuit)}.` },
+      { q: 'Din ce stofă e costumul de ceremonie Cesarini?', a: `Costumul de ceremonie Cesarini este din ${verified.ceremonySuitSpec.fabric} și vine în ${verified.ceremonySuitSpec.piecesRange}, în mărimile ${verified.ceremonySuitSpec.sizes}. Costă ${formatRON(p.ceremonySuit)}.` },
       { q: 'Unde pot proba un costum de mire în Cluj-Napoca?', a: `La showroom-ul Cesarini, ${verified.street}, ${verified.postalCode} ${verified.city}. Program: ${hours}. Programări la ${verified.phoneDisplay}.` },
     ],
-    relatedProducts: ['costum-ceremonie', 'camasa-ceremonie-nasturi-ascunsi', 'pantofi-oxford-negru-lucios', 'curea-piele-naturala'],
+    relatedProducts: ['costum-ceremonie-negru-c03', 'camasa-ceremonie-nasturi-ascunsi', 'pantofi-oxford-negru-semilucios', 'curea-piele-naturala'],
   },
   {
     slug: 'eticheta-camasa-smoking',
@@ -355,7 +355,7 @@ export const articles: Article[] = [
       { q: 'Ce cămașă porți cu papionul?', a: 'O cămașă albă de ceremonie, cu guler clasic, cu nasturi ascunși sau cu nasturi negri, și, ideal, cu manșetă dublă pentru butoni.' },
       { q: 'Unde găsesc cămașă de ceremonie în Cluj-Napoca?', a: `La Cesarini, ${verified.street}, ${verified.postalCode} ${verified.city}: cămăși de ceremonie clasice, cu nasturi ascunși sau cu nasturi negri, la ${formatRON(p.ceremonyShirt)}, și pantofi Oxford negri lucioși la ${formatRON(p.oxfordShoes)}. Program: ${hours}. Programări la ${verified.phoneDisplay}.` },
     ],
-    relatedProducts: ['camasa-ceremonie-nasturi-ascunsi', 'camasa-ceremonie-nasturi-negri', 'camasa-ceremonie-clasica', 'pantofi-oxford-negru-lucios'],
+    relatedProducts: ['camasa-ceremonie-nasturi-ascunsi', 'camasa-ceremonie-nasturi-negri', 'camasa-ceremonie-clasica', 'pantofi-oxford-negru-semilucios'],
   },
 ];
 

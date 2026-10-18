@@ -43,7 +43,8 @@ export const verified = {
     oxfordShoes: 599,
     leatherBelt: 199,
   },
-  ceremonySuitSpec: { pieces: 'sacou, vestă și pantaloni', fabric: '100% lână', sizes: '46 – 58' },
+  /** Fișele clientului (18.10.2026): modelele de ceremonie sunt în 2 sau 3 piese, toate cele cu fișă sunt 100% lână */
+  ceremonySuitSpec: { pieces: 'sacou, vestă și pantaloni', piecesRange: 'două sau trei piese (sacou și pantaloni, plus vestă la modelele în trei piese)', fabric: '100% lână', sizes: '46 – 58' },
   freeAlterations: 'Ajustări gratuite, realizate de croitorii Cesarini, pentru întreaga ținută cumpărată din showroom.',
   delivery: 'Livrare în 1 – 2 zile lucrătoare; un consultant sună pentru confirmarea mărimii.',
 
@@ -61,7 +62,7 @@ export const verified = {
 
   /** Fraza-entitate: formulată ca să poată fi citată cuvânt cu cuvânt. */
   entitySentence:
-    'Cesarini este un showroom de costume bărbătești din Cluj-Napoca, activ din 2015, pe Str. Ștefan Octavian Iosif nr. 1. Oferă costume de ceremonie și de mire (2.299 lei, trei piese, 100% lână), costume business și casual (1.599 lei), cămăși pe măsură, pantofi și accesorii, cu ajustări gratuite realizate de croitorii casei pentru întreaga ținută.',
+    'Cesarini este un showroom de costume bărbătești din Cluj-Napoca, activ din 2015, pe Str. Ștefan Octavian Iosif nr. 1. Oferă costume de ceremonie și de mire (2.299 lei, în două sau trei piese, 100% lână), costume business și casual (1.599 lei), cămăși pe măsură, pantofi și accesorii, cu ajustări gratuite realizate de croitorii casei pentru întreaga ținută.',
 };
 
 export const editorial = {
@@ -97,7 +98,7 @@ export const collections: Collection[] = [
     index: '01',
     title: 'Costume de Ceremonie',
     kicker: 'Mire · Naș · Gală',
-    description: 'Trei piese (sacou, vestă, pantaloni) din 100% lână, în mărimile 46 – 58, ajustate gratuit în atelier.',
+    description: 'Costume în două sau trei piese, din 100% lână, în mărimile 46 – 58, ajustate gratuit în atelier.',
     priceFrom: verified.prices.ceremonySuit,
     legacyUrl: 'https://www.cesarini.ro/costume-barbati-ceremonie/',
     fabric: 'herringbone',
@@ -152,23 +153,23 @@ export type FeaturedProduct = {
 
 export const featuredProducts: FeaturedProduct[] = [
   {
-    slug: 'costum-ceremonie',
-    name: 'Costum Bărbați Ceremonie',
+    slug: 'costum-ceremonie-negru-c03',
+    name: 'Costum de ceremonie negru',
     category: 'Costume de ceremonie',
     detail: '3 piese · 100% lână · 46 – 58',
     price: verified.prices.ceremonySuit,
     media: 'ceremonySuit',
-    href: '/produs/costum-ceremonie',
+    href: '/produs/costum-ceremonie-negru-c03',
     legacyUrl: 'https://www.cesarini.ro/costume-barbati-ceremonie/',
   },
   {
-    slug: 'costum-business-casual',
-    name: 'Costum Bărbați Business | Casual',
+    slug: 'costum-business-bej-b02',
+    name: 'Costum business bej',
     category: 'Business & Casual',
-    detail: 'Croială modernă · ajustări incluse',
+    detail: '3 piese · 77% lână · 46 – 58',
     price: verified.prices.businessSuit,
     media: 'businessSuit',
-    href: '/produs/costum-business-casual',
+    href: '/produs/costum-business-bej-b02',
     legacyUrl: 'https://www.cesarini.ro/costume-business-casual/',
   },
   {
@@ -192,13 +193,13 @@ export const featuredProducts: FeaturedProduct[] = [
     legacyUrl: 'https://www.cesarini.ro/camasa-oxford-white/',
   },
   {
-    slug: 'pantofi-oxford-negru-lucios',
-    name: 'Pantofi Oxford negru lucios',
-    category: 'Pantofi de ceremonie',
-    detail: 'Oxford · negru lucios · ceremonie',
+    slug: 'pantofi-oxford-negru-semilucios',
+    name: 'Pantofi Oxford negru semilucios',
+    category: 'Pantofi Oxford',
+    detail: 'Piele naturală · talpă neolit · 38 – 45',
     price: verified.prices.oxfordShoes,
     media: 'oxfordShoes',
-    href: '/produs/pantofi-oxford-negru-lucios',
+    href: '/produs/pantofi-oxford-negru-semilucios',
     legacyUrl: 'https://www.cesarini.ro/pantofi-barbati/',
   },
 ];
@@ -249,7 +250,7 @@ export const faqs = [
   },
   {
     q: 'Care este prețul de pornire pentru un costum de ceremonie sau business?',
-    a: `Un costum de ceremonie Cesarini costă ${formatRON(verified.prices.ceremonySuit)}: trei piese (${verified.ceremonySuitSpec.pieces}), din ${verified.ceremonySuitSpec.fabric}, în mărimile ${verified.ceremonySuitSpec.sizes}. Un costum business sau casual costă ${formatRON(verified.prices.businessSuit)}. Cămășile pornesc de la ${formatRON(verified.prices.businessShirt)}.`,
+    a: `Un costum de ceremonie Cesarini costă ${formatRON(verified.prices.ceremonySuit)}: ${verified.ceremonySuitSpec.piecesRange}, din ${verified.ceremonySuitSpec.fabric}, în mărimile ${verified.ceremonySuitSpec.sizes}. Un costum business sau casual costă ${formatRON(verified.prices.businessSuit)}. Cămășile pornesc de la ${formatRON(verified.prices.businessShirt)}.`,
   },
   {
     q: 'Cum pot comanda online dacă nu pot ajunge în showroom?',

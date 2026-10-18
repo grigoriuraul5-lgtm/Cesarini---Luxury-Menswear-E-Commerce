@@ -65,8 +65,8 @@ export function Checkout() {
           <p className="eyebrow">Finalizare comandă</p>
           <h1 className="mt-6 font-display text-display-sm font-normal text-ivory">Coșul e gol.</h1>
           <p className="lead mt-6 max-w-prose">Alege o piesă din colecție și revino aici ca să finalizezi comanda.</p>
-          <Link href="/produs/costum-ceremonie" className={goldButtonClass('solid', 'mt-10')}>
-            <span className="relative">Vezi costumul de ceremonie</span>
+          <Link href="/colectii" className={goldButtonClass('solid', 'mt-10')}>
+            <span className="relative">Vezi colecțiile</span>
           </Link>
         </div>
       </Shell>

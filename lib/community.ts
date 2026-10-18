@@ -42,11 +42,11 @@ export type FeedItem = {
 const ig = verified.social.instagram;
 
 export const feed: FeedItem[] = [
-  { id: 'ceremonie', kicker: 'Ceremonie', title: 'Costumul de mire, în trei piese', media: media.products.ceremonySuit, href: ig, shape: 'tall' },
+  { id: 'ceremonie', kicker: 'Ceremonie', title: 'Costumul de mire, croit pentru ziua ta', media: media.products.ceremonySuit, href: ig, shape: 'tall' },
   { id: 'atelier', kicker: 'Din atelier', title: 'Ajustarea, punct cu punct', media: media.atelier.tailorAtWork, href: ig, shape: 'square' },
   { id: 'stofe', kicker: 'Stofe', title: 'Mostrele, înainte de alegere', media: media.atelier.fabricSwatches, href: ig, shape: 'square' },
   { id: 'gala', kicker: 'Seara de gală', title: 'Papion negru, cămașă albă', media: media.editorial.heroTuxedo, href: ig, shape: 'wide' },
-  { id: 'detalii', kicker: 'Detalii', title: 'Oxford negru lucios', media: media.products.oxfordShoes, href: ig, shape: 'square' },
+  { id: 'detalii', kicker: 'Detalii', title: 'Oxford negru semilucios', media: media.products.oxfordShoes, href: ig, shape: 'square' },
   { id: 'camasi', kicker: 'Cămăși', title: 'Gulerul care stă unde trebuie', media: media.products.shirtHanger, href: ig, shape: 'tall' },
   { id: 'business', kicker: 'Business', title: 'Croiala de zi cu zi', media: media.products.businessSuit, href: ig, shape: 'square' },
   { id: 'croiala', kicker: 'Croitorie', title: 'Foarfeca, stofa, răbdarea', media: media.atelier.cuttingFabric, href: ig, shape: 'wide' },

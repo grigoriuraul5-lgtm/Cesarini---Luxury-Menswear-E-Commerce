@@ -14,13 +14,15 @@ type Props = {
   zoom?: boolean;
   className?: string;
   imgClassName?: string;
+  /** calitatea variantei servite de optimizatorul Next (fotografiile de produs: 85, fără artefacte vizibile) */
+  quality?: number;
 };
 
 /**
  * Imagine „de lux”: object-cover pe tot cadrul, grading unitar, zoom lent la hover
  * și fundal de stofă dacă sursa nu se încarcă (fără cadre goale sau iconițe de imagine spartă).
  */
-export function LuxImage({ media, sizes, priority, grade = 'soft', zoom = true, className = '', imgClassName = '' }: Props) {
+export function LuxImage({ media, sizes, priority, grade = 'soft', zoom = true, className = '', imgClassName = '', quality = 85 }: Props) {
   const [failed, setFailed] = useState(false);
   const remote = media.src.startsWith('http');
 
@@ -33,6 +35,7 @@ export function LuxImage({ media, sizes, priority, grade = 'soft', zoom = true, 
           fill
           sizes={sizes}
           priority={priority}
+          quality={quality}
           loader={remote ? unsplashLoader : undefined}
           onError={() => setFailed(true)}
           style={{ objectPosition: media.focal ?? '50% 50%' }}

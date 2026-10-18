@@ -11,6 +11,7 @@ import { EXPO } from '../ui/Reveal';
 import { goldButtonClass } from '../ui/GoldButton';
 import { useCart } from './CartProvider';
 import { MeasurementsPanel } from './MeasurementsPanel';
+import { ProductLightbox } from './ProductLightbox';
 import { ArrowRight, Diamond } from './parts';
 
 type Fit = 'standard' | 'custom';
@@ -26,6 +27,7 @@ export function ProductPage({ slug }: { slug: string }) {
   const uid = useId();
 
   const [shot, setShot] = useState(0);
+  const [zoomed, setZoomed] = useState(false);
   const [fit, setFit] = useState<Fit>('standard');
   const [size, setSize] = useState<string | null>(null);
   const [measures, setMeasures] = useState<Measurements | undefined>(() => cart.measureProfile[p.garment]);
@@ -83,6 +85,16 @@ export function ProductPage({ slug }: { slug: string }) {
           {/* ——— Galerie ——— */}
           <div className="lg:col-span-7">
             <div className="group relative overflow-hidden border border-gold-400/20">
+              <button
+                type="button"
+                onClick={() => setZoomed(true)}
+                aria-label={`Mărește fotografia ${shot + 1}: ${p.gallery[shot]?.alt ?? p.name}`}
+                className="absolute inset-0 z-10 cursor-zoom-in"
+              />
+              <span aria-hidden className="pointer-events-none absolute bottom-4 right-4 z-10 inline-flex items-center gap-2 border border-gold-400/25 bg-obsidian/55 px-3 py-1.5 text-[0.6rem] font-semibold uppercase tracking-wide2 text-silk backdrop-blur-md">
+                <svg viewBox="0 0 16 16" className="h-3 w-3"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" strokeWidth="1.2" /><path d="M11 11l4 4M7 5v4M5 7h4" stroke="currentColor" strokeWidth="1.2" /></svg>
+                Mărește
+              </span>
               <AnimatePresence mode="popLayout" initial={false}>
                 <motion.div
                   key={shot}
@@ -123,7 +135,11 @@ export function ProductPage({ slug }: { slug: string }) {
                 {p.category}
               </p>
               <h1 className="mt-6 text-balance font-display text-[clamp(2.25rem,1.6rem+2vw,3.5rem)] font-normal leading-[1.05] text-ivory">{p.name}</h1>
-              <p className="mt-5 font-display text-3xl tabular-nums text-gold-400">{formatRON(price)}</p>
+              <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
+                <p className="font-display text-3xl tabular-nums text-gold-400">{formatRON(price)}</p>
+                {p.badge && <span className="border border-gold-300 bg-gold-400 px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-wide2 text-obsidian">{p.badge}</span>}
+                {p.code && <span className="text-[0.7rem] uppercase tracking-wide2 text-stone-400">Model {p.code}</span>}
+              </div>
               <p className="lead mt-5 max-w-prose">{p.lead}</p>
 
               {/* Croiala (doar costume și cămăși) */}
@@ -274,6 +290,7 @@ export function ProductPage({ slug }: { slug: string }) {
         }}
       />
       )}
+      <ProductLightbox open={zoomed} items={p.gallery} index={shot} onIndex={setShot} onClose={() => setZoomed(false)} title={p.name} />
     </article>
   );
 }

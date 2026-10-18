@@ -2,10 +2,11 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { editorial, formatRON } from '@/lib/brand';
-import { CATEGORIES, OCCASIONS, commerceProducts, getCategory, type CategoryKey, type CommerceProduct } from '@/lib/commerce/catalog';
+import Link from 'next/link';
+import { editorial, formatRON, verified } from '@/lib/brand';
+import { CATEGORIES, COLOR_FAMILIES, OCCASIONS, commerceProducts, getCategory, type CategoryKey, type CommerceProduct } from '@/lib/commerce/catalog';
 import {
-  EMPTY_FILTERS, FIT_OPTIONS, SORT_OPTIONS, activeCount, applyFilters, facetCounts, parseQuery, toQuery,
+  EMPTY_FILTERS, FIT_OPTIONS, PIECES_OPTIONS, SORT_OPTIONS, activeCount, applyFilters, facetCounts, parseQuery, toQuery,
   type Filters, type SortKey,
 } from '@/lib/commerce/listing';
 import { EXPO } from '../ui/Reveal';
@@ -48,7 +49,7 @@ export function Catalog({ category }: { category?: CategoryKey }) {
   // URL-ul reflectă filtrele, ca selecția să poată fi trimisă ca link
   useEffect(() => {
     if (!ready) return;
-    const sameAsBase = filters.categorie.join() === base.categorie.join() && !filters.ocazie.length && !filters.croiala.length;
+    const sameAsBase = filters.categorie.join() === base.categorie.join() && !filters.ocazie.length && !filters.croiala.length && !filters.culoare.length && !filters.piese.length;
     const qs = sameAsBase && sort === 'recomandate' ? '' : toQuery(filters, sort);
     try {
       window.history.replaceState(window.history.state, '', `${window.location.pathname}${qs}`);
@@ -76,6 +77,8 @@ export function Catalog({ category }: { category?: CategoryKey }) {
   const chips = [
     ...filters.categorie.filter((c) => c !== category).map((c) => ({ group: 'categorie' as const, key: c, label: getCategory(c)!.label })),
     ...filters.croiala.map((c) => ({ group: 'croiala' as const, key: c, label: FIT_OPTIONS.find((o) => o.key === c)!.label })),
+    ...filters.culoare.map((c) => ({ group: 'culoare' as const, key: c, label: COLOR_FAMILIES.find((o) => o.key === c)!.label })),
+    ...filters.piese.map((c) => ({ group: 'piese' as const, key: c, label: PIECES_OPTIONS.find((o) => o.key === c)!.label })),
   ];
 
   const filterBody = (prefix: string) => (
@@ -90,6 +93,18 @@ export function Catalog({ category }: { category?: CategoryKey }) {
           <FilterOption key={c.key} id={`${prefix}-cat-${c.key}`} label={c.label} count={counts.categorie[c.key]} checked={filters.categorie.includes(c.key)} onChange={() => toggle('categorie', c.key)} />
         ))}
       </FilterGroup>
+      <FilterGroup title="Culoare">
+        {COLOR_FAMILIES.filter((o) => counts.culoare[o.key] > 0 || filters.culoare.includes(o.key)).map((o) => (
+          <FilterOption key={o.key} id={`${prefix}-col-${o.key}`} label={o.label} count={counts.culoare[o.key]} checked={filters.culoare.includes(o.key)} onChange={() => toggle('culoare', o.key)} />
+        ))}
+      </FilterGroup>
+      {(counts.piese['2-piese'] + counts.piese['3-piese'] > 0 || filters.piese.length > 0) && (
+        <FilterGroup title="Costum">
+          {PIECES_OPTIONS.map((o) => (
+            <FilterOption key={o.key} id={`${prefix}-pc-${o.key}`} label={o.label} count={counts.piese[o.key]} checked={filters.piese.includes(o.key)} onChange={() => toggle('piese', o.key)} />
+          ))}
+        </FilterGroup>
+      )}
       <FilterGroup title="Croială">
         {FIT_OPTIONS.map((o) => (
           <FilterOption key={o.key} id={`${prefix}-fit-${o.key}`} label={o.label} count={counts.croiala[o.key]} checked={filters.croiala.includes(o.key)} onChange={() => toggle('croiala', o.key)} />
@@ -218,7 +233,7 @@ export function Catalog({ category }: { category?: CategoryKey }) {
               <button type="button" onClick={reset} className={goldButtonClass('ghost', 'mt-8')}><span className="relative">Resetează filtrele</span></button>
             </div>
           ) : view === 'grila' ? (
-            <motion.ul layout={!reduce} className="grid gap-x-6 gap-y-14 sm:grid-cols-2 xl:grid-cols-3">
+            <motion.ul layout={!reduce} className="grid grid-cols-2 gap-x-3 gap-y-10 sm:gap-x-6 sm:gap-y-14 xl:grid-cols-3">
               <AnimatePresence initial={false} mode="popLayout">
                 {products.map((p) => (
                   <motion.li
@@ -243,6 +258,23 @@ export function Catalog({ category }: { category?: CategoryKey }) {
               ))}
             </ul>
           )}
+
+          {/* Cererea clientului: să se știe că în showroom sunt mult mai multe modele */}
+          <aside className="mt-20 grid gap-6 border border-gold-400/20 bg-obsidian/60 p-7 backdrop-blur-md sm:p-10 md:grid-cols-[1fr_auto] md:items-center">
+            <div>
+              <p className="eyebrow">Showroom {verified.city}</p>
+              <p className="mt-4 font-display text-[1.75rem] leading-snug text-ivory">
+                În showroom te așteaptă <span className="text-gold-400">mult mai multe modele</span> decât vezi aici.
+              </p>
+              <p className="mt-3 max-w-prose text-[0.95rem] leading-relaxed text-stone-400">
+                Pe site sunt piesele cele mai cerute. Restul colecției, cravatele, papioanele și butonii le probezi pe {verified.street}.
+              </p>
+            </div>
+            <div className="flex flex-col gap-3 md:items-end">
+              <Link href="/atelier" className={goldButtonClass('ghost')}><span className="relative">Programează o vizită</span></Link>
+              <a href={`tel:${verified.phoneE164}`} className="inline-flex min-h-11 items-center gap-1.5 text-sm text-silk/80 hover:text-gold-300">sau sună: <span className="text-ivory">{verified.phoneDisplay}</span></a>
+            </div>
+          </aside>
         </div>
       </div>
 

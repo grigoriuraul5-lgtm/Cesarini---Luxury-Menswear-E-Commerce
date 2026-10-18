@@ -22,7 +22,7 @@ const PRICE_LIST = [
   { item: 'Costum business & casual', note: 'mărimi 46 – 58', price: formatRON(verified.prices.businessSuit) },
   { item: 'Cămașă de ceremonie', note: 'clasică · nasturi ascunși · nasturi negri', price: formatRON(verified.prices.ceremonyShirt) },
   { item: 'Cămașă Oxford', note: 'business & casual', price: formatRON(verified.prices.businessShirt) },
-  { item: 'Pantofi Oxford', note: 'lucios · mat · medalion', price: formatRON(verified.prices.oxfordShoes) },
+  { item: 'Pantofi Oxford', note: 'semilucios · mat · medalion · pictați manual', price: formatRON(verified.prices.oxfordShoes) },
   { item: 'Ajustări de croitorie', note: 'pentru întreaga ținută din showroom', price: 'Gratuit', highlight: true },
 ];
 

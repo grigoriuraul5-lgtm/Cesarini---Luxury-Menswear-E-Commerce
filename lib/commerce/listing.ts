@@ -2,13 +2,19 @@
  * Filtrare, fațete și sortare pentru catalog (PLP). Funcții pure: aceleași pe server și în browser.
  * Starea filtrelor se oglindește în URL (?categorie=…&ocazie=…&croiala=…&sort=…) ca să poată fi trimisă ca link.
  */
-import { CATEGORIES, OCCASIONS, commerceProducts, isMtm, type CategoryKey, type CommerceProduct, type OccasionKey } from './catalog';
+import { CATEGORIES, COLOR_FAMILIES, OCCASIONS, commerceProducts, isMtm, type CategoryKey, type ColorFamily, type CommerceProduct, type OccasionKey } from './catalog';
 
 export type FitKey = 'mtm' | 'standard';
 export type SortKey = 'recomandate' | 'noutati' | 'pret-asc' | 'pret-desc';
-export type Filters = { categorie: CategoryKey[]; ocazie: OccasionKey[]; croiala: FitKey[] };
+export type PiecesKey = '2-piese' | '3-piese';
+export type Filters = { categorie: CategoryKey[]; ocazie: OccasionKey[]; croiala: FitKey[]; culoare: ColorFamily[]; piese: PiecesKey[] };
 
-export const EMPTY_FILTERS: Filters = { categorie: [], ocazie: [], croiala: [] };
+export const EMPTY_FILTERS: Filters = { categorie: [], ocazie: [], croiala: [], culoare: [], piese: [] };
+
+export const PIECES_OPTIONS: { key: PiecesKey; label: string; n: 2 | 3 }[] = [
+  { key: '3-piese', label: 'Trei piese (cu vestă)', n: 3 },
+  { key: '2-piese', label: 'Două piese', n: 2 },
+];
 
 export const FIT_OPTIONS: { key: FitKey; label: string }[] = [
   { key: 'mtm', label: 'Croit pe măsură disponibil' },
@@ -28,7 +34,9 @@ const fitsOf = (p: CommerceProduct): FitKey[] => (isMtm(p.garment) ? ['mtm', 'st
 const match = (p: CommerceProduct, f: Filters, skip?: keyof Filters) =>
   (skip === 'categorie' || !f.categorie.length || f.categorie.includes(p.categoryKey)) &&
   (skip === 'ocazie' || !f.ocazie.length || f.ocazie.some((o) => p.occasions.includes(o))) &&
-  (skip === 'croiala' || !f.croiala.length || f.croiala.every((c) => fitsOf(p).includes(c)));
+  (skip === 'croiala' || !f.croiala.length || f.croiala.every((c) => fitsOf(p).includes(c))) &&
+  (skip === 'culoare' || !f.culoare.length || (!!p.colorFamily && f.culoare.includes(p.colorFamily))) &&
+  (skip === 'piese' || !f.piese.length || f.piese.some((k) => PIECES_OPTIONS.find((o) => o.key === k)?.n === p.pieces));
 
 export function applyFilters(f: Filters, sort: SortKey, products = commerceProducts) {
   const list = products.filter((p) => match(p, f));
@@ -49,10 +57,12 @@ export function facetCounts(f: Filters, products = commerceProducts) {
     categorie: Object.fromEntries(CATEGORIES.map((c) => [c.key, count('categorie', (p) => p.categoryKey === c.key)])) as Record<CategoryKey, number>,
     ocazie: Object.fromEntries(OCCASIONS.map((o) => [o.key, count('ocazie', (p) => p.occasions.includes(o.key))])) as Record<OccasionKey, number>,
     croiala: Object.fromEntries(FIT_OPTIONS.map((o) => [o.key, count('croiala', (p) => fitsOf(p).includes(o.key))])) as Record<FitKey, number>,
+    culoare: Object.fromEntries(COLOR_FAMILIES.map((o) => [o.key, count('culoare', (p) => p.colorFamily === o.key)])) as Record<ColorFamily, number>,
+    piese: Object.fromEntries(PIECES_OPTIONS.map((o) => [o.key, count('piese', (p) => p.pieces === o.n)])) as Record<PiecesKey, number>,
   };
 }
 
-export const activeCount = (f: Filters) => f.categorie.length + f.ocazie.length + f.croiala.length;
+export const activeCount = (f: Filters) => f.categorie.length + f.ocazie.length + f.croiala.length + f.culoare.length + f.piese.length;
 
 /* ——— URL ——— */
 const pick = <T extends string>(raw: string | null, allowed: readonly T[]) =>
@@ -67,6 +77,8 @@ export function parseQuery(search: string, base?: Partial<Filters>): { filters: 
       categorie: q.has('categorie') ? pick(q.get('categorie'), CATEGORIES.map((c) => c.key)) : base?.categorie ?? [],
       ocazie: pick(q.get('ocazie'), OCCASIONS.map((o) => o.key)),
       croiala: pick(q.get('croiala'), FIT_OPTIONS.map((o) => o.key)),
+      culoare: pick(q.get('culoare'), COLOR_FAMILIES.map((o) => o.key)),
+      piese: pick(q.get('piese'), PIECES_OPTIONS.map((o) => o.key)),
     },
   };
 }
