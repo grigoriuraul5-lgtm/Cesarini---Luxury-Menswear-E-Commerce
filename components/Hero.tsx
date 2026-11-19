@@ -6,6 +6,7 @@ import { verified, formatRON } from '@/lib/brand';
 import { media } from '@/lib/media';
 import { GoldButton } from './ui/GoldButton';
 import { useBooking } from './booking/BookingProvider';
+import { useLocale } from './LocaleProvider';
 import { LuxImage } from './ui/LuxImage';
 import { EXPO } from './ui/Reveal';
 import { introDelay } from './IntroCurtain';
@@ -30,6 +31,7 @@ const portrait = media.editorial.heroTuxedo;
 export function Hero() {
   const reduce = useReducedMotion();
   const booking = useBooking();
+  const { t } = useLocale();
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
   // Parallax: imaginea urcă mai lent decât textul; textul se estompează la ieșire
@@ -94,14 +96,14 @@ export function Hero() {
 
           {/* Un singur buton; programarea e un link text cu săgeată, nu un al doilea bloc */}
           <motion.div {...fadeUp(0.9)} className="mt-[clamp(1.25rem,4svh,3rem)] flex flex-wrap items-center gap-x-8 gap-y-2 lg:mt-12 lg:gap-10">
-            <GoldButton href="/colectii">Explore Collection</GoldButton>
+            <GoldButton href="/colectii">{t.explore}</GoldButton>
             <button
               type="button"
               onClick={() => booking.open()}
               aria-haspopup="dialog"
               className="group inline-flex min-h-11 cursor-pointer items-center gap-3 text-[0.72rem] font-semibold uppercase tracking-wide2 text-gold-200 transition-colors duration-500 hover:text-gold-100"
             >
-              <span className="border-b border-gold-400/40 pb-1 transition-colors duration-500 group-hover:border-gold-200">Book Private Fitting</span>
+              <span className="border-b border-gold-400/40 pb-1 transition-colors duration-500 group-hover:border-gold-200">{t.book}</span>
               <svg aria-hidden viewBox="0 0 24 8" className="h-2 w-6 transition-transform duration-500 ease-expo group-hover:translate-x-1">
                 <path d="M0 4h22M18 1l4 3-4 3" fill="none" stroke="currentColor" strokeWidth="1" />
               </svg>

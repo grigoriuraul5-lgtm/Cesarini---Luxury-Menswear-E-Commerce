@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useId, useState, type FormEvent } from 'react';
 import { verified } from '@/lib/brand';
 import { useBooking } from './booking/BookingProvider';
+import { useLocale } from './LocaleProvider';
 import { LogoLockup, Wordmark } from './brand/Logo';
 
 const linkCls = 'inline-flex min-h-10 items-center text-[0.95rem] text-silk/80 transition-colors duration-300 hover:text-gold-300';
@@ -15,6 +16,7 @@ const headCls = 'text-[0.65rem] font-semibold uppercase tracking-wide2 text-gold
  */
 export function SiteFooter() {
   const booking = useBooking();
+  const { t } = useLocale();
   const year = new Date().getFullYear();
 
   return (
@@ -53,12 +55,12 @@ export function SiteFooter() {
           <ul className="mt-5 space-y-1">
             <li><Link href="/colectii" className={linkCls}>Colecții</Link></li>
             <li><Link href="/colectii?croiala=mtm" className={linkCls}>Croit pe măsură</Link></li>
-            <li><Link href="/comunitate" className={linkCls}>Community</Link></li>
-            <li><Link href="/journal" className={linkCls}>Journal</Link></li>
+            <li><Link href="/comunitate" className={linkCls}>{t.nav.despre}</Link></li>
+            <li><Link href="/journal" className={linkCls}>{t.nav.jurnal}</Link></li>
             <li><Link href="/atelier" className={linkCls}>Atelier &amp; contact</Link></li>
             <li>
               <button type="button" onClick={() => booking.open()} aria-haspopup="dialog" className={`${linkCls} cursor-pointer`}>
-                Private Fitting
+                {t.book}
               </button>
             </li>
           </ul>

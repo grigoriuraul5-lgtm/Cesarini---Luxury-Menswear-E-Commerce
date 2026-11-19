@@ -69,7 +69,7 @@ export function organizationGraph() {
         opens: h.opens,
         closes: h.closes,
       })),
-      priceRange: `${p.businessShirt} – ${p.ceremonySuit} RON`,
+      priceRange: `${p.bambooSocks} – ${p.ceremonySuit} RON`,
       currenciesAccepted: 'RON',
       areaServed: { '@type': 'City', name: verified.city },
       sameAs,

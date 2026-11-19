@@ -29,7 +29,8 @@ export function ProductPage({ slug }: { slug: string }) {
   const [shot, setShot] = useState(0);
   const [zoomed, setZoomed] = useState(false);
   const [fit, setFit] = useState<Fit>('standard');
-  const [size, setSize] = useState<string | null>(null);
+  // o singură mărime (curele reglabile, șosete 41–44): e aleasă din start
+  const [size, setSize] = useState<string | null>(p.sizes.length === 1 ? p.sizes[0] : null);
   const [measures, setMeasures] = useState<Measurements | undefined>(() => cart.measureProfile[p.garment]);
   const [panel, setPanel] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -184,7 +185,7 @@ export function ProductPage({ slug }: { slug: string }) {
                           role="radio"
                           aria-checked={size === s}
                           onClick={() => { setSize(s); setError(null); }}
-                          className={`min-h-12 cursor-pointer border font-display text-lg tabular-nums transition-all duration-300 ease-expo ${
+                          className={`min-h-12 cursor-pointer border font-display text-lg tabular-nums transition-all duration-300 ease-expo ${s.length > 3 ? 'col-span-2 px-3' : ''} ${
                             size === s ? 'border-gold-400 bg-gold-400 text-obsidian' : 'border-gold-400/20 text-silk hover:border-gold-400/60 hover:text-ivory'
                           }`}
                         >
@@ -243,6 +244,20 @@ export function ProductPage({ slug }: { slug: string }) {
 
               {/* Detalii */}
               <div className="mt-10 border-t border-gold-400/20">
+                {p.description && (
+                  <Disclosure title="Descriere" defaultOpen>
+                    <div className="space-y-6">
+                      {p.description.map((sec, i) => (
+                        <section key={i}>
+                          {sec.title && <h2 className="mb-2 font-display text-base text-ivory">{sec.title}</h2>}
+                          <div className="space-y-3">
+                            {sec.paragraphs.map((t) => <p key={t}>{t}</p>)}
+                          </div>
+                        </section>
+                      ))}
+                    </div>
+                  </Disclosure>
+                )}
                 <Disclosure title="Detalii produs" defaultOpen>
                   <ul className="space-y-2">
                     {p.details.map((d) => <li key={d} className="flex gap-3"><span aria-hidden className="text-gold-500">—</span>{d}</li>)}

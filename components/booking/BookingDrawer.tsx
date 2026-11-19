@@ -5,7 +5,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { verified } from '@/lib/brand';
 import { EXPO } from '../ui/Reveal';
 
-export const OCCASIONS = ['Nuntă — mire', 'Nuntă — naș sau invitat', 'Gală / Black tie', 'Business', 'Absolvire', 'Altă ocazie'] as const;
+/** Tipul evenimentului: lista clientului (CONSULTANȚĂ PERSONALIZATĂ.DOC, 19.11.2026). */
+export const OCCASIONS = ['Nuntă – Mire', 'Nuntă – Naș', 'Nuntă – Invitat', 'Business/Casual', 'Absolvire', 'Altă ocazie'] as const;
 const SLOTS = ['11:00 – 13:00', '13:00 – 15:00', '15:00 – 17:00', '17:00 – 19:00'] as const;
 
 type Status = 'idle' | 'sending' | 'sent' | 'error';
@@ -108,10 +109,13 @@ export function BookingDrawer({ isOpen, onClose, initialOccasion }: { isOpen: bo
           >
             <div className="flex items-start justify-between gap-6 border-b border-gold-400/20 px-8 pb-6 pt-8 sm:px-10">
               <div>
-                <p className="eyebrow">Book Private Fitting</p>
+                <p className="eyebrow">Consultanță personalizată</p>
                 <h2 id={titleId} className="mt-4 font-display text-4xl font-normal leading-tight text-ivory">
-                  Programează o <em className="text-gold-400">probă privată</em>
+                  Programează o întâlnire <span className="text-gold-400">în showroom</span>
                 </h2>
+                <p className="mt-4 text-[0.95rem] leading-relaxed text-silk/85">
+                  Te așteptăm la CESARINI, showroom-ul de costume bărbătești din Cluj-Napoca, pentru o experiență vestimentară personalizată. Descoperă colecțiile noastre de costume pentru miri, ceremonii și business, beneficiază de consultanță de stil și descoperă serviciile Made to Measure, pentru o ținută adaptată perfect stilului și măsurilor tale.
+                </p>
                 <p className="mt-3 text-sm leading-relaxed text-stone-400">
                   {verified.street}, {verified.city} · {verified.hours.map((h) => `${h.label} ${h.opens}–${h.closes}`).join(' · ')}
                 </p>
@@ -133,7 +137,7 @@ export function BookingDrawer({ isOpen, onClose, initialOccasion }: { isOpen: bo
                 </span>
                 <h3 className="mt-8 font-display text-3xl text-ivory">Mulțumim{firstName ? `, ${firstName}` : ''}.</h3>
                 <p className="mt-4 max-w-prose leading-relaxed text-stone-400">
-                  Am primit cererea ta. Un consultant Cesarini te sună pentru a confirma ziua și ora probei.
+                  Am primit cererea ta. Un consultant Cesarini te sună pentru a confirma ziua și ora întâlnirii.
                 </p>
                 <button type="button" onClick={onClose} className="mt-10 self-start border-b border-gold-400/50 pb-1 text-[0.7rem] font-semibold uppercase tracking-wide2 text-gold-300 hover:border-gold-300">
                   Înapoi la site
@@ -142,7 +146,7 @@ export function BookingDrawer({ isOpen, onClose, initialOccasion }: { isOpen: bo
             ) : (
               <form noValidate onSubmit={onSubmit} className="flex flex-1 flex-col gap-6 px-8 py-8 sm:px-10">
                 <fieldset>
-                  <legend className={label}>Ocazia</legend>
+                  <legend className={label}>Tipul evenimentului</legend>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {OCCASIONS.map((o, i) => (
                       <label key={o} className="cursor-pointer">

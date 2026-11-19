@@ -9,6 +9,12 @@ module.exports = {
       { source: '/produs/pantofi-oxford-negru-lucios', destination: '/produs/pantofi-oxford-negru-semilucios', permanent: true },
       { source: '/produs/pantofi-oxford-mat', destination: '/produs/pantofi-oxford-negru-mat', permanent: true },
       { source: '/produs/pantofi-oxford-medalion', destination: '/produs/pantofi-oxford-medalion-negru', permanent: true },
+      // Cămășile și cureaua cu poze de stoc → produsele reale din fișele clientului (19.11.2026)
+      { source: '/produs/camasa-ceremonie-nasturi-ascunsi', destination: '/produs/camasa-alba-nasturi-ascunsi', permanent: true },
+      { source: '/produs/camasa-ceremonie-clasica', destination: '/colectii/camasi', permanent: true },
+      { source: '/produs/camasa-ceremonie-nasturi-negri', destination: '/colectii/camasi', permanent: true },
+      { source: '/produs/camasa-oxford-white', destination: '/colectii/camasi', permanent: true },
+      { source: '/produs/curea-piele-naturala', destination: '/colectii/accesorii', permanent: true },
     ];
   },
   images: {

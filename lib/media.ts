@@ -30,6 +30,13 @@ export const media = {
       alt: 'Bărbat își încheie nasturele sacoului gri, cu batistă roșie în buzunarul de la piept',
       focal: '50% 50%',
     },
+    /** Secțiunea „De la prima probă până la ultima cusătură” de pe /atelier: fotografia din documentul clientului
+     *  (Atelier.DOC, 19.11.2026), găzduită local. Sursă/licență: de confirmat cu clientul. */
+    atelierProba: {
+      src: '/editorial/atelier-proba.webp',
+      alt: 'Mâinile unui croitor așază nasturi pe un catalog cu mostre de stofă pentru costume',
+      focal: '50% 22%',
+    },
     /** Cardul din dreapta al hero-ului. Alternative verificate (există pe Unsplash):
      *  photo-1539025828301-b314ca222fa9 (bărbat în smoking negru, Viespire)
      *  photo-1742319690297-eaa312e20d77 (croitori care iau măsura taliei, Alireza heidarpour) */

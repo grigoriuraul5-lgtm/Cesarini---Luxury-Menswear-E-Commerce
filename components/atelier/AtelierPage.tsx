@@ -1,42 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { atelierServices, editorial, experienceSteps, formatRON, verified } from '@/lib/brand';
+import { atelierServices, editorial, verified } from '@/lib/brand';
 import { media } from '@/lib/media';
 import { LuxImage } from '../ui/LuxImage';
 import { Reveal } from '../ui/Reveal';
 import { BookingButton, goldButtonClass } from '../ui/GoldButton';
-import { AtelierPriceList, AtelierProcess } from '../Atelier';
-
-const p = verified.prices;
-
-/** Detaliile fiecărui serviciu: doar fapte din `verified` (prețuri și ajustări confirmate). */
-const SERVICE_FACTS: Record<string, { id: string; facts: string[] }> = {
-  I: {
-    id: 'ajustari',
-    facts: [
-      'Talia, mânecile, tivul și lungimea sacoului, ajustate pe tine la probă.',
-      verified.freeAlterations,
-      'Se face în showroom, după ce alegi ținuta împreună cu un consultant.',
-    ],
-  },
-  II: {
-    id: 'camasi-pe-masura',
-    facts: [
-      'Gulerul, manșeta și lungimea cămășii, după măsurile tale.',
-      `Cămăși de ceremonie de la ${formatRON(p.ceremonyShirt)}; cămăși Oxford business de la ${formatRON(p.businessShirt)}.`,
-      'Online: alegi „Croit pe măsură” pe pagina cămășii și introduci măsurile, cu ghid ilustrat pentru fiecare.',
-    ],
-  },
-  III: {
-    id: 'ceremonie',
-    facts: [
-      `Costum de ceremonie în ${verified.ceremonySuitSpec.piecesRange}, ${verified.ceremonySuitSpec.fabric}, mărimi ${verified.ceremonySuitSpec.sizes}: ${formatRON(p.ceremonySuit)}.`,
-      `Cămașă de ceremonie ${formatRON(p.ceremonyShirt)} · pantofi Oxford ${formatRON(p.oxfordShoes)} · curea din piele naturală ${formatRON(p.leatherBelt)}.`,
-      'Cravate, papioane și butoni, aleși în showroom împreună cu ținuta.',
-    ],
-  },
-};
 
 const HOURS = [
   ...verified.hours.map((h) => ({ label: h.label, value: `${h.opens} – ${h.closes}` })),
@@ -45,7 +14,8 @@ const HOURS = [
 
 /**
  * Atelier · Showroom Cluj & Contact. Pagina-țintă pentru „Atelier” din meniu și pentru
- * ancorele serviciilor de pe homepage (#ajustari, #camasi-pe-masura, #ceremonie).
+ * ancorele serviciilor de pe homepage (#ajustari, #camasi-pe-masura, #consultanta).
+ * Textele: documentul clientului „Atelier.DOC” (19.11.2026). Fără lista de prețuri și fără „Vizita în showroom”.
  */
 export function AtelierPage() {
   return (
@@ -59,12 +29,8 @@ export function AtelierPage() {
             <li aria-current="page" className="text-silk/70">Atelier</li>
           </ol>
         </nav>
-        <p className="eyebrow mt-10 flex items-center gap-4">
-          <span aria-hidden className="h-px w-10 bg-gold-400" />
-          Atelier · Showroom {verified.city}
-        </p>
-        <h1 className="mt-8 max-w-[16ch] font-display text-display-md font-normal text-ivory">
-          Showroom-ul și atelierul <span className="text-gold-400">din Cluj-Napoca</span>
+        <h1 className="mt-10 max-w-[18ch] font-display text-display-md font-normal text-ivory">
+          Showroom și atelier de croitorie <span className="text-gold-400">în Cluj-Napoca</span>
         </h1>
       </header>
 
@@ -73,7 +39,7 @@ export function AtelierPage() {
         <div className="lg:col-span-6">
           <h2 id="contact" className="sr-only">Contact și program</h2>
           <p className="lead max-w-[34rem]">
-            {verified.appointmentNote} Probezi fără grabă, iar croitorii casei ajustează ținuta pe tine, în același loc.
+            La CESARINI descoperi o experiență vestimentară completă, de la alegerea costumului potrivit până la ultimele detalii de croitorie. Te așteptăm în showroom cu o gamă variată de costume bărbătești, cămăși, pantofi eleganți și accesorii. Beneficiezi de consultanță vestimentară personalizată și servicii de ajustare realizate în atelierul nostru, pentru o ținută care ți se potrivește impecabil.
           </p>
 
           <dl className="mt-12 grid gap-px border border-gold-400/20 bg-gold-400/20 sm:grid-cols-2">
@@ -137,16 +103,15 @@ export function AtelierPage() {
       {/* ——— Serviciile atelierului ——— */}
       <section aria-labelledby="servicii" className="container-site mt-section">
         <Reveal>
-          <p className="eyebrow">Serviciile atelierului</p>
-          <h2 id="servicii" className="mt-6 max-w-[20ch] font-display text-display-sm font-normal text-ivory">
-            Trei feluri în care <span className="text-gold-400">croim pentru tine</span>
+          <p className="eyebrow">Serviciile Cesarini</p>
+          <h2 id="servicii" className="mt-6 max-w-[22ch] font-display text-display-sm font-normal text-ivory">
+            Mai mult decât un costum. <span className="text-gold-400">O experiență vestimentară completă.</span>
           </h2>
         </Reveal>
         <ol className="mt-14 border-t border-gold-400/20">
           {atelierServices.map((s) => {
-            const d = SERVICE_FACTS[s.numeral];
             return (
-              <li key={s.numeral} id={d.id} className="scroll-mt-28 border-b border-gold-400/20 py-12 sm:py-16">
+              <li key={s.numeral} id={s.id} className="scroll-mt-28 border-b border-gold-400/20 py-12 sm:py-16">
                 <div className="grid gap-x-10 gap-y-6 md:grid-cols-12">
                   <span aria-hidden className="font-display text-5xl leading-none text-gold-400/80 md:col-span-2 sm:text-6xl">{s.numeral}</span>
                   <div className="md:col-span-5">
@@ -155,7 +120,7 @@ export function AtelierPage() {
                     <p className="mt-4 max-w-prose text-[0.95rem] leading-relaxed text-stone-400">{s.body}</p>
                   </div>
                   <ul className="space-y-4 md:col-span-5">
-                    {d.facts.map((f) => (
+                    {s.facts.map((f) => (
                       <li key={f} className="flex gap-4 text-[0.95rem] leading-relaxed text-silk/85">
                         <span aria-hidden className="mt-2.5 h-1.5 w-1.5 shrink-0 rotate-45 bg-gold-400" />
                         {f}
@@ -169,38 +134,30 @@ export function AtelierPage() {
         </ol>
       </section>
 
-      {/* ——— Lista de prețuri (mutată de pe prima pagină) ——— */}
-      <section aria-label="Lista de prețuri" className="container-site mt-section">
-        <div className="mx-auto max-w-2xl">
-          <AtelierPriceList />
-        </div>
+      {/* ——— De la prima probă până la ultima cusătură (fotografia clientului) ——— */}
+      <section aria-labelledby="proba" className="container-site mt-section grid items-center gap-12 lg:grid-cols-12 lg:gap-10">
+        <Reveal className="lg:col-span-5">
+          <h2 id="proba" className="max-w-[18ch] font-display text-display-sm font-normal text-ivory">
+            De la prima probă <span className="text-gold-400">până la ultima cusătură.</span>
+          </h2>
+          <p className="lead mt-8 max-w-prose">
+            Fiecare detaliu contează. Croitorii CESARINI se ocupă de ajustările necesare pentru ca întreaga ținută achiziționată din showroom să ți se potrivească impecabil.
+          </p>
+          <p className="mt-10 flex items-center gap-4 text-[0.72rem] font-semibold uppercase tracking-wide2 text-gold-400">
+            <span aria-hidden className="h-1.5 w-1.5 shrink-0 rotate-45 bg-gold-400" />
+            Ajustări gratuite pentru întreaga ținută
+          </p>
+        </Reveal>
+        <Reveal delay={0.1} className="lg:col-span-6 lg:col-start-7">
+          <figure className="group relative overflow-hidden border border-gold-400/20 transition-shadow duration-700 ease-expo hover:shadow-gold-soft">
+            <LuxImage media={media.editorial.atelierProba} grade="soft" sizes="(min-width: 1024px) 45vw, 100vw" className="aspect-[4/5]" />
+            <span aria-hidden className="absolute inset-4 border border-gold-400/20" />
+          </figure>
+        </Reveal>
       </section>
 
-      {/* ——— Procesul Made-to-Measure, în imagini (mutat de pe prima pagină) ——— */}
-      <div className="mt-section">
-        <AtelierProcess />
-      </div>
-
-      {/* ——— Vizita, pas cu pas ——— */}
-      <section aria-labelledby="vizita" className="container-site mt-section">
-        <Reveal>
-          <p className="eyebrow">Vizita în showroom</p>
-          <h2 id="vizita" className="mt-6 font-display text-display-sm font-normal text-ivory">
-            De la programare <span className="text-gold-400">la ținuta completă</span>
-          </h2>
-        </Reveal>
-        <ol className="mt-14 grid gap-px border border-gold-400/20 bg-gold-400/20 sm:grid-cols-2 lg:grid-cols-4">
-          {experienceSteps.map((st, i) => (
-            <li key={st.n} className="bg-obsidian/70 p-7 backdrop-blur-md transition-colors duration-500 hover:bg-graphite/80 sm:p-8">
-              <Reveal delay={i * 0.06}>
-                <span className="font-display text-sm tabular-nums text-gold-400">{st.n}</span>
-                <h3 className="mt-6 font-display text-2xl font-normal text-ivory">{st.title}</h3>
-                <p className="mt-3 text-[0.95rem] leading-relaxed text-stone-400">{st.body}</p>
-              </Reveal>
-            </li>
-          ))}
-        </ol>
-        <p className="mt-8 text-sm text-stone-400">
+      <section aria-label="Întrebări înainte de vizită" className="container-site mt-16 sm:mt-20">
+        <p className="text-sm text-stone-400">
           Ai întrebări înainte de vizită? Răspunsurile frecvente sunt pe{' '}
           <Link href="/#intrebari" className="text-gold-300 underline-offset-4 hover:underline">prima pagină</Link>, iar ghidurile de stil în{' '}
           <Link href="/journal" className="text-gold-300 underline-offset-4 hover:underline">Journal</Link>.

@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { nav, verified } from '@/lib/brand';
 import { EXPO } from './ui/Reveal';
 import { LanguageSwitcher } from './LanguageSwitcher';
+import { useLocale } from './LocaleProvider';
 import { useBooking } from './booking/BookingProvider';
 import { useCart } from './commerce/CartProvider';
 import { CrestMark, Wordmark } from './brand/Logo';
@@ -20,6 +21,7 @@ export function SiteNav() {
   const [open, setOpen] = useState(false);
   const booking = useBooking();
   const cart = useCart();
+  const { t } = useLocale();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -57,16 +59,16 @@ export function SiteNav() {
             onMouseLeave={() => setHovered(null)}
           >
             {nav.map((item) => (
-              <li key={item.label} className="relative">
+              <li key={item.key} className="relative">
                 <Link
                   href={item.href}
-                  onMouseEnter={() => setHovered(item.label)}
-                  onFocus={() => setHovered(item.label)}
-                  className="relative z-10 block px-6 py-2.5 text-[0.7rem] font-medium uppercase tracking-wide2 text-silk transition-colors duration-300 hover:text-obsidian focus-visible:text-obsidian"
+                  onMouseEnter={() => setHovered(item.key)}
+                  onFocus={() => setHovered(item.key)}
+                  className="relative z-10 block whitespace-nowrap px-5 py-2.5 text-[0.7rem] font-medium uppercase tracking-wide2 text-silk xl:px-6 transition-colors duration-300 hover:text-obsidian focus-visible:text-obsidian"
                 >
-                  {item.label}
+                  {t.nav[item.key]}
                 </Link>
-                {hovered === item.label && (
+                {hovered === item.key && (
                   <motion.span
                     layoutId="vip-pill"
                     className="absolute inset-0 rounded-full bg-gold-brushed"
@@ -88,7 +90,10 @@ export function SiteNav() {
           >
             <span aria-hidden className="absolute inset-0 translate-y-full bg-gold-brushed transition-transform duration-500 ease-expo group-hover:translate-y-0" />
             <span aria-hidden className="relative h-1.5 w-1.5 rounded-full bg-gold-400 shadow-[0_0_8px_2px_rgba(212,175,55,.6)] group-hover:bg-obsidian group-hover:shadow-none" />
-            <span className="relative">Private Fitting</span>
+            <span className="relative whitespace-nowrap">
+              <span className="hidden lg:inline xl:hidden">{t.bookCompact}</span>
+              <span className="lg:hidden xl:inline">{t.bookShort}</span>
+            </span>
           </button>
           <button
             type="button"
@@ -136,14 +141,14 @@ export function SiteNav() {
               <ul className="space-y-2">
                 {nav.map((item, i) => (
                   <motion.li
-                    key={item.label}
+                    key={item.key}
                     initial={{ opacity: 0, y: 24 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.15 + i * 0.07, duration: 0.8, ease: EXPO }}
                   >
                     <Link href={item.href} onClick={() => setOpen(false)} className="flex items-baseline gap-4 py-2 font-display text-5xl text-ivory">
                       <span className="font-sans text-xs text-gold-500">0{i + 1}</span>
-                      {item.label}
+                      {t.nav[item.key]}
                     </Link>
                   </motion.li>
                 ))}
@@ -165,7 +170,7 @@ export function SiteNav() {
                   }}
                   className="inline-flex min-h-12 cursor-pointer items-center bg-gold-brushed px-8 text-[0.72rem] font-semibold uppercase tracking-wide2 text-obsidian"
                 >
-                  Book Private Fitting
+                  {t.book}
                 </button>
               </div>
             </nav>

@@ -28,7 +28,7 @@ export default function Comunitate() {
           path: '/comunitate',
           name: 'Comunitatea Cesarini',
           description,
-          breadcrumb: [{ name: 'Acasă', path: '/' }, { name: 'Community', path: '/comunitate' }],
+          breadcrumb: [{ name: 'Acasă', path: '/' }, { name: 'Despre noi', path: '/comunitate' }],
         })}
       />
     </>

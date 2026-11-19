@@ -26,7 +26,7 @@ export function llmsTxt() {
     '',
     '## Pagini',
     '',
-    `- [Atelier & showroom Cluj-Napoca](${SITE_URL}/atelier): adresa, programul, programările și serviciile atelierului (ajustări gratuite pentru ținuta cumpărată din showroom, cămăși pe măsură, ținute de ceremonie).`,
+    `- [Atelier & showroom Cluj-Napoca](${SITE_URL}/atelier): adresa, programul, programările și serviciile Cesarini (costume Made to Measure și croitorie cu ajustări gratuite pentru ținuta cumpărată din showroom, cămăși personalizate, consultanță vestimentară personalizată).`,
     `- [Community](${SITE_URL}/comunitate): canalele oficiale Cesarini: Instagram ${verified.social.instagram}, TikTok ${verified.social.tiktok}, Facebook ${verified.social.facebook}.`,
     `- [The Cesarini Journal](${SITE_URL}/journal): ghiduri de stil cu răspunsuri directe (black tie, stofa costumului de mire, eticheta cămășii și a smokingului).`,
     '',

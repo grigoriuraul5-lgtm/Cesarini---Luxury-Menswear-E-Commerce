@@ -9,6 +9,7 @@ import { media } from '@/lib/media';
 import { LuxImage } from './ui/LuxImage';
 import { Reveal } from './ui/Reveal';
 import { useBooking } from './booking/BookingProvider';
+import { useLocale } from './LocaleProvider';
 
 /**
  * „Garderoba unei seri importante”: carusel cu produse reale din catalog (pozele și fișele Cesarini).
@@ -32,6 +33,7 @@ export function FeaturedCollections() {
   const [progress, setProgress] = useState(0);
   const [edges, setEdges] = useState({ start: true, end: false });
   const booking = useBooking();
+  const { t } = useLocale();
 
   const measure = useCallback(() => {
     const el = trackRef.current;
@@ -73,7 +75,7 @@ export function FeaturedCollections() {
               Garderoba unei <em className="text-gold-400">seri importante</em>
             </h2>
             <p className="lead mt-6 max-w-[38rem]">
-              De la cămașa Oxford de {formatRON(verified.prices.businessShirt)} la costumul de ceremonie de {formatRON(verified.prices.ceremonySuit)}. Piesele cele mai căutate, cu prețul la vedere.
+              De la cămașa de {formatRON(verified.prices.blackShirtTie)} la costumul de ceremonie de {formatRON(verified.prices.ceremonySuit)}. Piesele cele mai căutate, cu prețul la vedere.
             </p>
           </Reveal>
 
@@ -111,7 +113,7 @@ export function FeaturedCollections() {
           >
             <LuxImage media={media.atelier.rack} grade="none" sizes="30vw" className="!absolute inset-0 opacity-30" />
             <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,10,10,.7),rgba(10,10,10,.95))]" />
-            <span className="eyebrow relative">Private Fitting</span>
+            <span className="eyebrow relative">{t.bookShort}</span>
             <div className="relative">
               <p className="font-display text-4xl leading-tight text-ivory">
                 Probează totul, <em className="text-gold-400">într-o singură vizită.</em>

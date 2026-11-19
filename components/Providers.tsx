@@ -3,12 +3,15 @@
 import type { ReactNode } from 'react';
 import { BookingProvider } from './booking/BookingProvider';
 import { CartProvider } from './commerce/CartProvider';
+import { LocaleProvider } from './LocaleProvider';
 
-/** Stările globale ale site-ului: coșul și panoul de programare. */
+/** Stările globale ale site-ului: limba etichetelor, coșul și panoul de programare. */
 export function Providers({ children }: { children: ReactNode }) {
   return (
-    <CartProvider>
-      <BookingProvider>{children}</BookingProvider>
-    </CartProvider>
+    <LocaleProvider>
+      <CartProvider>
+        <BookingProvider>{children}</BookingProvider>
+      </CartProvider>
+    </LocaleProvider>
   );
 }

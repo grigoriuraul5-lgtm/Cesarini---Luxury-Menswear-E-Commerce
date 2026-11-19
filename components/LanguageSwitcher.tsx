@@ -3,23 +3,16 @@
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { EXPO } from './ui/Reveal';
-
-const LOCALES = [
-  { code: 'ro', label: 'Română', short: 'RO' },
-  { code: 'en', label: 'English', short: 'EN' },
-  { code: 'it', label: 'Italiano', short: 'IT' },
-] as const;
-
-type Code = (typeof LOCALES)[number]['code'];
+import { LOCALES, useLocale } from './LocaleProvider';
 
 /**
  * Selector de limbă accesibil (listbox): tastatură, Escape, click în afară.
- * La i18n real (next-intl / rute /[locale]), `onSelect` face router.push către ruta localizată
- * și se adaugă <link rel="alternate" hreflang> în metadata.
+ * Schimbă etichetele de navigare (LocaleProvider). La i18n complet (rute /[locale]),
+ * alegerea face router.push către ruta localizată și se adaugă <link rel="alternate" hreflang>.
  */
-export function LanguageSwitcher({ initial = 'ro' as Code }) {
+export function LanguageSwitcher() {
   const [open, setOpen] = useState(false);
-  const [current, setCurrent] = useState<Code>(initial);
+  const { locale: current, setLocale: setCurrent } = useLocale();
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

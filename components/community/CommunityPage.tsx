@@ -26,12 +26,12 @@ export function CommunityPage() {
             <ol className="flex items-center gap-3">
               <li><Link href="/" className="inline-flex min-h-8 items-center transition-colors hover:text-gold-300">Acasă</Link></li>
               <li aria-hidden>/</li>
-              <li aria-current="page" className="text-silk/70">Community</li>
+              <li aria-current="page" className="text-silk/70">Despre noi</li>
             </ol>
           </nav>
           <p className="eyebrow mt-10 flex items-center gap-4">
             <span aria-hidden className="h-px w-10 bg-gold-400" />
-            Maison Community · Social
+            Despre noi · Community
           </p>
           <h1 className="mt-8 font-display text-display-md font-normal text-ivory">
             Comunitatea <em className="text-gold-400">Cesarini</em>

@@ -2,8 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import Link from 'next/link';
-import { editorial, formatRON, verified } from '@/lib/brand';
+import { verified } from '@/lib/brand';
 import { CATEGORIES, COLOR_FAMILIES, OCCASIONS, commerceProducts, getCategory, type CategoryKey, type CommerceProduct } from '@/lib/commerce/catalog';
 import {
   EMPTY_FILTERS, FIT_OPTIONS, PIECES_OPTIONS, SORT_OPTIONS, activeCount, applyFilters, facetCounts, parseQuery, toQuery,
@@ -11,7 +10,7 @@ import {
 } from '@/lib/commerce/listing';
 import { EXPO } from '../ui/Reveal';
 import { SidePanel } from '../ui/SidePanel';
-import { goldButtonClass } from '../ui/GoldButton';
+import { BookingButton, goldButtonClass } from '../ui/GoldButton';
 import { useCart } from './CartProvider';
 import { MeasurementsPanel } from './MeasurementsPanel';
 import { ProductSpread, ProductTile } from './ProductTiles';
@@ -72,7 +71,6 @@ export function Catalog({ category }: { category?: CategoryKey }) {
   };
 
   const cat = category ? getCategory(category) : undefined;
-  const prices = commerceProducts.map((p) => p.price);
 
   const chips = [
     ...filters.categorie.filter((c) => c !== category).map((c) => ({ group: 'categorie' as const, key: c, label: getCategory(c)!.label })),
@@ -117,47 +115,57 @@ export function Catalog({ category }: { category?: CategoryKey }) {
     <div className="relative pb-section pt-32">
       {/* ——— Antet editorial ——— */}
       <header className="container-site">
-        <p className="eyebrow flex items-center gap-4">
-          <span aria-hidden className="h-px w-10 bg-gold-400" />
-          {cat ? `Collections · ${cat.label}` : editorial.seasonLabel}
-        </p>
-        <h1 className="mt-8 max-w-[14ch] text-balance font-display text-display-md font-normal text-ivory">
+        {cat && (
+          <p className="eyebrow flex items-center gap-4">
+            <span aria-hidden className="h-px w-10 bg-gold-400" />
+            Colecția · {cat.label}
+          </p>
+        )}
+        <h1 className={`${cat ? 'mt-8' : ''} max-w-[14ch] text-balance font-display text-display-md font-normal text-ivory`}>
           {cat ? (
             cat.title
           ) : (
             <>
-              Garderoba <em className="text-gold-400">Cesarini</em>
+              Colecția <span className="text-gold-400">Cesarini</span>
             </>
           )}
         </h1>
-        <p className="lead mt-8 max-w-[38rem]">
-          {cat
-            ? cat.intro
-            : `Costume, cămăși, pantofi și accesorii, de la ${formatRON(Math.min(...prices))} la ${formatRON(Math.max(...prices))}. Costumele și cămășile se pot croi pe măsurile tale.`}
-        </p>
+        {cat ? (
+          <p className="lead mt-8 max-w-[38rem]">{cat.intro}</p>
+        ) : (
+          /* Textul clientului (Collection.DOC, 19.11.2026) */
+          <>
+            <p className="mt-8 max-w-[38rem] font-display text-[clamp(1.35rem,1.1rem+0.8vw,1.75rem)] leading-snug text-ivory">
+              Costume bărbătești, cămăși, pantofi și accesorii pentru bărbatul elegant.
+            </p>
+            <p className="lead mt-5 max-w-[40rem]">
+              Descoperă colecțiile CESARINI, de la ținute business și costume de ceremonie până la costume de mire. Alege din colecția noastră sau optează pentru servicii Made to Measure, cu costume și cămăși realizate pe măsurile tale.
+            </p>
+          </>
+        )}
 
-        {/* Semnătura: ocaziile, ca un rând de invitație */}
-        <div role="group" aria-label="Filtrează după ocazie" className="mt-14 flex flex-wrap items-baseline gap-x-6 gap-y-3 border-y sm:gap-x-2 border-gold-400/20 py-6">
-          <span className="w-full text-[0.65rem] font-semibold uppercase tracking-wide2 text-stone-500 sm:mr-4 sm:w-auto">Pentru</span>
+        {/* Ocaziile (textul clientului): trei filtre, fiecare cu rândul lui de explicație */}
+        <div role="group" aria-label="Filtrează după ocazie" className="mt-14 grid border-y border-gold-400/20 sm:grid-cols-3">
           {OCCASIONS.map((o, i) => {
             const on = filters.ocazie.includes(o.key);
             const disabled = !on && counts.ocazie[o.key] === 0;
             return (
-              <span key={o.key} className="flex items-baseline">
-                {i > 0 && <span aria-hidden className="mx-5 hidden h-1 w-1 rotate-45 self-center bg-gold-500/60 sm:block" />}
-                <button
-                  type="button"
-                  aria-pressed={on}
-                  disabled={disabled}
-                  onClick={() => toggle('ocazie', o.key)}
-                  className={`relative min-h-11 cursor-pointer font-display text-[clamp(1.6rem,1.2rem+1.6vw,2.6rem)] leading-none transition-colors duration-500 ease-expo disabled:cursor-not-allowed disabled:opacity-30 ${
-                    on ? 'text-gold-300' : 'text-silk/60 hover:text-ivory'
-                  }`}
-                >
+              <button
+                key={o.key}
+                type="button"
+                aria-pressed={on}
+                disabled={disabled}
+                onClick={() => toggle('ocazie', o.key)}
+                className={`group relative flex min-h-11 cursor-pointer flex-col items-start gap-3 py-6 text-left transition-colors duration-500 ease-expo disabled:cursor-not-allowed disabled:opacity-30 sm:px-8 sm:first:pl-0 ${
+                  i > 0 ? 'border-t border-gold-400/20 sm:border-l sm:border-t-0' : ''
+                }`}
+              >
+                <span className={`relative font-display text-[clamp(1.5rem,1.2rem+1vw,2.1rem)] uppercase leading-none tracking-[0.02em] transition-colors duration-500 ${on ? 'text-gold-300' : 'text-silk/75 group-hover:text-ivory'}`}>
                   {o.label}
-                  <span aria-hidden className={`absolute inset-x-0 -bottom-1 h-px origin-left bg-gold-400 transition-transform duration-700 ease-expo ${on ? 'scale-x-100' : 'scale-x-0'}`} />
-                </button>
-              </span>
+                  <span aria-hidden className={`absolute inset-x-0 -bottom-1.5 h-px origin-left bg-gold-400 transition-transform duration-700 ease-expo ${on ? 'scale-x-100' : 'scale-x-0'}`} />
+                </span>
+                <span className="max-w-[30ch] text-sm leading-relaxed text-stone-400">{o.note}</span>
+              </button>
             );
           })}
         </div>
@@ -259,19 +267,19 @@ export function Catalog({ category }: { category?: CategoryKey }) {
             </ul>
           )}
 
-          {/* Cererea clientului: să se știe că în showroom sunt mult mai multe modele */}
-          <aside className="mt-20 grid gap-6 border border-gold-400/20 bg-obsidian/60 p-7 backdrop-blur-md sm:p-10 md:grid-cols-[1fr_auto] md:items-center">
+          {/* Textul clientului (Collection.DOC, 19.11.2026): „Asta e jos de tot” */}
+          <aside className="mt-20 grid gap-6 border border-gold-400/20 bg-obsidian/60 p-7 backdrop-blur-md sm:p-10 md:grid-cols-[1fr_auto] md:items-center md:gap-12">
             <div>
-              <p className="eyebrow">Showroom {verified.city}</p>
-              <p className="mt-4 font-display text-[1.75rem] leading-snug text-ivory">
-                În showroom te așteaptă <span className="text-gold-400">mult mai multe modele</span> decât vezi aici.
+              <p className="font-display text-[1.75rem] leading-snug text-ivory">
+                Descoperă în showroom <span className="text-gold-400">întreaga colecție CESARINI.</span>
               </p>
-              <p className="mt-3 max-w-prose text-[0.95rem] leading-relaxed text-stone-400">
-                Pe site sunt piesele cele mai cerute. Restul colecției, cravatele, papioanele și butonii le probezi pe {verified.street}.
+              <p className="mt-3 text-[0.72rem] font-semibold uppercase tracking-wide2 text-gold-400">Online vezi doar o parte din selecția noastră.</p>
+              <p className="mt-5 max-w-prose text-[0.95rem] leading-relaxed text-stone-400">
+                Te așteptăm în showroom să descoperi o varietate mult mai mare de costume bărbătești, cămăși, pantofi și accesorii. Beneficiezi de consultanță vestimentară personalizată și de ajustări gratuite pentru întreaga ținută achiziționată, astfel încât fiecare piesă să ți se potrivească impecabil.
               </p>
             </div>
             <div className="flex flex-col gap-3 md:items-end">
-              <Link href="/atelier" className={goldButtonClass('ghost')}><span className="relative">Programează o vizită</span></Link>
+              <BookingButton variant="ghost" />
               <a href={`tel:${verified.phoneE164}`} className="inline-flex min-h-11 items-center gap-1.5 text-sm text-silk/80 hover:text-gold-300">sau sună: <span className="text-ivory">{verified.phoneDisplay}</span></a>
             </div>
           </aside>

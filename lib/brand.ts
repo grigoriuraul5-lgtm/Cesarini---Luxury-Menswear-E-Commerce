@@ -38,10 +38,11 @@ export const verified = {
   prices: {
     ceremonySuit: 2299,   // 3 piese: sacou, vestă, pantaloni · 100% lână
     businessSuit: 1599,
-    ceremonyShirt: 299,
-    businessShirt: 199,   // Oxford
+    ceremonyShirt: 299,   // cămășile albe și cămașa neagră cu manșete pentru butoni (fișele din 19.11.2026)
+    blackShirtTie: 249,   // cămașa neagră cu guler pentru cravată (fișa din 19.11.2026)
     oxfordShoes: 599,
-    leatherBelt: 199,
+    leatherBelt: 199,     // curele din piele naturală, 105 – 135 cm (fișele din 19.11.2026)
+    bambooSocks: 29,      // șosete din bambus 41–44 (fișele din 19.11.2026)
   },
   /** Fișele clientului (18.10.2026): modelele de ceremonie sunt în 2 sau 3 piese, toate cele cu fișă sunt 100% lână */
   ceremonySuitSpec: { pieces: 'sacou, vestă și pantaloni', piecesRange: 'două sau trei piese (sacou și pantaloni, plus vestă la modelele în trei piese)', fabric: '100% lână', sizes: '46 – 58' },
@@ -119,9 +120,9 @@ export const collections: Collection[] = [
     slug: 'camasi',
     index: '03',
     title: 'Cămăși',
-    kicker: 'Oxford · Ceremonie · Pe măsură',
-    description: 'Cămăși Oxford pentru zi, cămăși de ceremonie cu nasturi ascunși sau negri, și cămăși pe măsură.',
-    priceFrom: verified.prices.businessShirt,
+    kicker: 'Ceremonie · Papion · Pe măsură',
+    description: 'Cămăși albe și negre din 100% bumbac, Slim Fit, cu nasturi ascunși, și cămăși croite pe măsura ta.',
+    priceFrom: verified.prices.blackShirtTie,
     legacyUrl: 'https://www.cesarini.ro/camasi-barbati-ceremonie/',
     fabric: 'poplin',
     href: '/colectii/camasi',
@@ -130,9 +131,9 @@ export const collections: Collection[] = [
     slug: 'accesorii',
     index: '04',
     title: 'Pantofi & Accesorii',
-    kicker: 'Oxford · Cravate · Papioane · Curele',
-    description: 'Pantofi Oxford, curele din piele naturală, cravate, papioane și butoni: detaliile care închid ținuta.',
-    priceFrom: verified.prices.leatherBelt,
+    kicker: 'Oxford · Curele · Șosete · Papioane',
+    description: 'Pantofi Oxford, curele din piele naturală, șosete din bambus, cravate, papioane și butoni: detaliile care închid ținuta.',
+    priceFrom: verified.prices.bambooSocks,
     legacyUrl: 'https://www.cesarini.ro/accesorii-barbati/',
     fabric: 'silk',
     href: '/colectii/accesorii',
@@ -173,24 +174,24 @@ export const featuredProducts: FeaturedProduct[] = [
     legacyUrl: 'https://www.cesarini.ro/costume-business-casual/',
   },
   {
-    slug: 'camasa-ceremonie-nasturi-ascunsi',
-    name: 'Cămașă Ceremonie cu nasturi ascunși',
+    slug: 'camasa-alba-nasturi-ascunsi',
+    name: 'Cămașă albă Slim Fit cu nasturi ascunși',
     category: 'Cămăși de ceremonie',
-    detail: 'Ceremonie · mai multe variante',
+    detail: '100% bumbac · manșete pentru butoni',
     price: verified.prices.ceremonyShirt,
     media: 'shirtHanger',
-    href: '/produs/camasa-ceremonie-nasturi-ascunsi',
+    href: '/produs/camasa-alba-nasturi-ascunsi',
     legacyUrl: 'https://www.cesarini.ro/camasa-ceremonie-cu-nasturi-ascunsi/',
   },
   {
-    slug: 'camasa-oxford-white',
-    name: 'Cămașă Bărbați Oxford White',
-    category: 'Cămăși business',
-    detail: 'Bumbac Oxford · business & casual',
-    price: verified.prices.businessShirt,
+    slug: 'curea-piele-neagra',
+    name: 'Curea din piele naturală neagră',
+    category: 'Curele',
+    detail: 'Piele naturală · 3,5 cm · 105 – 135 cm',
+    price: verified.prices.leatherBelt,
     media: 'shirtTable',
-    href: '/produs/camasa-oxford-white',
-    legacyUrl: 'https://www.cesarini.ro/camasa-oxford-white/',
+    href: '/produs/curea-piele-neagra',
+    legacyUrl: 'https://www.cesarini.ro/accesorii-barbati/',
   },
   {
     slug: 'pantofi-oxford-negru-semilucios',
@@ -204,35 +205,47 @@ export const featuredProducts: FeaturedProduct[] = [
   },
 ];
 
+/** Serviciile casei: textul clientului (Atelier.DOC, 19.11.2026), cuvânt cu cuvânt. Pe homepage apar titlul și subtitlul. */
 export const atelierServices = [
   {
     numeral: 'I',
-    title: 'Made-to-Measure Fit',
-    lead: 'Costumul, ajustat pe măsurile tale de croitorii casei. Gratuit.',
-    body: 'Talie, mâneci, tiv, lungimea sacoului: fiecare piesă cumpărată din showroom este croită pe tine, fără cost suplimentar.',
+    id: 'ajustari',
+    title: 'Costume Made to Measure & croitorie',
+    lead: 'Costume adaptate măsurilor tale, pentru o potrivire impecabilă.',
+    body: 'La CESARINI, realizăm costume Made to Measure, adaptate măsurilor și preferințelor tale. Pentru costumele achiziționate din showroom, croitorii noștri se ocupă de ajustările necesare, de la modificarea taliei și a lungimii pantalonilor până la ajustarea mânecilor și a sacoului, precum și alte intervenții de croitorie, în funcție de particularitățile fiecărei ținute.',
+    facts: [
+      'Consultanță vestimentară și măsurători personalizate.',
+      'Ajustări gratuite pentru întreaga ținută achiziționată din showroom.',
+      'Servicii de croitorie realizate în atelierul CESARINI din Cluj-Napoca.',
+    ],
     href: '/atelier#ajustari',
   },
   {
     numeral: 'II',
-    title: 'Cămăși pe Măsură',
-    lead: 'Guler, manșetă și lungime, după măsurile tale.',
-    body: 'Pentru bărbatul la care o cămașă din raft nu vine niciodată perfect la guler și la manșetă.',
+    id: 'camasi-pe-masura',
+    title: 'Cămăși personalizate',
+    lead: 'Croială adaptată măsurilor și conformației tale.',
+    body: 'Îți oferim posibilitatea de a personaliza cămășile din colecția CESARINI prin ajustări realizate după tiparul stabilit pe baza măsurătorilor tale. Adaptăm croiala cămășii alese pentru un plus de confort și o potrivire cât mai bună.',
+    facts: [
+      'Măsurători și configurarea tiparului personalizat.',
+      'Ajustarea cămășilor disponibile în colecția CESARINI.',
+      'Personalizarea croielii în funcție de conformația ta.',
+    ],
     href: '/atelier#camasi-pe-masura',
   },
   {
     numeral: 'III',
-    title: 'Ceremonie & Mire',
-    lead: 'Ținuta completă, într-o singură vizită.',
-    body: 'Costum, cămașă, pantofi și accesorii, alese împreună cu un consultant și ajustate înaintea marelui moment.',
-    href: '/atelier#ceremonie',
+    id: 'consultanta',
+    title: 'Consultanță vestimentară personalizată',
+    lead: 'Alegerea potrivită pentru fiecare stil și fiecare ocazie.',
+    body: 'Fie că ești mire, naș, invitat la o nuntă, participi la un eveniment special sau cauți o ținută business ori casual, echipa CESARINI te îndrumă în alegerea ținutei potrivite. Beneficiezi de recomandări personalizate privind croiala, culorile, materialele și accesoriile, pentru o apariție elegantă și armonioasă.',
+    facts: [
+      'Consultanță vestimentară pentru ținute de ceremonie, business și casual.',
+      'Recomandări personalizate pentru costume, cămăși, pantofi și accesorii.',
+      'Îndrumare în alegerea și asortarea întregii ținute.',
+    ],
+    href: '/atelier#consultanta',
   },
-] as const;
-
-export const experienceSteps = [
-  { n: '01', title: 'Programarea', body: 'Alegi ziua și ora. Consultantul tău îți rezervă tot timpul de care ai nevoie.' },
-  { n: '02', title: 'Consultarea', body: 'Discutăm ocazia, croiala și culorile. Probezi fără grabă.' },
-  { n: '03', title: 'Ajustările', body: 'Croitorii Cesarini ajustează fiecare piesă pe măsurile tale, gratuit.' },
-  { n: '04', title: 'Ținuta completă', body: 'Costum, cămașă, pantofi, accesorii. Pleci gata de eveniment.' },
 ] as const;
 
 /**
@@ -250,7 +263,7 @@ export const faqs = [
   },
   {
     q: 'Care este prețul de pornire pentru un costum de ceremonie sau business?',
-    a: `Un costum de ceremonie Cesarini costă ${formatRON(verified.prices.ceremonySuit)}: ${verified.ceremonySuitSpec.piecesRange}, din ${verified.ceremonySuitSpec.fabric}, în mărimile ${verified.ceremonySuitSpec.sizes}. Un costum business sau casual costă ${formatRON(verified.prices.businessSuit)}. Cămășile pornesc de la ${formatRON(verified.prices.businessShirt)}.`,
+    a: `Un costum de ceremonie Cesarini costă ${formatRON(verified.prices.ceremonySuit)}: ${verified.ceremonySuitSpec.piecesRange}, din ${verified.ceremonySuitSpec.fabric}, în mărimile ${verified.ceremonySuitSpec.sizes}. Un costum business sau casual costă ${formatRON(verified.prices.businessSuit)}. Cămășile pornesc de la ${formatRON(verified.prices.blackShirtTie)}.`,
   },
   {
     q: 'Cum pot comanda online dacă nu pot ajunge în showroom?',
@@ -262,10 +275,10 @@ export const faqs = [
   },
 ] as const;
 
-/** Navigația principală (13 oct 2026): Collections → Community → Journal → Atelier (showroom & contact). */
+/** Navigația principală. Etichetele vin din `components/LocaleProvider.tsx` (în română: Colecții · Despre noi · Jurnal · Atelier, cererea clientului din 19.11.2026). */
 export const nav = [
-  { label: 'Collections', href: '/colectii' },
-  { label: 'Community', href: '/comunitate' },
-  { label: 'Journal', href: '/journal' },
-  { label: 'Atelier', href: '/atelier' },
+  { key: 'colectii', href: '/colectii' },
+  { key: 'despre', href: '/comunitate' },
+  { key: 'jurnal', href: '/journal' },
+  { key: 'atelier', href: '/atelier' },
 ] as const;

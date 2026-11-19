@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import type { ReactNode } from 'react';
+import { useLocale } from '../LocaleProvider';
 import { useBooking } from '../booking/BookingProvider';
 
 type Variant = 'solid' | 'ghost';
@@ -44,12 +45,13 @@ export function GoldButton({ href, children, variant = 'solid', className = '', 
   );
 }
 
-/** Deschide panoul „Book Private Fitting”. */
-export function BookingButton({ children = 'Book Private Fitting', variant = 'ghost', className = '', occasion }: { children?: ReactNode; variant?: Variant; className?: string; occasion?: string }) {
+/** Deschide formularul de programare. Eticheta implicită urmează limba aleasă („Programează o întâlnire” în română). */
+export function BookingButton({ children, variant = 'ghost', className = '', occasion }: { children?: ReactNode; variant?: Variant; className?: string; occasion?: string }) {
   const { open } = useBooking();
+  const { t } = useLocale();
   return (
     <button type="button" onClick={() => open(occasion)} aria-haspopup="dialog" className={goldButtonClass(variant, className)}>
-      <Inner>{children}</Inner>
+      <Inner>{children ?? t.book}</Inner>
     </button>
   );
 }
