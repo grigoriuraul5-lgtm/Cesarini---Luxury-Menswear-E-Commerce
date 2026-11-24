@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { SiteNav } from '@/components/SiteNav';
-import { Hero } from '@/components/Hero';
+import { Hero, FactsBand } from '@/components/Hero';
 import { IntroCurtain } from '@/components/IntroCurtain';
 import { Atelier } from '@/components/Atelier';
-import { FeaturedCollections } from '@/components/FeaturedCollections';
+import { HomeShop } from '@/components/HomeShop';
 import { BrandBackdrop } from '@/components/BrandBackdrop';
 import { Providers } from '@/components/Providers';
 import { HomeFaq } from '@/components/HomeFaq';
@@ -95,7 +95,8 @@ function App() {
           <IntroCurtain />
           <main id="continut">
             <Hero />
-            <FeaturedCollections />
+            <HomeShop />
+            <FactsBand />
             <Atelier />
             <HomeFaq />
           </main>

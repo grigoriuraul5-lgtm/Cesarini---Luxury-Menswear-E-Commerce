@@ -1,8 +1,8 @@
 import { SiteNav } from '@/components/SiteNav';
-import { Hero } from '@/components/Hero';
+import { Hero, FactsBand } from '@/components/Hero';
 import { IntroCurtain } from '@/components/IntroCurtain';
 import { Atelier } from '@/components/Atelier';
-import { FeaturedCollections } from '@/components/FeaturedCollections';
+import { HomeShop } from '@/components/HomeShop';
 import { HomeFaq } from '@/components/HomeFaq';
 import { SiteFooter } from '@/components/SiteFooter';
 import { JsonLd } from '@/components/JsonLd';
@@ -15,7 +15,9 @@ export default function HomePage() {
       <IntroCurtain />
       <main id="continut">
         <Hero />
-        <FeaturedCollections />
+        {/* Vitrina magazinului, direct sub hero (24.11.2026); înlocuiește caruselul „Garderoba unei seri importante” */}
+        <HomeShop />
+        <FactsBand />
         <Atelier />
         <HomeFaq />
       </main>
