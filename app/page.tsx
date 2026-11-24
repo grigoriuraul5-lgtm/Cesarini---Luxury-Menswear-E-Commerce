@@ -3,6 +3,7 @@ import { Hero, FactsBand } from '@/components/Hero';
 import { IntroCurtain } from '@/components/IntroCurtain';
 import { Atelier } from '@/components/Atelier';
 import { HomeShop } from '@/components/HomeShop';
+import { LookBuilder } from '@/components/LookBuilder';
 import { HomeFaq } from '@/components/HomeFaq';
 import { SiteFooter } from '@/components/SiteFooter';
 import { JsonLd } from '@/components/JsonLd';
@@ -17,6 +18,7 @@ export default function HomePage() {
         <Hero />
         {/* Vitrina magazinului, direct sub hero (24.11.2026); înlocuiește caruselul „Garderoba unei seri importante” */}
         <HomeShop />
+        <LookBuilder />
         <FactsBand />
         <Atelier />
         <HomeFaq />

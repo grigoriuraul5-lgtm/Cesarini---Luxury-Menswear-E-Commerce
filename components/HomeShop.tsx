@@ -17,15 +17,16 @@ import { Reveal, EXPO } from './ui/Reveal';
 const PER_VIEW = 8;
 
 /** „Toate”: o selecție amestecată, ca prima privire să arate toată gama casei. */
+/** Fără piesele deja aflate în vitrina hero-ului (HERO_PICKS), ca prima pagină să nu se repete. */
 const CURATED = [
-  'costum-ceremonie-negru-c03',
-  'costum-business-bej-b02',
-  'camasa-alba-nasturi-ascunsi',
-  'pantofi-oxford-negru-semilucios',
   'costum-ceremonie-alb-crem-c10',
   'costum-business-caramiziu-b15',
-  'curea-piele-neagra',
+  'camasa-alba-papion',
+  'pantofi-oxford-medalion-bordo',
   'costum-ceremonie-verde-inchis-c07',
+  'costum-business-gri-dungi-b03',
+  'curea-piele-neagra',
+  'costum-ceremonie-bleumarin-c13',
 ];
 
 type Tab = 'toate' | CategoryKey;

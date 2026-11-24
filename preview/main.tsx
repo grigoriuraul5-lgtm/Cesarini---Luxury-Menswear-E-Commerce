@@ -5,6 +5,7 @@ import { Hero, FactsBand } from '@/components/Hero';
 import { IntroCurtain } from '@/components/IntroCurtain';
 import { Atelier } from '@/components/Atelier';
 import { HomeShop } from '@/components/HomeShop';
+import { LookBuilder } from '@/components/LookBuilder';
 import { BrandBackdrop } from '@/components/BrandBackdrop';
 import { Providers } from '@/components/Providers';
 import { HomeFaq } from '@/components/HomeFaq';
@@ -96,6 +97,7 @@ function App() {
           <main id="continut">
             <Hero />
             <HomeShop />
+            <LookBuilder />
             <FactsBand />
             <Atelier />
             <HomeFaq />
