@@ -114,7 +114,7 @@ export function OrderSummary({ idPrefix, locked = false }: { idPrefix: string; l
 
       <dl className="mt-2 space-y-3 border-t border-gold-400/20 pt-6 text-sm">
         <Row k="Subtotal" v={formatRON(t.subtotal)} />
-        <Row k="Livrare prin curier · 1 – 2 zile lucrătoare" v={t.shipping ? formatRON(t.shipping) : 'Gratuită'} />
+        <Row k="Livrare prin curier · 15 – 30 de zile" v={t.shipping ? formatRON(t.shipping) : 'Gratuită'} />
         {cart.items.some((i) => i.monogram) && <Row k="Monogramă" v={commerceConfig.monogramFree ? 'Gratuită' : '—'} />}
         <div className="flex items-baseline justify-between border-t border-gold-400/20 pt-4">
           <dt className="font-display text-xl text-ivory">Total</dt>

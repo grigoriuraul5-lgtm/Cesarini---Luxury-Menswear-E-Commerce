@@ -19,14 +19,14 @@ export function CartDrawer() {
       onClose={cart.close}
       eyebrow="Coșul tău"
       title={empty ? 'Coșul e gol' : <>Garderoba <em className="text-gold-400">ta</em></>}
-      subtitle={empty ? undefined : `${cart.totals.count} ${cart.totals.count === 1 ? 'piesă' : 'piese'} · livrare în 1 – 2 zile lucrătoare`}
+      subtitle={empty ? undefined : `${cart.totals.count} ${cart.totals.count === 1 ? 'piesă' : 'piese'} · livrare în 15 – 30 de zile`}
       closeLabel="Închide coșul"
       footer={
         empty ? undefined : (
           <div className="space-y-5">
             <dl className="space-y-2 text-sm">
               <div className="flex justify-between text-stone-400">
-                <dt>Livrare · 1 – 2 zile lucrătoare</dt>
+                <dt>Livrare · 15 – 30 de zile</dt>
                 <dd className="tabular-nums">{commerceConfig.shippingFee ? formatRON(commerceConfig.shippingFee) : 'Gratuită'}</dd>
               </div>
               <div className="flex items-baseline justify-between">
@@ -45,7 +45,7 @@ export function CartDrawer() {
       {empty ? (
         <div className="px-6 py-12 sm:px-10">
           <p className="lead max-w-prose">
-            Alege o piesă, apoi decide: mărime standard, cu livrare în 1 – 2 zile, sau croită pe măsurile tale.
+            Alege o piesă, apoi decide: mărime standard, cu livrare în 15 – 30 de zile, sau croită pe măsurile tale.
           </p>
           <ul className="mt-10 space-y-px border border-gold-400/20 bg-gold-400/20">
             {['costum-ceremonie-negru-c03', 'costum-business-bej-b02', 'pantofi-oxford-negru-semilucios'].map((slug) => {

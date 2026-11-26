@@ -126,7 +126,7 @@ export function Catalog({ category }: { category?: CategoryKey }) {
             cat.title
           ) : (
             <>
-              Colecția <span className="text-gold-400">Cesarini</span>
+              Colecția <span className="text-gold-400">CESARINI</span>
             </>
           )}
         </h1>

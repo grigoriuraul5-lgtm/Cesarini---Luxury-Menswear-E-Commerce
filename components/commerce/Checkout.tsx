@@ -224,7 +224,7 @@ export function Checkout() {
                 <div className="sm:col-span-4"><label htmlFor={`${uid}-notes`} className={labelCls}>Observații pentru curier (opțional)</label><input id={`${uid}-notes`} name="notes" className={field} placeholder="Interfon, interval orar…" /></div>
               </div>
               <div className="mt-6 flex items-center justify-between gap-4 border border-gold-400/20 bg-obsidian/40 px-5 py-4">
-                <span className="flex items-center gap-3 text-sm text-silk"><Diamond />Curier · 1 – 2 zile lucrătoare</span>
+                <span className="flex items-center gap-3 text-sm text-silk"><Diamond />Curier · 15 – 30 de zile</span>
                 <span className="text-sm tabular-nums text-gold-300">{commerceConfig.shippingFee ? formatRON(commerceConfig.shippingFee) : 'Gratuită'}</span>
               </div>
               {hasCustom && <p className="mt-3 text-sm text-stone-400">Pentru piesele croite pe măsură, termenul de livrare îl confirmă consultantul la telefon.</p>}
@@ -403,7 +403,7 @@ function Confirmation({ payload, firstName, delivered }: { payload: OrderPayload
           <ol className="mt-12 border-t border-gold-400/20">
             {[
               custom ? 'Un consultant te sună să verifice măsurile, apoi croitorii încep lucrul.' : 'Un consultant te sună să confirme mărimea.',
-              custom ? 'Termenul de livrare pentru piesele croite pe măsură ți-l spune consultantul.' : 'Livrăm prin curier în 1 – 2 zile lucrătoare.',
+              custom ? 'Termenul de livrare pentru piesele croite pe măsură ți-l spune consultantul.' : 'Livrăm prin curier în 15 – 30 de zile, în funcție de volumul de lucru.',
               `Pentru orice întrebare: ${verified.phoneDisplay} · ${verified.email}`,
             ].map((t, i) => (
               <li key={t} className="flex gap-6 border-b border-gold-400/20 py-5">

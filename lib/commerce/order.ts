@@ -135,7 +135,7 @@ export function buildOrderPayload(d: OrderDraft, opts: { orderId: string; create
     createdAt: opts.createdAt,
     source: 'cesarini.ro',
     customer: { ...c, fullName: `${c.firstName.trim()} ${c.lastName.trim()}`, phoneE164: toE164(c.phone) },
-    shipping: { ...d.shipping, country: 'RO', method: 'curier', estimate: '1 – 2 zile lucrătoare' },
+    shipping: { ...d.shipping, country: 'RO', method: 'curier', estimate: '15 – 30 de zile' },
     items,
     totals: {
       currency: 'RON',

@@ -105,7 +105,7 @@ export const articles: Article[] = [
       {
         id: 'pe-masura',
         question: 'Cum îți croiești ținuta pe măsură în Cluj-Napoca?',
-        answer: 'Online, alegi „Croit pe măsură” pe pagina costumului sau a cămășii și introduci măsurile; în showroom, croitorii casei ajustează gratuit ținuta cumpărată acolo.',
+        answer: 'Online, alegi „Croit pe măsură” pe pagina costumului sau a cămășii și introduci măsurile; în showroom, croitorii noștri ajustează gratuit ținuta cumpărată acolo.',
         blocks: [
           { type: 'list', items: [
             'Măsurile cerute pentru costum: înălțime, greutate, piept, talie, șold, lățimea umerilor, biceps, lungimea mânecii și lungimea pantalonului pe interior.',
@@ -120,7 +120,7 @@ export const articles: Article[] = [
         id: 'cand',
         question: 'Cu cât timp înainte de eveniment să te ocupi de ținută?',
         answer: 'Cu câteva săptămâni înainte, ca să ai timp de probă și ajustări. Pentru o nuntă, începe și mai devreme.',
-        blocks: [{ type: 'p', text: 'Piesele din stoc se livrează în 1 – 2 zile lucrătoare, dar ajustările și o a doua probă au nevoie de timp. Termenul pentru piesele croite pe măsură ți-l confirmă consultantul la telefon.' }],
+        blocks: [{ type: 'p', text: 'Piesele din stoc se livrează în 15 – 30 de zile, în funcție de volumul de lucru, iar ajustările și o a doua probă au nevoie de timp. Termenul pentru piesele croite pe măsură ți-l confirmă consultantul la telefon.' }],
       },
       {
         id: 'greseli',

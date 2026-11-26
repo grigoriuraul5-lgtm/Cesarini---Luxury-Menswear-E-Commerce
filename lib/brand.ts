@@ -47,7 +47,8 @@ export const verified = {
   /** Fișele clientului (18.10.2026): modelele de ceremonie sunt în 2 sau 3 piese, toate cele cu fișă sunt 100% lână */
   ceremonySuitSpec: { pieces: 'sacou, vestă și pantaloni', piecesRange: 'două sau trei piese (sacou și pantaloni, plus vestă la modelele în trei piese)', fabric: '100% lână', sizes: '46 – 58' },
   freeAlterations: 'Ajustări gratuite, realizate de croitorii Cesarini, pentru întreaga ținută cumpărată din showroom.',
-  delivery: 'Livrare în 1 – 2 zile lucrătoare; un consultant sună pentru confirmarea mărimii.',
+  // Pagina_1.DOC (corectura clientului): piesele din stoc se livrează în 15–30 de zile, în funcție de volumul de lucru
+  delivery: 'Livrare în 15 – 30 de zile, în funcție de volumul de lucru din perioada respectivă; un consultant sună pentru confirmarea mărimii.',
 
   social: {
     instagram: 'https://www.instagram.com/cesarini.romania/',
@@ -63,7 +64,7 @@ export const verified = {
 
   /** Fraza-entitate: formulată ca să poată fi citată cuvânt cu cuvânt. */
   entitySentence:
-    'Cesarini este un showroom de costume bărbătești din Cluj-Napoca, activ din 2015, pe Str. Ștefan Octavian Iosif nr. 1. Oferă costume de ceremonie și de mire (2.299 lei, în două sau trei piese, 100% lână), costume business și casual (1.599 lei), cămăși pe măsură, pantofi și accesorii, cu ajustări gratuite realizate de croitorii casei pentru întreaga ținută.',
+    'Cesarini este un showroom de costume bărbătești din Cluj-Napoca, activ din 2015, pe Str. Ștefan Octavian Iosif nr. 1. Oferă costume de ceremonie și de mire (2.299 lei, în două sau trei piese, 100% lână), costume business și casual (1.599 lei), cămăși pe măsură, pantofi și accesorii, cu ajustări gratuite realizate de croitorii Cesarini pentru întreaga ținută.',
 };
 
 export const editorial = {
@@ -255,7 +256,7 @@ export const atelierServices = [
 export const faqs = [
   {
     q: 'Cât durează realizarea unui costum Made-to-Measure la Cesarini?',
-    a: `Termenul depinde de piesă și de stofă, așa că ți-l confirmă un consultant Cesarini la telefon, după ce verifică măsurile tale. Piesele din stoc, în mărime standard, se livrează în 1 – 2 zile lucrătoare. Dacă ai un eveniment la o dată fixă, spune-ne data de la început.`,
+    a: `Termenul depinde de piesă și de stofă, așa că ți-l confirmă un consultant Cesarini la telefon, după ce verifică măsurile tale. Piesele din stoc, în mărime standard, se livrează între 15-30 de zile, în funcție de volumul de lucru din perioada respectivă. Dacă ai un eveniment la o dată fixă, sau vreo urgență, spune-ne de la început acest lucru.`,
   },
   {
     q: 'Cum funcționează ajustările gratuite în showroom-ul din Cluj-Napoca?',

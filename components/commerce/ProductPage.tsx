@@ -153,7 +153,7 @@ export function ProductPage({ slug }: { slug: string }) {
                     checked={fit === 'standard'}
                     onSelect={() => chooseFit('standard')}
                     title="Mărime standard"
-                    body="Din stoc. Livrare în 1 – 2 zile lucrătoare."
+                    body="Din stoc. Livrare în 15 – 30 de zile."
                   />
                   <FitOption
                     name={`${uid}-fit`}
@@ -237,7 +237,7 @@ export function ProductPage({ slug }: { slug: string }) {
 
               {/* Garanțiile casei: fapte, nu iconițe */}
               <ul className="mt-8 grid gap-3 text-sm text-silk/85 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
-                {(mtm ? ['Ajustări gratuite în showroom', 'Livrare în 1 – 2 zile lucrătoare', 'Consultant la telefon'] : ['Livrare în 1 – 2 zile lucrătoare', 'Consultant la telefon', 'Showroom în Cluj-Napoca']).map((t) => (
+                {(mtm ? ['Ajustări gratuite în showroom', 'Livrare în 15 – 30 de zile', 'Consultant la telefon'] : ['Livrare în 15 – 30 de zile', 'Consultant la telefon', 'Showroom în Cluj-Napoca']).map((t) => (
                   <li key={t} className="flex items-center gap-3"><Diamond />{t}</li>
                 ))}
               </ul>
@@ -272,7 +272,7 @@ export function ProductPage({ slug }: { slug: string }) {
                   <ol className="space-y-2">
                     <li>1. Introduci măsurile, cu ghidul ilustrat pentru fiecare.</li>
                     <li>2. Un consultant te sună și le verifică împreună cu tine.</li>
-                    <li>3. Croitorii casei pregătesc piesa pe măsurile tale.</li>
+                    <li>3. Croitorii noștri pregătesc piesa pe măsurile tale.</li>
                   </ol>
                 </Disclosure>
                 )}

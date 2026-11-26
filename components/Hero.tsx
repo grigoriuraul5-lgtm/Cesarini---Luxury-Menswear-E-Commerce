@@ -96,7 +96,7 @@ export function Hero() {
         <div className="min-w-0 max-lg:order-1 lg:col-span-5 lg:row-start-2 lg:self-end">
           <motion.p {...fadeUp(0.1)} className="eyebrow flex items-center gap-4">
             <span aria-hidden className="h-px w-10 bg-gold-400" />
-            <span><span className="hidden sm:inline lg:hidden xl:inline">Maison de Croitorie · </span>Cluj-Napoca · Est. {verified.foundingYear}</span>
+            <span><span className="hidden sm:inline lg:hidden xl:inline">Croit pentru tine · </span>Cluj-Napoca · Est. {verified.foundingYear}</span>
           </motion.p>
 
           <h1 id="hero-title" className="mt-[clamp(0.9rem,2.5svh,1.75rem)] font-display text-[clamp(2.45rem,10vw,3rem)] font-normal leading-[0.98] tracking-[-0.015em] sm:text-display-sm lg:text-[clamp(3.2rem,1rem+3.1vw,4.9rem)]">
@@ -114,7 +114,7 @@ export function Hero() {
           <motion.div {...fadeUp(0.6)}>
             <p className="lead max-w-[30rem] lg:mt-[clamp(0.9rem,2.5svh,1.5rem)] max-lg:text-[1rem] max-lg:leading-[1.6]">
               Costume de ceremonie din lână, cămăși pe măsură și accesorii,{' '}
-              <strong className="font-medium text-ivory">ajustate gratuit</strong> de croitorii casei în showroom-ul din centrul Clujului.
+              <strong className="font-medium text-ivory">ajustate gratuit</strong> de croitorii noștri în showroom-ul din centrul Clujului.
             </p>
 
             <div className="mt-[clamp(1rem,3svh,2rem)] flex flex-wrap items-center gap-x-8 gap-y-2">

@@ -14,14 +14,9 @@ export function Atelier() {
         {/* ——— Coloana de titlu, lipită la scroll ——— */}
         <header className="lg:col-span-5">
           <div className="lg:sticky lg:top-32">
+            {/* Eticheta „The Craftsmanship & Atelier” a fost ștearsă la cererea clientului (Pagina_1.DOC) */}
             <Reveal>
-              <p className="eyebrow flex items-center gap-4">
-                <span aria-hidden className="h-px w-10 bg-gold-400" />
-                The Craftsmanship &amp; Atelier
-              </p>
-            </Reveal>
-            <Reveal delay={0.08}>
-              <h2 id="atelier-title" className="mt-8 font-display text-display-md font-normal text-ivory">
+              <h2 id="atelier-title" className="font-display text-display-md font-normal text-ivory">
                 Croit
                 <br />
                 <em className="font-normal text-gold-400">pentru tine.</em>
@@ -31,7 +26,7 @@ export function Atelier() {
               {/* Paragraful-entitate: fraza pe care o citează AI-urile */}
               <p className="lead mt-10 max-w-prose">
                 În showroom-ul de pe Ștefan Octavian Iosif, fiecare costum Cesarini trece prin mâinile
-                croitorilor casei înainte să plece. Ajustările sunt gratuite pentru întreaga ținută: costum, cămașă și pantaloni.
+                croitorilor înainte să plece. Ajustările sunt gratuite pentru întreaga ținută: costum, cămașă și pantaloni.
               </p>
             </Reveal>
             <Reveal delay={0.24}>
