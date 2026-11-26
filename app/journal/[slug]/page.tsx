@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { social } from '@/lib/seo';
+import { fitDescription, social } from '@/lib/seo';
 import { notFound } from 'next/navigation';
 import { articles, getArticle } from '@/lib/journal';
 import { articleGraph } from '@/lib/schema';
@@ -17,8 +17,8 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const a = getArticle((await params).slug);
   if (!a) return {};
   return {
-    title: a.title,
-    description: a.shortAnswer.slice(0, 300),
+    title: a.seoTitle ?? a.title,
+    description: fitDescription(a.shortAnswer),
     alternates: { canonical: `/journal/${a.slug}` },
     ...social({ title: a.title, description: a.dek, path: `/journal/${a.slug}`, type: 'article', published: a.published, modified: a.updated }),
   };

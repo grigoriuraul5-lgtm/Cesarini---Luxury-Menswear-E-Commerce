@@ -22,6 +22,8 @@ export type Section = { id: string; question: string; answer: string; blocks: Bl
 export type Article = {
   slug: string;
   title: string;
+  /** titlul din Google (≤ 50 caractere, „ | Cesarini” se adaugă automat); lipsă = `title` */
+  seoTitle?: string;
   dek: string;
   kicker: string;
   /** subiectul articolului (schema Article.about) */
@@ -46,6 +48,7 @@ export const articles: Article[] = [
   {
     slug: 'ghid-black-tie',
     title: 'Ghidul Definitiv Black Tie & Made-to-Measure în Cluj-Napoca',
+    seoTitle: 'Ghid black tie: ce porți la o gală',
     kicker: 'Ghid de stil',
     about: 'Black tie (cod vestimentar)',
     occasion: 'Altă ocazie',
@@ -152,6 +155,7 @@ export const articles: Article[] = [
   {
     slug: 'stofa-costum-de-mire',
     title: 'Cum alegi stofa perfectă pentru un costum de mire: Lână Merino Super 130s vs. Mătase',
+    seoTitle: 'Stofa pentru costumul de mire: Super 130s sau mătase',
     kicker: 'Stofe & croială',
     about: 'Stofe pentru costumul de mire',
     occasion: 'Nuntă – Mire',
@@ -265,6 +269,7 @@ export const articles: Article[] = [
   {
     slug: 'eticheta-camasa-smoking',
     title: 'Eticheta masculină la evenimente formale: Regulile nescrise ale cămășii și smokingului',
+    seoTitle: 'Cămașa pentru smoking: regulile de etichetă',
     kicker: 'Etichetă',
     about: 'Etichetă vestimentară masculină la evenimente formale',
     occasion: 'Altă ocazie',

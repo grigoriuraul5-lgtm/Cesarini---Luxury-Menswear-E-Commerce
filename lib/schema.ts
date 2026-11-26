@@ -195,7 +195,8 @@ export function productPageGraph(p: {
         category: p.category,
         brand: { '@id': id('brand') },
         url,
-        ...(p.code && { sku: p.code }),
+        ...(p.code && { sku: p.code, mpn: p.code }),
+        audience: { '@type': 'PeopleAudience', suggestedGender: 'male' },
         ...(p.color && { color: p.color }),
         ...(p.composition && { material: p.composition }),
         ...(p.sizes?.length && { size: `${p.sizes[0]} – ${p.sizes[p.sizes.length - 1]}` }),
@@ -206,7 +207,17 @@ export function productPageGraph(p: {
           price: String(p.price),
           priceCurrency: 'RON',
           availability: p.badge === 'Stoc limitat' ? 'https://schema.org/LimitedAvailability' : 'https://schema.org/InStock',
+          itemCondition: 'https://schema.org/NewCondition',
           seller: { '@id': id('showroom') },
+          // Dreptul legal de retragere de 14 zile (OUG 34/2014, art. 9) pentru piesele în mărime standard.
+          // Piesele croite pe măsură sunt exceptate (art. 16 lit. c); cine plătește returul nu e confirmat, deci nu e declarat.
+          hasMerchantReturnPolicy: {
+            '@type': 'MerchantReturnPolicy',
+            applicableCountry: 'RO',
+            returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+            merchantReturnDays: 14,
+            returnMethod: 'https://schema.org/ReturnByMail',
+          },
         },
       },
       {

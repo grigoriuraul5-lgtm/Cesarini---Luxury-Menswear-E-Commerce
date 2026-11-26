@@ -34,11 +34,12 @@ const PRESETS: { key: string; label: string; look: Record<SlotKey, string> }[] =
 
 const prod = (slug: string) => getProduct(slug) as CommerceProduct;
 
-export function LookBuilder() {
+export function LookBuilder({ initialPreset = 'mire' }: { initialPreset?: 'mire' | 'nas' | 'business' } = {}) {
   const reduce = useReducedMotion();
   const cart = useCart();
-  const [look, setLook] = useState<Record<SlotKey, string>>(PRESETS[0].look);
-  const [preset, setPreset] = useState<string | null>(PRESETS[0].key);
+  const start = PRESETS.find((x) => x.key === initialPreset) ?? PRESETS[0];
+  const [look, setLook] = useState<Record<SlotKey, string>>(start.look);
+  const [preset, setPreset] = useState<string | null>(start.key);
   const [sizes, setSizes] = useState<Partial<Record<SlotKey, string>>>({});
   const [added, setAdded] = useState(false);
   const [tried, setTried] = useState(false);

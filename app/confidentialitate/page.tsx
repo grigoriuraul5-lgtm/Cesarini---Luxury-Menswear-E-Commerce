@@ -6,6 +6,7 @@ import { LegalPage } from '@/components/LegalPage';
 // Text provizoriu până la versiunea juridică finală: nu se indexează.
 export const metadata: Metadata = {
   title: 'Politica de confidențialitate (GDPR)',
+  description: 'Ce date personale colectează Cesarini prin site, de ce, cât le păstrează și cum îți exerciți drepturile GDPR.',
   alternates: { canonical: '/confidentialitate' },
   robots: { index: false, follow: true },
 };

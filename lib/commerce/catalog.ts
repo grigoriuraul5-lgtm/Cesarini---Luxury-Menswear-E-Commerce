@@ -83,7 +83,7 @@ export const commerceConfig = {
 export const isMtm = (g: GarmentType) => g === 'suit' || g === 'shirt';
 
 export const CATEGORIES: { key: CategoryKey; label: string; title: string; intro: string; legacyUrl: string }[] = [
-  { key: 'costume-ceremonie', label: 'Costume ceremonie', title: 'Costume de ceremonie', intro: `Costume în două sau trei piese, pentru mire, naș și seri de gală. Toate la ${formatRON(verified.prices.ceremonySuit)}, ajustate gratuit de croitorii noștri.`, legacyUrl: 'https://www.cesarini.ro/costume-barbati-ceremonie/' },
+  { key: 'costume-ceremonie', label: 'Costume ceremonie', title: 'Costume de ceremonie', intro: `Costume în două sau trei piese, pentru mire, naș și seri de gală. Toate la ${formatRON(verified.prices.ceremonySuit)}, ajustate gratuit în showroom-ul din Cluj.`, legacyUrl: 'https://www.cesarini.ro/costume-barbati-ceremonie/' },
   { key: 'costume-business-casual', label: 'Costume business', title: 'Costume business & casual', intro: `Costume în două sau trei piese, din lână sau amestec de lână, pentru birou, întâlniri și evenimente de zi. Toate la ${formatRON(verified.prices.businessSuit)}.`, legacyUrl: 'https://www.cesarini.ro/costume-business-casual/' },
   { key: 'camasi', label: 'Cămăși', title: 'Cămăși', intro: 'Cămăși albe și negre din 100% bumbac, Slim Fit, cu nasturi ascunși: pentru papion, cravată sau butoni. Pe mărime de guler sau croite pe măsurile tale.', legacyUrl: 'https://www.cesarini.ro/camasi-barbati-ceremonie/' },
   { key: 'pantofi', label: 'Pantofi', title: 'Pantofi Oxford', intro: 'Oxford din piele naturală de bovină, cu talpă din neolit și toc de 2,5 cm: negru mat sau semilucios, cu medalion ori pictați manual, și pe calapod lat.', legacyUrl: 'https://www.cesarini.ro/pantofi-barbati/' },
@@ -131,7 +131,7 @@ function suit(kind: 'ceremonie' | 'business', r: SuitRow, rank: number): Commerc
     `Model ${r.code}`,
   ].filter(Boolean) as string[];
   const lead = r.pieces && r.composition
-    ? `${base} în ${r.pieces === 3 ? 'trei' : 'două'} piese, ${r.color}, din ${r.composition.toLowerCase()}. Ajustat gratuit de croitorii noștri, după măsurile tale.`
+    ? `${base} în ${r.pieces === 3 ? 'trei' : 'două'} piese, ${r.color}, din ${r.composition.toLowerCase()}. Cumpărat din showroom-ul din Cluj, îl ajustează gratuit croitorii noștri.`
     : `${base}, ${r.color}. Îl probezi în showroom-ul din Cluj, iar croitorii noștri îl ajustează gratuit după măsurile tale.`;
   return {
     slug: r.slug,

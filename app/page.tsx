@@ -8,6 +8,17 @@ import { HomeFaq } from '@/components/HomeFaq';
 import { SiteFooter } from '@/components/SiteFooter';
 import { JsonLd } from '@/components/JsonLd';
 import { faqGraph } from '@/lib/schema';
+import type { Metadata } from 'next';
+import { social } from '@/lib/seo';
+
+/** Prima pagină: titlu ≤ 60 și descriere ≤ 160 caractere, cu ce caută clientul (mire, ceremonie, preț, Cluj, livrare). */
+const description = 'Costume de ceremonie și de mire de la 2.299 lei, costume business, cămăși, pantofi și accesorii. Showroom în Cluj-Napoca și livrare în toată țara.';
+export const metadata: Metadata = {
+  title: { absolute: 'Costume de mire și ceremonie în Cluj-Napoca | Cesarini' },
+  description,
+  alternates: { canonical: '/' },
+  ...social({ title: 'Cesarini · Costume de mire și ceremonie, Cluj-Napoca', description, path: '/' }),
+};
 
 export default function HomePage() {
   return (

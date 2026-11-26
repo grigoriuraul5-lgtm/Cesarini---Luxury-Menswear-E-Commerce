@@ -54,6 +54,7 @@ export function SiteFooter() {
           <h2 id="ft-nav" className={headCls}>Navigare</h2>
           <ul className="mt-5 space-y-1">
             <li><Link href="/colectii" className={linkCls}>Colecții</Link></li>
+            <li><Link href="/costume-de-mire" className={linkCls}>Costume de mire</Link></li>
             <li><Link href="/colectii?croiala=mtm" className={linkCls}>Croit pe măsură</Link></li>
             <li><Link href="/comunitate" className={linkCls}>{t.nav.despre}</Link></li>
             <li><Link href="/journal" className={linkCls}>{t.nav.jurnal}</Link></li>

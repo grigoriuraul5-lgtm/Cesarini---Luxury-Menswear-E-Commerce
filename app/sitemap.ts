@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     page('/', 1, 'weekly'),
     page('/colectii', 0.9, 'weekly'),
+    page('/costume-de-mire', 0.9, 'weekly'),
     ...CATEGORIES.map((c) => page(`/colectii/${c.key}`, 0.8, 'weekly')),
     ...commerceProducts.map((p) => page(`/produs/${p.slug}`, 0.7)),
     page('/atelier', 0.8),

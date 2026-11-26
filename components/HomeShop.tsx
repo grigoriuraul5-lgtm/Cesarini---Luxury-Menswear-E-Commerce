@@ -138,3 +138,34 @@ export function HomeShop() {
     </section>
   );
 }
+
+/** Grilă simplă de produse (cu „Personalizează măsurile”), refolosită pe paginile de ocazie, de ex. /costume-de-mire. */
+export function ProductGrid({ products }: { products: CommerceProduct[] }) {
+  const [customizing, setCustomizing] = useState<CommerceProduct | null>(null);
+  const cart = useCart();
+  return (
+    <>
+      <ul className="grid grid-cols-2 gap-x-3 gap-y-10 sm:gap-x-6 lg:grid-cols-4 lg:gap-y-14">
+        {products.map((p) => (
+          <li key={p.slug}>
+            <ProductTile p={p} onCustomize={setCustomizing} />
+          </li>
+        ))}
+      </ul>
+      {customizing && (
+        <MeasurementsPanel
+          open={!!customizing}
+          onClose={() => setCustomizing(null)}
+          garment={customizing.garment}
+          productName={customizing.name}
+          initial={cart.measureProfile[customizing.garment]}
+          onSave={(m) => {
+            cart.saveMeasureProfile(customizing.garment, m);
+            cart.add(customizing.slug, { type: 'custom', measurements: m });
+            setCustomizing(null);
+          }}
+        />
+      )}
+    </>
+  );
+}

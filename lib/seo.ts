@@ -21,3 +21,20 @@ export function social(opts: { title: string; description: string; path: string;
     twitter: { card: 'summary_large_image', title: opts.title, description: opts.description, images: [IMAGE.url] },
   };
 }
+
+/** Lungimile pe care Google le afișează întregi: titlul cu tot cu „ | Cesarini” ≤ 60, descrierea 120–160. */
+export const TITLE_MAX = 60;
+const BRAND = ' | Cesarini';
+
+/** Primul titlu din listă care încape cu tot cu brand; altfel ultimul (cel mai scurt). */
+export function fitTitle(candidates: string[]): string {
+  return candidates.find((t) => (t + BRAND).length <= TITLE_MAX) ?? candidates[candidates.length - 1];
+}
+
+/** Taie descrierea la ultimul cuvânt întreg sub `max` caractere (fără să rupă un cuvânt). */
+export function fitDescription(text: string, max = 160): string {
+  const t = text.replace(/\s+/g, ' ').trim();
+  if (t.length <= max) return t;
+  const cut = t.slice(0, max - 1);
+  return cut.slice(0, cut.lastIndexOf(' ')).replace(/[,;:·–-]+$/, '') + '…';
+}

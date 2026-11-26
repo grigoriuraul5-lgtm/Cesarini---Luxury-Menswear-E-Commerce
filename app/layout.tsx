@@ -14,7 +14,7 @@ import { Providers } from '@/components/Providers';
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Cesarini — Croitorie Made-to-Measure & costume de ceremonie în Cluj-Napoca',
+    default: 'Cesarini · Costume de ceremonie și de mire, Cluj-Napoca',
     template: '%s | Cesarini',
   },
   description: verified.entitySentence,

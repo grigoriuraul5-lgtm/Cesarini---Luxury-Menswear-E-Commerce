@@ -9,7 +9,7 @@ import { JsonLd } from '@/components/JsonLd';
 import { Catalog } from '@/components/commerce/Catalog';
 
 const prices = commerceProducts.map((p) => p.price);
-const description = `Costume de ceremonie și business, cămăși, pantofi Oxford și accesorii Cesarini, de la ${formatRON(Math.min(...prices))} la ${formatRON(Math.max(...prices))}. Costumele și cămășile se pot croi pe măsură. Showroom în Cluj-Napoca.`;
+const description = `Costume de ceremonie și business, cămăși, pantofi Oxford și accesorii Cesarini, de la ${formatRON(Math.min(...prices))}. Croite și pe măsură. Showroom în Cluj-Napoca.`;
 
 export const metadata: Metadata = {
   title: 'Colecții: costume, cămăși, pantofi și accesorii',
